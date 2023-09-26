@@ -1,5 +1,3 @@
-
-
 CREATE TABLE UserRoles(
 id TINYINT PRIMARY KEY AUTO_INCREMENT,
 name varchar(30) UNIQUE
