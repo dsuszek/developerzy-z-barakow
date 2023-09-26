@@ -1,7 +1,6 @@
 package org.kainos.ea.service;
 
 import org.kainos.ea.model.JobRoleRequest;
-import org.kainos.ea.model.ProductRequest;
 
 public class JobRoleValidator {
 
@@ -16,7 +15,7 @@ public class JobRoleValidator {
         }
 
         if (jobRole.getLink().length() > 1000) {
-            return "Length of link to job role greater than 3000 characters";
+            return "Length of link to job role greater than 1000 characters";
         }
 
         return null;
