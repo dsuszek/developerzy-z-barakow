@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-@Tag(name = "Engineering Academy Dropwizard Product API")
+@Tag(name = "Job Roles API")
 @Path("/api")
 public class JobRoleController {
     private final JobRoleService jobRoleService = new JobRoleService(new JobRoleDao(), new JobRoleValidator());
