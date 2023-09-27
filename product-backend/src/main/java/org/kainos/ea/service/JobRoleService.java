@@ -33,7 +33,7 @@ public class JobRoleService {
         } catch (SQLException e) {
             logger.error("SQL exception! Error: {}", e.getMessage());
 
-            throw new FailedToCreateJobRoleException();
+            throw new FailedToCreateJobRoleException(e.getMessage());
         }
     }
 }
