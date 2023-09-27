@@ -6,7 +6,7 @@ name varchar(30) UNIQUE
 CREATE TABLE IF NOT EXISTS Users(
 id SMALLINT PRIMARY KEY AUTO_INCREMENT,
 email varchar(50) UNIQUE,
-password varchar(50),
+password varchar(80),
 roleId TINYINT,
 FOREIGN KEY (roleId) REFERENCES UserRoles (id)
 );

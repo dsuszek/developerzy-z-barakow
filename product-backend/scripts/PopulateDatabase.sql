@@ -1,7 +1,7 @@
 INSERT INTO UserRoles (name) VALUES ('user'),('administrator');
 
-INSERT INTO Users(email,password,roleId) VALUES ('admin@kainos.com','admin',2);
-INSERT INTO Users(email,password,roleId) VALUES ('user@kainos.com','user',1);
+INSERT INTO Users(email,password,roleId) VALUES ('admin@kainos.com','PVGsZaWZUCNDXv+41/A0Uw==:jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=',2);
+INSERT INTO Users(email,password,roleId) VALUES ('user@kainos.com','KqzqGgU+R/P3fOuzjm7Vzw==:A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=',1);
 
 INSERT INTO JobRoles(name,description,link) VALUES ('Principal Architect',
 'As a Principal Platform Architect (Principal) for Kainos, you’ll be accountable for leading the delivery of cloud platforms and solutions enabling business transformation which

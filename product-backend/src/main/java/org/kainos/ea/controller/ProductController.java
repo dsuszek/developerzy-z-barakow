@@ -1,6 +1,6 @@
 package org.kainos.ea.controller;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
+//import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-@Tag(name = "Engineering Academy Dropwizard Product API")
+//@Tag(name = "Engineering Academy Dropwizard Product API")
 @Path("/api")
 public class ProductController {
     private final static Logger logger = LoggerFactory.getLogger(ProductService.class);
