@@ -5,8 +5,14 @@ import session from 'express-session';
 import path from 'path';
 import nunjucks from 'nunjucks';
 import axios from 'axios';
+
+// import { serialize } from 'cookie';
+// import cookieParser from 'cookie-parser';
+// import cook from './cook.mjs';
+
 import Product from './model/product.js';
 import ProductController from './controller/productController.js';
+import AuthController from './controller/authController.js';
 import logger from './service/logger.js';
 import { API_URL } from './common/constants.js';
 
@@ -29,6 +35,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(session({ secret: 'NOT_HARDCODED_SECRET', cookie: { maxAge: 60000 } }));
 
+// app.use(cookieParser());
+
 axios.defaults.baseURL = API_URL;
 
 declare module 'express-session' {
@@ -45,6 +53,7 @@ app.listen(3000, () => {
 });
 
 const productController = new ProductController();
+const authController = new AuthController();
 
 // Routing
 
@@ -53,3 +62,4 @@ app.get('/', (eq: Request, res: Response) => {
 });
 
 productController.appRoutes(app);
+authController.appRoutes(app);
