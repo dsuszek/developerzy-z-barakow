@@ -21,7 +21,7 @@ describe('JobRole validator', () => {
                 name: 'aa aaa a a a a a a a aa aaa a a a a a a a aa aaa a a a a a a a aa aaa a a a a a a a aa aaa a a a a a a a aa aaa a a a a a a a aa aaa a a a a a a a aa aaa a a a a a a a aa aaa a a a a a a a aa aaa a a a a a a a ',
             };
 
-            expect(jobRoleValidator.validateJobRole(jobRole as JobRole)).to.be.equal('Name greater than 50 chatacter')
+            expect(jobRoleValidator.validateJobRole(jobRole as JobRole)).to.be.equal('Name greater than 50 characters')
         });
 
         it('expect no error', () => {
