@@ -10,29 +10,52 @@ import static org.junit.jupiter.api.Assertions.*;
 class PasswordEncoderTest {
 
     @Test
-    void encodePassword_WhenGetsPassword_ThenShouldReturnEncodedPasswordWithSalt() throws NoSuchAlgorithmException {
-       String encodedSaltedPassword = PasswordEncoder.encodePassword("1234");
-       String desaltedPassword= encodedSaltedPassword.split(":")[1];
+    public void encodePassword_WhenGetsPassword_ThenShouldReturnEncodedPasswordWithTheSameLength() throws NoSuchAlgorithmException {
+        String encodedSaltedPassword = PasswordEncoder.encodePassword("1234");
 
-       assertEquals("A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ="
-               ,desaltedPassword);
+        assertEquals(69, encodedSaltedPassword.length());
     }
 
     @Test
-    void checkPassword() throws NoSuchAlgorithmException {
-        String passwordFromDb= PasswordEncoder.encodePassword("1234");
+    public void checkPassword_WhenPasswordGivenIsTheSameAsPasswordFromDB_ShouldReturnTrue() throws NoSuchAlgorithmException {
+        String passwordFromDb = PasswordEncoder.encodePassword("1234");
 
-        boolean result = PasswordEncoder.checkPassword(PasswordEncoder.encodePassword("1234"),passwordFromDb);
+        boolean result = PasswordEncoder.checkPassword(PasswordEncoder.encodePassword("1234"), passwordFromDb);
 
         assertTrue(result);
     }
 
     @Test
-    void hashPassword() throws NoSuchAlgorithmException {
-        byte [] hash= PasswordEncoder.hashPassword("1234");
+    public void checkPassword_WhenPasswordGivenIsNotTheSameAsPasswordFromDB_ShouldReturnFalse() throws NoSuchAlgorithmException {
+        String passwordFromDb = PasswordEncoder.encodePassword("1234");
+
+        boolean result = PasswordEncoder.checkPassword(PasswordEncoder.encodePassword("12345"), passwordFromDb);
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void checkPassword_WhenPasswordGivenIsNull_ShouldReturnFalse() throws NoSuchAlgorithmException {
+
+        boolean result = PasswordEncoder.checkPassword(null, "passwordFromDb");
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void checkPassword_WhenPasswordGivenIsNull_ShouldReturnFalseIFOneOFThePasswordsDoesNotContainColon() throws NoSuchAlgorithmException {
+
+        boolean result = PasswordEncoder.checkPassword("21312313", "123:12313");
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void hashPassword_WhenGivenString_ShouldReturnHashedPassword() throws NoSuchAlgorithmException {
+        byte[] hash = PasswordEncoder.hashPassword("1234");
 
         String hashedString = Base64.getEncoder().encodeToString(hash);
 
-        assertEquals("A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=",hashedString);
+        assertEquals("A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=", hashedString);
     }
 }

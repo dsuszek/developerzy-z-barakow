@@ -27,6 +27,9 @@ public class PasswordEncoder {
     }
 
     public static boolean checkPassword(String inputPassword, String storedPassword) throws NoSuchAlgorithmException {
+        if(inputPassword == null){
+            return false;
+        }
         String[] partsInput = inputPassword.split(":");
         String[] partsStored = storedPassword.split(":");
         if (partsInput.length != 2 || partsStored.length != 2) {

@@ -3,7 +3,6 @@ package integration;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.kainos.ea.model.Product;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static io.restassured.RestAssured.given;
