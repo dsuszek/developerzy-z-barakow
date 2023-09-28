@@ -11,8 +11,8 @@ import java.sql.SQLException;
 
 public class DatabaseConnector {
     private final static Logger logger = LoggerFactory.getLogger(JobService.class);
-    private static Connection conn;
-    public static Connection getConnection() throws SQLException {
+    public static Connection conn;
+    public Connection getConnection() throws SQLException {
         String user, password, host, name;
         if (conn != null && !conn.isClosed()) {
             return conn;
@@ -33,5 +33,15 @@ public class DatabaseConnector {
             logger.error("Couldn't connect to the database! Error: {}", exception.getMessage());
             throw exception;
         }
+    }
+    public boolean isDbConnected(Connection conn) {
+        try {
+            if(conn != null && !conn.isClosed()){
+                return  true;
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return false;
     }
 }

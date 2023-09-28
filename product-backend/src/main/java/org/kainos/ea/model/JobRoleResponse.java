@@ -1,22 +1,14 @@
 package org.kainos.ea.model;
 
-public class JobRole {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class JobRoleResponse {
+
     private short id;
     private String name;
     private String description;
     private String link;
-
-    public JobRole(short id, String name, String description, String link) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.link = link;
-    }
-    public JobRole(String name, String description, String link) {
-        this.name = name;
-        this.description = description;
-        this.link = link;
-    }
 
     public short getId() {
         return id;
@@ -49,4 +41,18 @@ public class JobRole {
     public void setLink(String link) {
         this.link = link;
     }
+
+    @JsonCreator
+    public JobRoleResponse(
+            @JsonProperty("id") short id,
+            @JsonProperty("name") String name,
+            @JsonProperty("description") String description,
+            @JsonProperty("link") String link) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.link = link;
+    }
 }
+
+

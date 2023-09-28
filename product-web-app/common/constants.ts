@@ -1,6 +1,6 @@
 export const API_URL = `${process.env.API_URL}`;
 
 export const API = {
-  PRODUCTS: '/api/products',
-  GET_PRODUCT: (id: number) => `/api/products/${id}`,
+  JOBS: '/api/job-roles',
+  GET_ROLE: (id: number) => `/api/job-roles/${id}`,
 };

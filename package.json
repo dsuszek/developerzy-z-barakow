@@ -1,0 +1,11 @@
+{
+  "name": "developerzy-z-barakow",
+  "version": "1.0.0",
+  "description": "### Prerequirements",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
