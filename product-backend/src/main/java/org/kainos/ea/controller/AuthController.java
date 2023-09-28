@@ -17,10 +17,12 @@ import org.kainos.ea.service.AuthService;
 import java.security.NoSuchAlgorithmException;
 
 @Tag(name="Auth API")
-@Path("/api")
+@Path("/api/auth")
 public class AuthController {
-
-    private final AuthService authService = new AuthService(new AuthDao());
+    public AuthService authService;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @POST
     @Path("/login")

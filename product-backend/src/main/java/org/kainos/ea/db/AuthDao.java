@@ -13,23 +13,19 @@ import java.util.UUID;
 public class AuthDao {
     private final DatabaseConnector databaseConnector = new DatabaseConnector();
 
-    public boolean validLoginRequest(LoginRequest loginRequest) throws NoSuchAlgorithmException {
+    public String getPasswordFromDatabase(LoginRequest loginRequest) throws NoSuchAlgorithmException {
         try (Connection c = databaseConnector.getConnection()) {
             String selectStatement = "SELECT `password` FROM `Users` WHERE email = ? ;";
             PreparedStatement st = c.prepareStatement(selectStatement);
             st.setString(1, loginRequest.getEmail());
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                System.out.println(rs.getString("password"));
-                return
-                        PasswordEncoder.checkPassword(
-                        PasswordEncoder.encodePassword(loginRequest.getPassword()),
-                        rs.getString("password"));
+                return rs.getString("password");
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
-        return false;
+        return null;
     }
 
     public String generateToken(String email) throws SQLException {
