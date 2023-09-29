@@ -19,7 +19,7 @@ export default class RoleController {
       res.render('list-roles', { roles: data });
     });
     app.get('/role/:id', async (req: Request, res: Response) => {
-      let data = {};
+      let data = null;
 
       try {
         data = await this.roleService.findRoleById(Number.parseInt(req.params.id, 10));

@@ -79,5 +79,10 @@ public class JobServiceTest {
         assertThatExceptionOfType(FailedToGetRoleException.class)
                 .isThrownBy(() -> jobService.findRoleById(20));
     }
-
+    @Test
+    void getRoles_When_ThereIsDatabaseError_Expect_FailedToGetRoleExceptionToBeThrown() throws SQLException  {
+        when(databaseConnectorMock.getConnection()).thenThrow(new SQLException());
+        assertThatExceptionOfType(FailedToGetRolesException.class)
+                .isThrownBy(() -> jobService.getJobRoles());
+    }
 }
