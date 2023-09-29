@@ -1,12 +1,12 @@
 import axios from 'axios';
-import Login from '../model/auth.js';
+import Login from '../model/login.js';
 import LoginValidator from './loginValidator.js';
 
 export default class AuthService {
   private loginValidator: LoginValidator;
 
-  constructor(productValidator: LoginValidator) {
-    this.loginValidator = productValidator;
+  constructor(loginValidator: LoginValidator) {
+    this.loginValidator = loginValidator;
   }
 
   async login(login: Login): Promise<string> {
@@ -16,7 +16,7 @@ export default class AuthService {
         throw new Error(validateError);
       }
 
-      const response = await axios.post('http://localhost:8080/api/login/', login);
+      const response = await axios.post('/api/auth/login/', login);
       return response.data;
     } catch (e) {
       throw new Error('Could not login');

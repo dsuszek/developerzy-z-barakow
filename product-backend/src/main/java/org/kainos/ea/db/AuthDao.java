@@ -1,11 +1,17 @@
 package org.kainos.ea.db;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.impl.TextCodec;
 import org.apache.commons.lang3.time.DateUtils;
 import org.kainos.ea.exception.TokenExpiredException;
 import org.kainos.ea.model.LoginRequest;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.time.Instant;
 import java.util.Date;
 import java.util.UUID;
 
@@ -29,41 +35,29 @@ public class AuthDao {
     }
 
     public String generateToken(String email) throws SQLException {
-        String token = UUID.randomUUID().toString();
-        java.util.Date expiry = DateUtils.addHours(new Date(), 1);
-
-        Connection c = databaseConnector.getConnection();
-
-        String insertStatement = "INSERT INTO Token (email, token, expiry) VALUES (?,?,?)";
-        PreparedStatement st = c.prepareStatement(insertStatement);
-        st.setString(1, email);
-        st.setString(2, token);
-        st.setTimestamp(3, new Timestamp(expiry.getTime()));
-
-        st.executeUpdate();
-
-        return token;
+        return Jwts.builder()
+                .claim("name", email)
+                .claim("roleId", getRoleIDFromEmail(email))
+                .setIssuedAt(new Date())
+                .setExpiration(DateUtils.addHours(new Date(), 1))
+                .signWith(
+                        SignatureAlgorithm.HS256,
+                        "Yn2kjibddFAWtnPJ2AFlL8WXmohJMCvigQggaEypa5E=".getBytes(StandardCharsets.UTF_8)
+                )
+                .compact();
     }
 
-    public int getRoleIDFromToken(String token) throws SQLException, TokenExpiredException {
+    private int getRoleIDFromEmail(String email) throws SQLException {
         Connection c = databaseConnector.getConnection();
-        String selectStatement = "SELECT roleId, expiry FROM Users JOIN Token using (email) where Token = ? ;";
+        String selectStatement = "SELECT roleId FROM Users where email = ? ;";
         PreparedStatement st = c.prepareStatement(selectStatement);
-        st.setString(1, token);
+        st.setString(1, email);
 
         ResultSet rs = st.executeQuery();
 
         while (rs.next()) {
-            Timestamp expiry = rs.getTimestamp("Expiry");
-            if (expiry.after(new Date())) {
-                return rs.getInt("roleId");
-            } else {
-                throw new TokenExpiredException();
-            }
+            return rs.getByte(1);
         }
-
         return -1;
     }
-
-
 }
