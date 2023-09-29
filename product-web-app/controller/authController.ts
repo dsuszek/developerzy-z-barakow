@@ -1,6 +1,4 @@
 import { Application, Request, Response } from 'express';
-import { serialize } from 'cookie';
-import jwt from 'jsonwebtoken';
 
 import Login from '../model/login.js';
 import AuthService from '../service/authService.js';
@@ -20,16 +18,11 @@ export default class AuthController {
       const data: Login = req.body;
       try {
         const tokenFromApi: string = await this.authService.login(data);
-        // const userData = {
-        //   email: data.email,
-        //   token: tokenFromApi,
-        // };
-        // const token = jwt.sign(userData, 'MYVERYSECRETSERCRET', { expiresIn: '1h' });
         const cookieOptions = {
           httpOnly: true,
           maxAge: MILISECONDS_PER_HOUR,
         };
-        res.setHeader('Set-Cookie', serialize('token', tokenFromApi, cookieOptions));
+        res.cookie('token', tokenFromApi, cookieOptions);
         res.redirect('/');
       } catch (e:any) {
         res.locals.errormessage = e.message;
