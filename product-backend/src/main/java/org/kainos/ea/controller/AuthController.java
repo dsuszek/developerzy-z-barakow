@@ -16,7 +16,7 @@ import org.kainos.ea.service.AuthService;
 
 import java.security.NoSuchAlgorithmException;
 
-@Tag(name="Auth API")
+@Tag(name="Auth")
 @Path("/api/auth")
 public class AuthController {
     public AuthService authService;
