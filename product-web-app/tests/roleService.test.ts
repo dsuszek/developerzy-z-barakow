@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import sinon from 'sinon';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import Role from '../model/role.js';
