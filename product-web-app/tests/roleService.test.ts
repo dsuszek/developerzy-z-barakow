@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import sinon from 'sinon';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import Role from '../model/role.js';
@@ -54,7 +53,7 @@ describe('Role service', () => {
     it('when API is down expect exception to be thrown', async () => {
       mockAxios.onGet('http://localhost:8080/api/job-roles').reply(500);
 
-      let exception: any;
+      let exception: any = {};
       try {
         await roleService.getRoles();
       } catch (e) {

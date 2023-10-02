@@ -54,5 +54,3 @@ public class JobRoleResponse {
         this.link = link;
     }
 }
-
-
