@@ -24,7 +24,7 @@ public class JobRoleController {
     private final static Logger logger = LoggerFactory.getLogger(ProductService.class);
 
     @POST
-    @Path("/job-roles")
+    @Path("/admin/job-roles")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createJobRole(JobRoleRequest jobRole) {
