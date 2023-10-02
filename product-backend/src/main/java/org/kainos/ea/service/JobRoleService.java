@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 public class JobRoleService {
 
-    private final static Logger logger = LoggerFactory.getLogger(ProductService.class);
+    private final static Logger logger = LoggerFactory.getLogger(JobRoleService.class);
     private final JobRoleDao jobRoleDao;
     private final JobRoleValidator jobRoleValidator;
 
