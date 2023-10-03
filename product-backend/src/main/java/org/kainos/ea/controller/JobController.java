@@ -20,17 +20,11 @@ import java.sql.SQLException;
 @Path("/api")
 public class JobController {
     private static JobService jobService;
-
-    static {
-        try {
-            jobService = new JobService(new JobDao(), new DatabaseConnector());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private final static Logger logger = LoggerFactory.getLogger(JobService.class);
 
+    public JobController() throws SQLException {
+        JobService jobService = new JobService(new JobDao(), new DatabaseConnector());
+    }
 
     @GET
     @Path("/job-roles")
@@ -56,7 +50,6 @@ public class JobController {
             return Response.status(Response.Status.BAD_REQUEST).build();
         } catch (FailedToGetRoleException e) {
             logger.error("Role does not exist! Id: {} Error: {}", id, e.getMessage());
-
             return Response.serverError().build();
         }
     }

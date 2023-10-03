@@ -20,8 +20,6 @@ public class JobDao {
 
     public JobDao() throws SQLException {
     }
-
-
     public List<JobRole> getRoles(Connection c) throws SQLException {
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery(
