@@ -41,10 +41,5 @@ public class JobService {
         } catch ( SQLException e) {
             throw new FailedToGetRoleException();
         }
-
     }
 }
-
-
-
-
