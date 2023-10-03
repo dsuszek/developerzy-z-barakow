@@ -1,7 +1,9 @@
 import JobRole from '../model/jobRole.js'
 
+const LINK_PATTERN = new RegExp("https://kainossoftwareltd.sharepoint.com/.+");
 
 export default class JobRoleValidator {
+
     validateJobRole(jobRole: JobRole) {
         if (jobRole.name.length > 50) {
             return 'Length of name of job role greater than 50 characters!';
@@ -26,6 +28,11 @@ export default class JobRoleValidator {
 
         if (!jobRole.link.trim() || jobRole.link == null) {
             return "Link for job role cannot be empty!";
+        }
+
+        // checks if link matches the regex
+        if (!LINK_PATTERN.test(jobRole.link)) {
+            return "Link does not meet all the criteria!";
         }
 
         return null;

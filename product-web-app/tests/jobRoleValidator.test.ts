@@ -75,6 +75,16 @@ describe('JobRole validator', () => {
             expect(jobRoleValidator.validateJobRole(jobRole as JobRole)).to.be.equal('Link for job role cannot be empty!')
         });
 
+        it('expect invalid link', () => {
+            const jobRole: Partial<JobRole> = {
+                name: 'Technology Leader',
+                description: 'A technology leader is key strategic role within the business making executive technology decisions on behalf of the business, based upon the sector and practices’ strategic direction and goals.',
+                link: 'ffwemkf23423.com'
+            };
+
+            expect(jobRoleValidator.validateJobRole(jobRole as JobRole)).to.be.equal('Link does not meet all the criteria!')
+        });
+
         it('expect no error', () => {
             const jobRole: JobRole = {
                 jobRoleId: 1,

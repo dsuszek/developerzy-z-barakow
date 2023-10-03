@@ -91,4 +91,12 @@ public class JobRoleValidatorTest {
         when(jobRole.getLink()).thenReturn("https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20profile%20%2D%20Apprentice%20Software%20Engineer%20%28Apprentice%29%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FEngineering&p=true&ga=1https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20profile%20%2D%20Apprentice%20Software%20Engineer%20%28Apprentice%29%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FEngineering&p=true&ga=1https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20profile%2ems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20profile%2ems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20profile%2");
         assertThat(jobRoleValidator.isValidJobRole(jobRole)).isEqualTo("Length of link to job role greater than 1000 characters");
     }
+
+    @Test
+    void When_JobRoleLinkInvalid_Expect_MessageReturned() {
+        when(jobRole.getName()).thenReturn("Principal Architect");
+        when(jobRole.getDescription()).thenReturn("This is an exemplary description of Principal Architect position.");
+        when(jobRole.getLink()).thenReturn("int.com/people/Job%20Specifications/Fo2FJob%20profile%2");
+        assertThat(jobRoleValidator.isValidJobRole(jobRole)).isEqualTo("Link doesn't meet all the criteria");
+    }
 }
