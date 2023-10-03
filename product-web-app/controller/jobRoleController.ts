@@ -9,11 +9,11 @@ export default class JobRoleController {
     private jobRoleService = new JobRoleService(new JobRoleValidator());
 
     appRoutes(app: Application) {
-        app.get('/admin/add-job-role', async (req: Request, res: Response) => {
-            res.render('add-job-role');
+        app.get('/admin/add-job-roles', async (req: Request, res: Response) => {
+            res.render('add-job-roles');
         });
 
-        app.post('/admin/add-job-role', async (req: Request, res: Response) => {
+        app.post('/admin/add-job-roles', async (req: Request, res: Response) => {
             const data: JobRole = req.body;
             data.name = sanitize(data.name).trim();
             data.description = sanitize(data.description).trim();
@@ -25,8 +25,8 @@ export default class JobRoleController {
             } catch (e: any) {
                 logger.warn(e.message);
                 res.locals.errormessage = e.message;
-                res.render('add-job-role', req.body);
+                res.render('add-job-roles', req.body);
             }
-        })
+        });
     }
 }
