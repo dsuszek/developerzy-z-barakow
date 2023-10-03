@@ -3,13 +3,14 @@ package org.kainos.ea.db;
 import org.kainos.ea.exception.FailedToCreateJobRoleException;
 import org.kainos.ea.model.JobRole;
 import org.kainos.ea.model.JobRoleRequest;
+
 import java.sql.*;
 
 public class JobRoleDao {
     public JobRole createJobRole(JobRoleRequest jobRole) throws SQLException, FailedToCreateJobRoleException {
         Connection c = DatabaseConnector.getConnection();
 
-        String insertStatement = "INSERT INTO JobRoles (name, description, link) VALUES (?,?,?)";
+        String insertStatement = "INSERT INTO `JobRoles` (name, description, link) VALUES (?, ?, ?);";
 
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
 
