@@ -10,7 +10,6 @@ import ProductController from './controller/productController.js';
 import logger from './service/logger.js';
 import { API_URL } from './common/constants.js';
 import JobRoleController from './controller/jobRoleController.js';
-import AuthController from './controller/authController.js';
 
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -48,7 +47,6 @@ app.listen(3000, () => {
 
 const productController = new ProductController();
 const jobRoleController = new JobRoleController();
-const authController = new AuthController();
 // Routing
 
 app.get('/', (eq: Request, res: Response) => {
@@ -57,4 +55,3 @@ app.get('/', (eq: Request, res: Response) => {
 
 productController.appRoutes(app);
 jobRoleController.appRoutes(app);
-authController.appRoutes(app);
