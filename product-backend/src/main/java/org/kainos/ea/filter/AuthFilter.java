@@ -1,0 +1,37 @@
+package org.kainos.ea.filter;
+
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.container.ContainerRequestFilter;
+import jakarta.ws.rs.core.Response;
+
+import java.security.interfaces.RSAPublicKey;
+
+
+public class AuthFilter implements ContainerRequestFilter {
+    private final String secretKey = System.getenv("JWT_SECRET");
+    @Override
+    public void filter(ContainerRequestContext requestContext) {
+        String path = requestContext.getUriInfo().getPath();
+        System.out.println(path);
+        if (!path.contains("auth")) {
+            try{
+                String token = requestContext.getHeaderString("Authorization");
+                System.out.println(token);
+                DecodedJWT jwtData = JWT.decode(token);
+                if (path.contains("admin")) {
+                    if (jwtData.getClaim("roleId").asInt() != 2) {
+                        throw new WebApplicationException("No admin privileges", Response.Status.UNAUTHORIZED);
+                    }
+                }
+            }catch (Exception e){
+                throw new WebApplicationException("User unauthorized", Response.Status.UNAUTHORIZED);
+            }
+        }
+    }
+}

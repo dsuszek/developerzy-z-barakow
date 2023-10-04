@@ -5,9 +5,14 @@ import session from 'express-session';
 import path from 'path';
 import nunjucks from 'nunjucks';
 import axios from 'axios';
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 import AuthController from './controller/authController.js';
 import logger from './service/logger.js';
 import { API_URL } from './common/constants.js';
+import authMiddleware from './middleware/authMiddleware.js';
+
+dotenv.config();
 
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -45,6 +50,9 @@ app.listen(3000, () => {
 });
 
 const authController = new AuthController();
+
+app.use(cookieParser());
+app.use(authMiddleware);
 
 // Routing
 app.get('/', (eq: Request, res: Response) => {

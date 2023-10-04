@@ -6,7 +6,9 @@ import io.dropwizard.core.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.kainos.ea.controller.AuthController;
+import org.kainos.ea.controller.TestController;
 import org.kainos.ea.db.AuthDao;
+import org.kainos.ea.filter.AuthFilter;
 import org.kainos.ea.service.AuthService;
 
 public class DropwizardWebServiceApplication extends Application<DropwizardWebServiceConfiguration> {
@@ -33,6 +35,8 @@ public class DropwizardWebServiceApplication extends Application<DropwizardWebSe
     @Override
     public void run(DropwizardWebServiceConfiguration dropwizardWebServiceConfiguration, Environment environment) throws Exception {
         environment.jersey().register(new AuthController(new AuthService(new AuthDao())));
+//        environment.jersey().register(new AuthFilter());
+        environment.jersey().register(new TestController());
     }
 
 }
