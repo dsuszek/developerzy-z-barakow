@@ -22,27 +22,22 @@
     </header>
     <main class="container">
         <section id="roles">
-            {% if roles and roles.length > 0 %}
+            {% if roles and roles.length > 0%}
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
-                        <div class ="col-6">
-                        <th scope="col w-100">Description</th>
-                        </div>
-                        <th scope="col">Link</th> 
-                    </tr>
+                      </tr>
                 </thead>
                 <tbody>
                     {% for role in roles %}
                     <tr>
-                        <td>{{ role.name }}</td>
-                        <td>{{ role.description }}</td>
-                        <td><a href="{{role.link}}" target="_blank">{{ role.link }};</a></td>
-                     </tr>
+                        <td><a href="role/{{ role.id }}">{{ role.name }}</a></td>
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>
+            {% else %}
             There are no roles.
             {% endif %}
         </section>
