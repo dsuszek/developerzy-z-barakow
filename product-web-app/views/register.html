@@ -40,15 +40,12 @@
                         <input type="password" id="password" name="password" class="form-control" value="{{ password }}"
                             required>
                     </div>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Choose Role
-                            <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">HTML</a></li>
-                            <li><a href="#">CSS</a></li>
-                            <li><a href="#">JavaScript</a></li>
-                        </ul>
+                    <div class="form-group">
+                        <select id="roleId" name="roleId" required>
+                            <option value="" selected disabled hidden>Choose role for user</option>
+                            <option value="1">Employee</option>
+                            <option value="2">Admin</option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Sign up</button>
                 </form>

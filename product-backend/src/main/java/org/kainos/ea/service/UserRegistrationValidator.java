@@ -30,8 +30,6 @@ public class UserRegistrationValidator {
             }
         } catch (SQLException e) {
             logger.error("Error: {}", e.getMessage());
-        } catch (FailedToRegisterUserException e) {
-            logger.error("Failed to register user! Error: {}", e.getMessage());
         }
 
         return null;

@@ -7,7 +7,7 @@ import java.sql.*;
 
 public class UserDao {
     // Checks if user's email address is already in use
-    public boolean isEmailTaken(String email) throws SQLException, FailedToRegisterUserException {
+    public boolean isEmailTaken(String email) throws SQLException {
         Connection c = DatabaseConnector.getConnection();
         String selectStatement = "SELECT 1 FROM `Users` WHERE email = ? LIMIT 1;";
         PreparedStatement st = c.prepareStatement(selectStatement);
