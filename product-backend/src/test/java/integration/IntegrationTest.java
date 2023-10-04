@@ -11,6 +11,7 @@ import org.kainos.ea.DropwizardWebServiceConfiguration;
 import org.kainos.ea.model.JobRole;
 import org.kainos.ea.model.JobRoleResponse;
 
+
 import java.util.List;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
