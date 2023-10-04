@@ -9,7 +9,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.kainos.ea.exception.*;
 import org.kainos.ea.model.JobRoleRequest;
-import org.kainos.ea.service.AuthService;
 import org.kainos.ea.service.JobRoleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

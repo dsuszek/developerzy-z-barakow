@@ -5,12 +5,14 @@ public class JobRole {
     private String name;
     private String description;
     private String link;
+    private short bandId;
 
-    public JobRole(short id, String name, String description, String link) {
+    public JobRole(short id, String name, String description, String link, short bandId) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.link = link;
+        this.bandId = bandId;
     }
 
     public short getId() {
@@ -43,5 +45,13 @@ public class JobRole {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public short getBandId() {
+        return bandId;
+    }
+
+    public void setBandId(short bandId) {
+        this.bandId = bandId;
     }
 }
