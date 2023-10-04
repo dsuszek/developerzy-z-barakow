@@ -3,6 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <title>Sign up</title>
+        <style>
+            .dropdown {
+                padding-bottom: 10px;
+            }
+        </style>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     </head>
     <body>
@@ -32,9 +37,14 @@
                             <label for="password">Password</label>
                             <input type="password" id="password" name="password" class="form-control" value="{{ password }}" required>
                         </div>
-                        <div class="form-group">
-                            <label for="roleId">Role</label>
-                            <input type="roleId" id="roleId" name="roleId" class="form-control" value="{{ roleId }}" required>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Choose a role
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                              <a class="dropdown-item" href="#">User</a>
+                              <a class="dropdown-item" href="#">Admin</a>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Sign up</button>
                     </form>
