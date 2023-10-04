@@ -1,6 +1,6 @@
 import JobRole from '../model/jobRole.js'
 
-const LINK_PATTERN = new RegExp("https://kainossoftwareltd.sharepoint.com/.+");
+const LINK_PATTERN = /^(https?:\/\/)?kainossoftwareltd\.sharepoint\.com\/.+$/
 
 export default class JobRoleValidator {
 
