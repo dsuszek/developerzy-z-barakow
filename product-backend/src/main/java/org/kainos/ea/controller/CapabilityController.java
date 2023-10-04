@@ -21,16 +21,11 @@ import java.sql.SQLException;
 @Tag(name = "API for JOBS app")
 @Path("/api")
 public class CapabilityController {
-
     CapabilityService capabilityService;
-
     public CapabilityController() throws SQLException {
         this.capabilityService = new CapabilityService(new CapabilityDao(), new DatabaseConnector());
     }
-
     private final static Logger logger = LoggerFactory.getLogger(CapabilityService.class);
-
-
     @GET
     @Path("/capabilities")
     @Produces(MediaType.APPLICATION_JSON)
@@ -42,7 +37,6 @@ public class CapabilityController {
             return Response.serverError().build();
         }
     }
-
     @GET
     @Path("/capabilities/{id}")
     @Produces(MediaType.APPLICATION_JSON)
