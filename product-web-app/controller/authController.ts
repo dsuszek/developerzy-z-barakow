@@ -11,28 +11,28 @@ export default class AuthController {
 
   private authService = new AuthService(new RegistrationValidator(), new LoginValidator());
 
-    appRoutes(app: Application) {
-      const MILISECONDS_PER_HOUR = 3600000;
-  
-        app.get('/auth/register', async (req: Request, res: Response) => {
-            res.render('register');
-        });
+  appRoutes(app: Application) {
+    const MILISECONDS_PER_HOUR = 3600000;
 
-        app.post('/auth/register', async (req: Request, res: Response) => {
-            const data: Registration = req.body;
-            data.email = sanitize(data.email).trim();
-            data.password = sanitize(data.password).trim();
+    app.get('/auth/register', async (req: Request, res: Response) => {
+      res.render('register');
+    });
 
-            try {
-                const newUser = await this.authService.register(data);
-                res.redirect('/');
+    app.post('/auth/register', async (req: Request, res: Response) => {
+      const data: Registration = req.body;
+      data.email = sanitize(data.email).trim();
+      data.password = sanitize(data.password).trim();
 
-            } catch (e: any) {
-                res.locals.errormessage = e.message;
-                res.render('register', req.body);
-            }
-        });
-    
+      try {
+        const newUser = await this.authService.register(data);
+        res.redirect('/');
+
+      } catch (e: any) {
+        res.locals.errormessage = e.message;
+        res.render('register', req.body);
+      }
+    });
+
 
     app.get('/auth/login', async (req: Request, res: Response) => {
       res.render('login');
@@ -48,7 +48,7 @@ export default class AuthController {
         };
         res.cookie('token', tokenFromApi, cookieOptions);
         res.redirect('/');
-      } catch (e:any) {
+      } catch (e: any) {
         res.locals.errormessage = e.message;
         res.render('login', req.body);
       }

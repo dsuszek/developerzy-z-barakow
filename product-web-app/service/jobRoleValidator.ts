@@ -1,6 +1,7 @@
 import JobRole from '../model/jobRole.js'
 
 const LINK_PATTERN = /^(https?:\/\/)?kainossoftwareltd\.sharepoint\.com\/.+$/
+
 export default class JobRoleValidator {
 
     validateJobRole(jobRole: JobRole) {

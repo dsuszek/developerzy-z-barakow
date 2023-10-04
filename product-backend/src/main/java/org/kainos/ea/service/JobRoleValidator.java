@@ -6,7 +6,7 @@ import org.kainos.ea.model.JobRoleRequest;
 import java.util.regex.Pattern;
 
 public class JobRoleValidator {
-    private static final Pattern LINK_PATTERN = Pattern.compile("https://kainossoftwareltd.sharepoint.com/.+");
+    private static final Pattern LINK_PATTERN = Pattern.compile("^(https?://)?kainossoftwareltd\\.sharepoint\\.com/.+$");
 
     public String isValidJobRole(JobRoleRequest jobRole) {
 
