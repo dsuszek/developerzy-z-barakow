@@ -7,9 +7,10 @@ import nunjucks from 'nunjucks';
 import axios from 'axios';
 import Role from './model/role.js';
 import RoleController from './controller/roleController.js';
-
-import { API_URL } from './common/constants.js';
+import AuthController from './controller/authController.js';
 import logger from './service/logger.js';
+import { API_URL } from './common/constants.js';
+
 
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -30,6 +31,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(session({ secret: 'NOT_HARDCODED_SECRET', cookie: { maxAge: 60000 } }));
 
+// app.use(cookieParser());
+
 axios.defaults.baseURL = API_URL;
 
 declare module 'express-session' {
@@ -46,11 +49,12 @@ app.listen(3000, () => {
 });
 
 const roleController = new RoleController();
+const authController = new AuthController();
 
 // Routing
-
 app.get('/', (eq: Request, res: Response) => {
-  res.redirect('/products');
+  res.render('home');
 });
 
 roleController.appRoutes(app);
+authController.appRoutes(app);

@@ -4,12 +4,11 @@ import io.github.cdimascio.dotenv.Dotenv;
 import org.kainos.ea.service.JobService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
 public class DatabaseConnector {
+
     private final static Logger logger = LoggerFactory.getLogger(JobService.class);
     public static Connection conn;
     public Connection getConnection() throws SQLException {
@@ -30,7 +29,6 @@ public class DatabaseConnector {
             conn = DriverManager.getConnection("jdbc:mysql://" + host + "/" + name + "?allowPublicKeyRetrieval=true&useSSL=false", user, password);
             return conn;
         } catch (SQLException exception) {
-            logger.error("Couldn't connect to the database! Error: {}", exception.getMessage());
             throw exception;
         }
     }
