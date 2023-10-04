@@ -33,8 +33,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(session({ secret: 'NOT_HARDCODED_SECRET', cookie: { maxAge: 60000 } }));
 
-// app.use(cookieParser());
-
 axios.defaults.baseURL = API_URL;
 
 declare module 'express-session' {
@@ -52,6 +50,7 @@ app.listen(3000, () => {
 const authController = new AuthController();
 
 app.use(cookieParser());
+
 app.use(authMiddleware);
 
 // Routing
