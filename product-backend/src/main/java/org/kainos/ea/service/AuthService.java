@@ -16,7 +16,6 @@ public class AuthService {
         this.authDao = authDao;
     }
 
-
     public String login(LoginRequest login) throws NoSuchAlgorithmException, FailedToGenerateTokenException, FailedToLoginException {
         try {
             String hashedPasswordFromDB = authDao.getPasswordFromDatabase(login);
