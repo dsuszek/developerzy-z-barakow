@@ -6,16 +6,18 @@ import Login from '../model/login.js';
 import AuthService from '../service/authService.js';
 import LoginValidator from '../service/loginValidator.js';
 import logger from '../service/logger.js';
+import RegistrationValidator from '../service/registrationValidator.js';
 
 const mockAxios = new MockAdapter(axios);
 const loginValidatorStub = sinon.stub(new LoginValidator());
+const registrationValidatorStub = sinon.stub(new RegistrationValidator());
 
 const loginRequest: Login = {
   email: 'random@kainos.com',
   password: 'randomPassword',
 };
 
-const authService = new AuthService(loginValidatorStub);
+const authService = new AuthService(registrationValidatorStub, loginValidatorStub);
 
 describe('Login service', () => {
   before(() => {
