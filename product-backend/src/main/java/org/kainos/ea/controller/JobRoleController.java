@@ -12,7 +12,6 @@ import org.kainos.ea.exception.*;
 import org.kainos.ea.model.JobRoleRequest;
 import org.kainos.ea.service.JobRoleService;
 import org.kainos.ea.service.JobRoleValidator;
-import org.kainos.ea.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +20,7 @@ import org.slf4j.LoggerFactory;
 @Path("/api")
 public class JobRoleController {
     private final JobRoleService jobRoleService = new JobRoleService(new JobRoleDao(), new JobRoleValidator());
-    private final static Logger logger = LoggerFactory.getLogger(ProductService.class);
+    private final static Logger logger = LoggerFactory.getLogger(JobRoleService.class);
 
     @POST
     @Path("/admin/job-roles")

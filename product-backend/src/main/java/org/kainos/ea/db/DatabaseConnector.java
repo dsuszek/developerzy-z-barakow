@@ -1,7 +1,6 @@
 package org.kainos.ea.db;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import org.kainos.ea.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +9,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnector {
-    private final static Logger logger = LoggerFactory.getLogger(ProductService.class);
     private static Connection conn;
 
     public static Connection getConnection() throws SQLException {
@@ -35,7 +33,6 @@ public class DatabaseConnector {
             return conn;
 
         } catch (SQLException exception) {
-            logger.error("Couldn't connect to the database! Error: {}", exception.getMessage());
             throw exception;
         }
     }
