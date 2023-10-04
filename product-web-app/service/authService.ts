@@ -20,6 +20,10 @@ export default class AuthService {
         }
 
         try{
+            console.log(registration.email);
+            console.log(registration.password);
+            console.log(registration.roleId);
+            
             const response = await axios.post(API.REGISTRATION, registration);
 
             return response.data;

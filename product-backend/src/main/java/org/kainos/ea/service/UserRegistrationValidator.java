@@ -11,10 +11,7 @@ import java.util.regex.Pattern;
 public class UserRegistrationValidator {
     private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@kainos\\.com$");
-    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[0-9])"
-                                                                    + "(?=.*[a-z])(?=.*[A-Z])"
-                                                                    + "(?=.*[@#$%^&+=])"
-                                                                    + "(?=\\S+$).{8,}$");
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$%^&+=!]).{9,}$");
 
     private UserDao userDao = new UserDao();
 
@@ -24,7 +21,7 @@ public class UserRegistrationValidator {
         }
 
         if (!PASSWORD_PATTERN.matcher(userRegistrationRequest.getPassword()).matches()) {
-            return "Password doesn't meet all the criteria";
+            return "Password does not meet all the criteria";
         }
 
         try {
