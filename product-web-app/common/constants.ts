@@ -4,4 +4,6 @@ export const JWT_SECRET = `${process.env.JWT_SECRET}`;
 export const API = {
   PRODUCTS: '/api/products',
   GET_PRODUCT: (id: number) => `/api/products/${id}`,
+  JOB_ROLES: '/api/admin/job-roles',
+  REGISTRATION: '/api/auth/register'
 };
