@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     </head>
     <body>
-        <header class="bg-success text-light">
+        <header class="bg-dark text-light">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -23,7 +23,7 @@
                             {{ errormessage }}
                         </div>
                     {% endif %}
-                    <form action="/login" method="post">
+                    <form action="/auth/login" method="post">
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" class="form-control" value="{{ email }}" required>

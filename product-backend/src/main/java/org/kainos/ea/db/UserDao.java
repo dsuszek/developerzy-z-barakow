@@ -6,7 +6,6 @@ import org.kainos.ea.model.UserRegistrationRequest;
 import java.sql.*;
 
 public class UserDao {
-
     // Checks if user's email address is already in use
     public boolean isEmailTaken(String email) throws SQLException, FailedToRegisterUserException {
         Connection c = DatabaseConnector.getConnection();

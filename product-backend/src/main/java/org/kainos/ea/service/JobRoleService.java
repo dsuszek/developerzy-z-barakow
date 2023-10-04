@@ -2,7 +2,6 @@ package org.kainos.ea.service;
 
 import org.kainos.ea.db.JobRoleDao;
 import org.kainos.ea.exception.FailedToCreateJobRoleException;
-import org.kainos.ea.exception.FailedToCreateProductException;
 import org.kainos.ea.exception.InvalidJobRoleException;
 import org.kainos.ea.model.JobRole;
 import org.kainos.ea.model.JobRoleRequest;

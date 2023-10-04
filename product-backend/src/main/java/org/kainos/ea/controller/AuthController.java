@@ -1,30 +1,49 @@
 package org.kainos.ea.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.kainos.ea.db.UserDao;
-import org.kainos.ea.exception.ErrorResponse;
-import org.kainos.ea.exception.FailedToRegisterUserException;
-import org.kainos.ea.exception.InvalidUserRegistrationRequestException;
+import org.kainos.ea.exception.*;
+import org.kainos.ea.model.LoginRequest;
 import org.kainos.ea.model.UserRegistrationRequest;
 import org.kainos.ea.service.AuthService;
-import org.kainos.ea.service.UserRegistrationValidator;
-import org.kainos.ea.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Tag(name = "Authorization API")
-@Path("/api")
-public class AuthController {
-    private final static Logger logger = LoggerFactory.getLogger(ProductService.class);
-    private AuthService authService = new AuthService(new UserDao(), new UserRegistrationValidator());
+import java.security.NoSuchAlgorithmException;
 
+@Tag(name = "Authorization API")
+@Path("/api/auth")
+public class AuthController {
+    private AuthService authService;
+    private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
+
+    public AuthController() {}
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
     @POST
-    @Path("/auth/register")
+    @Path("/login")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response login(LoginRequest login){
+        try{
+            return Response.ok(authService.login(login)).build();
+        }catch (FailedToLoginException e){
+            System.err.println(e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }catch (FailedToGenerateTokenException | NoSuchAlgorithmException e){
+            System.err.println(e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+    @POST
+    @Path("/register")
     @Produces(MediaType.APPLICATION_JSON)
     public Response register(UserRegistrationRequest userRegistrationRequest) {
         try {

@@ -7,12 +7,10 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.kainos.ea.db.JobRoleDao;
 import org.kainos.ea.exception.*;
 import org.kainos.ea.model.JobRoleRequest;
+import org.kainos.ea.service.AuthService;
 import org.kainos.ea.service.JobRoleService;
-import org.kainos.ea.service.JobRoleValidator;
-import org.kainos.ea.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,8 +18,14 @@ import org.slf4j.LoggerFactory;
 @Tag(name = "Job Roles API")
 @Path("/api")
 public class JobRoleController {
-    private final JobRoleService jobRoleService = new JobRoleService(new JobRoleDao(), new JobRoleValidator());
-    private final static Logger logger = LoggerFactory.getLogger(ProductService.class);
+    private JobRoleService jobRoleService;
+    private final static Logger logger = LoggerFactory.getLogger(JobRoleService.class);
+
+    public JobRoleController() {}
+
+    public JobRoleController(JobRoleService jobRoleService) {
+        this.jobRoleService = jobRoleService;
+    }
 
     @POST
     @Path("/admin/job-roles")
