@@ -1,6 +1,6 @@
 export default interface JobRole {
-    jobRoleId: number;
-    name: string;
-    description: string;
-    link: string;
+  jobRoleId: number;
+  name: string;
+  description: string;
+  link: string;
 }

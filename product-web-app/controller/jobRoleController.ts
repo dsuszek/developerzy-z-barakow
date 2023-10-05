@@ -1,4 +1,4 @@
-import { Application, Request, Response } from "express";
+import { Application, Request, Response } from 'express';
 import sanitize from 'sanitize-html';
 import JobRoleService from '../service/jobRoleService.js';
 import JobRole from '../model/jobRole.js';

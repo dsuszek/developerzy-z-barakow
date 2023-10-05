@@ -1,12 +1,9 @@
 import { expect } from 'chai';
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
 import Role from '../model/role.js';
 import RoleService from '../service/roleService.js';
 import logger from '../service/logger.js';
 import { API, API_URL } from '../common/constants.js';
-
-const mockAxios = new MockAdapter(axios);
+import mockAxios from './axios.instance.test.js';
 
 const roleDev: Role = {
   id: 1,
