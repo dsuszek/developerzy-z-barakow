@@ -3,21 +3,15 @@ package org.kainos.ea.service;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.db.AuthDao;
-import org.kainos.ea.db.PasswordEncoder;
 import org.kainos.ea.db.UserDao;
 import org.kainos.ea.exception.FailedToGenerateTokenException;
 import org.kainos.ea.exception.FailedToLoginException;
 import org.kainos.ea.exception.FailedToRegisterUserException;
 import org.kainos.ea.model.LoginRequest;
-<<<<<<< HEAD
-import org.kainos.ea.model.User;
 import org.kainos.ea.model.UserRegistrationRequest;
-=======
->>>>>>> b4fa46baa55f6e3b227383364ea51aa781ce4dd7
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.mockito.Mockito.when;
 
@@ -28,18 +22,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class AuthServiceTest {
-<<<<<<< HEAD
     private final AuthDao authDao = Mockito.mock(AuthDao.class);
     private final UserDao userDao = Mockito.mock(UserDao.class);
     private final UserRegistrationValidator userRegistrationValidator = Mockito.mock(UserRegistrationValidator.class);
     private AuthService authService = new AuthService(userDao, authDao, userRegistrationValidator);
     private String hashedAndSaltedPass = "U55AS5gfTUoluRuSy+nxRQ==:jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg="; // admin
-=======
-    AuthDao authDao = Mockito.mock(AuthDao.class);
-    AuthService authService = new AuthService(authDao);
-    String hashedAndSaltedPass = "U55AS5gfTUoluRuSy+nxRQ==:jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=";// admin
 
->>>>>>> b4fa46baa55f6e3b227383364ea51aa781ce4dd7
     @Test
     public void login_WhenGivenCorrectShouldLogin_ShouldReturnToken() throws NoSuchAlgorithmException, FailedToLoginException, FailedToGenerateTokenException, SQLException {
         //given
@@ -78,7 +66,7 @@ class AuthServiceTest {
     @Test
     public void register_WhenRegistrationDataIsIncorrect_ShouldThrowFailedToRegisterUserException() throws SQLException, FailedToRegisterUserException {
         // given
-        UserRegistrationRequest userRegistrationRequest = new UserRegistrationRequest("joe@gmail.com", "3jou89234u9**(U(#HH@bnbnj", (short)1);
+        UserRegistrationRequest userRegistrationRequest = new UserRegistrationRequest("joe@gmail.com", "3jou89234u9**(U(#HH@bnbnj", (short) 1);
         // when
         when(userDao.isEmailTaken(userRegistrationRequest.getEmail())).thenReturn(false);
         when(userDao.registerUser(userRegistrationRequest)).thenThrow(new FailedToRegisterUserException());
