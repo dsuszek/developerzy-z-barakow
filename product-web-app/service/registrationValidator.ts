@@ -6,7 +6,7 @@ export default class RegistrationValidator {
 
     validateRegistration(registration: Registration) {
         if (!EMAIL_PATTERN.test(registration.email)) {
-            return "Email does not have @kainos.com domain"
+            return "Email does not have @kainos.com domain";
         }
 
         return null;
