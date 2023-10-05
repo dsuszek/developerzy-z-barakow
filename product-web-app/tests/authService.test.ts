@@ -27,7 +27,7 @@ describe('Login service', () => {
 
   describe('login', () => {
     it('when API is down expect exception to be thrown', async () => {
-      const login:Login = loginRequest;
+      const login: Login = loginRequest;
       mockAxios.onPost('/api/auth/login', login).reply(500);
 
       let exception: any;
@@ -40,7 +40,7 @@ describe('Login service', () => {
       }
     });
     it('when login is not found should return error message', async () => {
-      const login:Login = loginRequest;
+      const login: Login = loginRequest;
       mockAxios.onPost('/api/auth/login', login).reply(400);
 
       let exception: any;
@@ -53,7 +53,7 @@ describe('Login service', () => {
       }
     });
     it('when API is running expect login to be succesful', async () => {
-      const login:Login = loginRequest;
+      const login: Login = loginRequest;
       mockAxios.onPost('/api/auth/login/', login).reply(200, 'randomizedToken2123');
       const responseBody = await authService.login(login);
       expect(responseBody).to.deep.equal('randomizedToken2123');

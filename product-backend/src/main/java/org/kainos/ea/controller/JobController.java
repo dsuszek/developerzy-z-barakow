@@ -32,7 +32,7 @@ public class JobController {
     public Response getJobRoles() throws SQLException, RoleDoesNotExistException, FailedToGetRoleException {
         try {
             return Response.ok(jobService.getJobRoles()).build();
-                } catch (FailedToGetRolesException e) {
+        } catch (FailedToGetRolesException e) {
             logger.error("Roles failed to be found! Error: {}", e.getMessage());
             return Response.serverError().build();
         }

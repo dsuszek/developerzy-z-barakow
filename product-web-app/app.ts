@@ -12,7 +12,6 @@ import logger from './service/logger.js';
 import { API_URL } from './common/constants.js';
 import CapabilityController from './controller/capabiliyController.js';
 
-
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const app: Application = express();
@@ -51,7 +50,6 @@ app.listen(3000, () => {
 const roleController = new RoleController();
 const authController = new AuthController();
 const capabiltyController = new CapabilityController();
-
 
 // Routing
 app.get('/', (eq: Request, res: Response) => {

@@ -24,7 +24,7 @@ export default class AuthController {
         };
         res.cookie('token', tokenFromApi, cookieOptions);
         res.redirect('/');
-      } catch (e:any) {
+      } catch (e: any) {
         res.locals.errormessage = e.message;
         res.render('login', req.body);
       }
