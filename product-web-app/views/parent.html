@@ -15,22 +15,26 @@
         <div class="container">
             <div class="row"></div>
             <div class="col-md-12" style="min-height:50px;">
-                <h1> {% block title %} {% endblock %} <img  href="../public/static/kainos_logo.svg" style="float: left;margin-right: 10px;" height="50" width="217" ></h1>
+                <h1> {% block title %} {% endblock %} </h1>
+                <!-- <img  href="../public/static/kainos_logo.svg" style="float: left;margin-right: 10px;" height="50" width="217" > -->
             </div>
-                {% if not IsAuthPage %}
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                      <ul class="navbar-nav">
+            {% if not IsAuthPage %}
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
-                          </li>
+                            <a class="nav-link {% if page=="home" %} active {% endif %}" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if page=="add-job-roles" %} active {% endif %}" href="/admin/add-job-roles">Add job role</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/auth/logout">Logout</a>
-                          </li>
-                      </ul>
-                    </div>
-                  </nav>
-                  {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        {% endif %}
         </div>
     </header>
     <main class="container mt-4">
