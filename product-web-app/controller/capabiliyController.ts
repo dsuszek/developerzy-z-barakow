@@ -1,7 +1,7 @@
 import { Application } from 'express-serve-static-core';
 import { Request, Response } from 'express';
-import Capability from '../model/capability';
-import CapabilityService from '../service/capabilityService';
+import Capability from '../model/capability.js';
+import CapabilityService from '../service/capabilityService.js';
 import logger from '../service/logger.js';
 
 export default class CapabilityController {

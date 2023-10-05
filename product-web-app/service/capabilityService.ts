@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Capability from '../model/capability';
+import Capability from '../model/capability.js';
 
 export default class CapabilityService {
   async getCapabilities(): Promise<Capability[]> {
