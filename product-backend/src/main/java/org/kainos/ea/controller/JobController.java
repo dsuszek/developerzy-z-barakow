@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.sql.SQLException;
 
-@Tag(name = "API for JOBS app")
+@Tag(name = "Job roles")
 @Path("/api")
 public class JobController {
     private static JobService jobService;
