@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 
-@Tag(name = "API for JOBS app")
+@Tag(name = "API for capabilities")
 @Path("/api")
 public class CapabilityController {
     CapabilityService capabilityService;
@@ -45,11 +45,9 @@ public class CapabilityController {
             return Response.ok(capabilityService.findCapabilityById(id)).build();
         } catch (CapabilityDoesNotExistException e) {
             logger.error("Failed to get a capability! Error: {}", e.getMessage());
-
             return Response.status(Response.Status.BAD_REQUEST).build();
         } catch (FailedToGetCapabilityException e) {
             logger.error("Capability does not exist! Id: {} Error: {}", id, e.getMessage());
-
             return Response.serverError().build();
         }
     }
