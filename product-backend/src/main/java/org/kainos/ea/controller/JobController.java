@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 import java.sql.SQLException;
 
 
-@Tag(name = "API for JOBS app")
+@Tag(name = "Job Roles")
 @Path("/api")
 public class JobController {
     private static JobService jobService;
@@ -53,5 +53,4 @@ public class JobController {
             return Response.serverError().build();
         }
     }
-
 }
