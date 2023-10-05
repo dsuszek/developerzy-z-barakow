@@ -29,5 +29,9 @@ export default class AuthController {
         res.render('login', req.body);
       }
     });
+    app.get('/auth/logout', async (req: Request, res: Response) => {
+      res.clearCookie('token');
+      res.render('login');
+    });
   }
 }
