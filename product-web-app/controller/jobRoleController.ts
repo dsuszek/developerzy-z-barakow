@@ -19,14 +19,14 @@ export default class JobRoleController {
       data.description = sanitize(data.description).trim();
       data.link = sanitize(data.link).trim();
 
-      try {
-        const newJobRole = await this.jobRoleService.createJobRole(data);
-        res.redirect(`/job-roles/${newJobRole.jobRoleId}`);
-      } catch (e: any) {
-        logger.warn(e.message);
-        res.locals.errormessage = e.message;
-        res.render('add-job-roles', req.body);
-      }
-    });
-  }
+            try {
+                const newJobRole = await this.jobRoleService.createJobRole(data);
+                res.redirect(`/job-roles/${newJobRole.id}`);
+            } catch (e: any) {
+                logger.warn(e.message);
+                res.locals.errormessage = e.message;
+                res.render('add-job-roles', req.body);
+            }
+        });
+    }
 }
