@@ -1,5 +1,5 @@
 export default interface JobRole {
-    jobRoleId: number;
+    id: number;
     name: string;
     description: string;
     link: string;
