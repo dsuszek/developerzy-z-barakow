@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class DatabaseConnector {
 
     private final static Logger logger = LoggerFactory.getLogger(JobService.class);
-    public static Connection conn;
+    public Connection conn;
     public Connection getConnection() throws SQLException {
         String user, password, host, name;
         if (conn != null && !conn.isClosed()) {
@@ -31,15 +31,5 @@ public class DatabaseConnector {
         } catch (SQLException exception) {
             throw exception;
         }
-    }
-    public boolean isDbConnected(Connection conn) {
-        try {
-            if(conn != null && !conn.isClosed()){
-                return  true;
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-        return false;
     }
 }

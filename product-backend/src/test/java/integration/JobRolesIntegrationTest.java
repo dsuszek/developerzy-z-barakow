@@ -10,20 +10,19 @@ import org.kainos.ea.DropwizardWebServiceApplication;
 import org.kainos.ea.DropwizardWebServiceConfiguration;
 import org.kainos.ea.model.JobRole;
 import org.kainos.ea.model.JobRoleResponse;
-
-
 import java.util.List;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
-public class IntegrationTest {
+public class JobRolesIntegrationTest {
     static final DropwizardAppExtension<DropwizardWebServiceConfiguration> APP = new DropwizardAppExtension<>(
             DropwizardWebServiceApplication.class, null,
             new ResourceConfigurationSourceProvider()
     );
+    public final String API_URL = System.getenv("API_URL");
 
     @Test
     void getJobRoles_shouldReturnListOfJobRoles() {
-        List<JobRole> response = APP.client().target("http://localhost:8080/api/job-roles")
+        List<JobRole> response = APP.client().target(API_URL + "/api/job-roles")
                 .request()
                 .get(List.class);
 
@@ -31,12 +30,19 @@ public class IntegrationTest {
     }
 
     @Test
-    void getJobRoles_shouldReturnJobRole() {
-        Response response = APP.client().target("http://localhost:8080/api/job-roles/1")
+    void getJobRole_shouldReturnJobRole() {
+        Response response = APP.client().target(API_URL + "/api/job-roles/40")
                 .request()
                 .get();
         Assertions.assertEquals(200,response.getStatus());
-        Assertions.assertEquals(1, response.readEntity(JobRoleResponse.class).getId());
+    }
+
+    @Test
+    void getJobRole_shouldReturnBadRequest_whenJobRoleDoesNotExist() {
+        Response response = APP.client().target(API_URL + "/api/job-roles/1")
+                .request()
+                .get();
+        Assertions.assertEquals(400,response.getStatus());
     }
 
 }

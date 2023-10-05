@@ -8,7 +8,6 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-import org.kainos.ea.db.AuthDao;
 import org.kainos.ea.exception.FailedToGenerateTokenException;
 import org.kainos.ea.exception.FailedToLoginException;
 import org.kainos.ea.model.LoginRequest;

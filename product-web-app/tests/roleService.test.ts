@@ -4,6 +4,7 @@ import MockAdapter from 'axios-mock-adapter';
 import Role from '../model/role.js';
 import RoleService from '../service/roleService.js';
 import logger from '../service/logger.js';
+import { API, API_URL } from '../common/constants.js';
 
 const mockAxios = new MockAdapter(axios);
 
@@ -33,7 +34,7 @@ describe('Role service', () => {
 
   describe('getRoles', () => {
     it('when API is online expect roles to be returned', async () => {
-      mockAxios.onGet('http://localhost:8080/api/job-roles').reply(200, [roleDev, roleAdmin]);
+      mockAxios.onGet(API_URL + API.JOBS).reply(200, [roleDev, roleAdmin]);
 
       const responseBody = await roleService.getRoles();
 
@@ -42,7 +43,7 @@ describe('Role service', () => {
     });
 
     it('when API is online expect role to be returned', async () => {
-      mockAxios.onGet('http://localhost:8080/api/job-roles/1').reply(200, roleDev);
+      mockAxios.onGet(API_URL + API.GET_ROLE(1)).reply(200, roleDev);
 
       const responseBody = await roleService.getRoles();
 
@@ -51,7 +52,7 @@ describe('Role service', () => {
     });
 
     it('when API is down expect exception to be thrown', async () => {
-      mockAxios.onGet('http://localhost:8080/api/job-roles').reply(500);
+      mockAxios.onGet(API_URL + API.JOBS).reply(500);
 
       let exception: any;
       try {
