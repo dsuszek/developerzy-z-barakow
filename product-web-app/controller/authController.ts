@@ -24,7 +24,6 @@ export default class AuthController {
       data.password = sanitize(data.password).trim();
 
       try {
-        const newUser = await this.authService.register(data);
         res.redirect('/');
 
       } catch (e: any) {
