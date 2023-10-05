@@ -1,6 +1,6 @@
 import Registration from "../model/registration.js";
 
-const EMAIL_PATTERN = /"^[A-Za-z0-9._%+-]+@kainos.com$"/;
+const EMAIL_PATTERN = /^[A-Za-z0-9._%+-]+@kainos.com$/;
 
 export default class RegistrationValidator {
 
