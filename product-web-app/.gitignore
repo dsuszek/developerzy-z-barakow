@@ -40,9 +40,3 @@ dist/**/*
 
 # ignore yarn.lock
 yarn.lock
-
-#package.json
-package.json
-
-#package-lock.json
-package-lock.json
