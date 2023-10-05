@@ -8,5 +8,7 @@ export default class RegistrationValidator {
         if (!EMAIL_PATTERN.test(registration.email)) {
             return "Email does not have @kainos.com domain"
         }
+
+        return null;
     }
 }
