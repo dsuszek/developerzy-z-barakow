@@ -26,8 +26,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class JobServiceTest {
-
-
     JobDao jobDaoMock = mock(JobDao.class);
     DatabaseConnector databaseConnectorMock = mock(DatabaseConnector.class);
     Connection connMock = mock ( Connection.class);

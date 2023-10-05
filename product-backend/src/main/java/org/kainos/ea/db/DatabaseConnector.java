@@ -4,6 +4,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 import org.kainos.ea.service.JobService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -35,10 +36,11 @@ public class DatabaseConnector {
             throw exception;
         }
     }
+
     public boolean isDbConnected(Connection conn) {
         try {
-            if(conn != null && !conn.isClosed()){
-                return  true;
+            if (conn != null && !conn.isClosed()) {
+                return true;
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());

@@ -11,6 +11,7 @@ import AuthController from './controller/authController.js';
 import logger from './service/logger.js';
 import { API_URL } from './common/constants.js';
 import CapabilityController from './controller/capabiliyController.js';
+import JobRoleController from './controller/jobRoleController.js';
 
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -48,6 +49,7 @@ app.listen(3000, () => {
   logger.info('Server listening on port 3000');
 });
 const roleController = new RoleController();
+const jobRoleController = new JobRoleController();
 const authController = new AuthController();
 const capabiltyController = new CapabilityController();
 
@@ -56,5 +58,6 @@ app.get('/', (eq: Request, res: Response) => {
   res.render('home');
 });
 roleController.appRoutes(app);
+jobRoleController.appRoutes(app);
 authController.appRoutes(app);
 capabiltyController.appRoutes(app);
