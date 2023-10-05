@@ -6,7 +6,7 @@ export default function (req: Request, res: Response, next: NextFunction) {
     next();
   } else if (req.cookies.token && req.cookies.token.length > 0) {
     try {
-      axios.defaults.headers.common.Authorization = `Bearer ${req.cookies.token}`;
+      axios.defaults.headers.common.Authorization = req.cookies.token;
       next();
     } catch (error) {
       res.redirect('/auth/login');
