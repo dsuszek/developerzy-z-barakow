@@ -26,7 +26,7 @@ public class BandRequest {
     @JsonCreator
     public BandRequest(
             @JsonProperty("name") String name,
-            @JsonProperty("level") String description) {
+            @JsonProperty("level") short level) {
         this.name = name;
         this.level = level;
     }
