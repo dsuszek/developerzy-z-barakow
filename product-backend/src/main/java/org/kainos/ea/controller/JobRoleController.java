@@ -27,7 +27,6 @@ public class JobRoleController {
     public JobRoleController(JobRoleService jobRoleService) {
         this.jobRoleService = jobRoleService;
     }
-
     @POST
     @Path("/admin/job-roles")
     @Consumes(MediaType.APPLICATION_JSON)

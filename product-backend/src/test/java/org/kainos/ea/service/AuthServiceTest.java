@@ -9,8 +9,11 @@ import org.kainos.ea.exception.FailedToGenerateTokenException;
 import org.kainos.ea.exception.FailedToLoginException;
 import org.kainos.ea.exception.FailedToRegisterUserException;
 import org.kainos.ea.model.LoginRequest;
+<<<<<<< HEAD
 import org.kainos.ea.model.User;
 import org.kainos.ea.model.UserRegistrationRequest;
+=======
+>>>>>>> b4fa46baa55f6e3b227383364ea51aa781ce4dd7
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -22,29 +25,37 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 class AuthServiceTest {
+<<<<<<< HEAD
     private final AuthDao authDao = Mockito.mock(AuthDao.class);
     private final UserDao userDao = Mockito.mock(UserDao.class);
     private final UserRegistrationValidator userRegistrationValidator = Mockito.mock(UserRegistrationValidator.class);
     private AuthService authService = new AuthService(userDao, authDao, userRegistrationValidator);
     private String hashedAndSaltedPass = "U55AS5gfTUoluRuSy+nxRQ==:jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg="; // admin
+=======
+    AuthDao authDao = Mockito.mock(AuthDao.class);
+    AuthService authService = new AuthService(authDao);
+    String hashedAndSaltedPass = "U55AS5gfTUoluRuSy+nxRQ==:jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=";// admin
+
+>>>>>>> b4fa46baa55f6e3b227383364ea51aa781ce4dd7
     @Test
     public void login_WhenGivenCorrectShouldLogin_ShouldReturnToken() throws NoSuchAlgorithmException, FailedToLoginException, FailedToGenerateTokenException, SQLException {
         //given
-        LoginRequest loginRequest = new LoginRequest("admin@kainos","admin");
+        LoginRequest loginRequest = new LoginRequest("admin@kainos", "admin");
         //when
         when(authDao.getPasswordFromDatabase(loginRequest)).thenReturn(hashedAndSaltedPass);
         when(authDao.generateToken("admin@kainos")).thenReturn("1234567890");
         String result = authService.login(loginRequest);
         //then
-        assertEquals(result,"1234567890");
+        assertEquals(result, "1234567890");
     }
 
     @Test
-    public void login_WhenLoginDataIsIncorrect_ShouldThrowFailedToLoginException() throws NoSuchAlgorithmException{
+    public void login_WhenLoginDataIsIncorrect_ShouldThrowFailedToLoginException() throws NoSuchAlgorithmException {
         //given
-        LoginRequest loginRequest = new LoginRequest("admin@kainos",hashedAndSaltedPass);
+        LoginRequest loginRequest = new LoginRequest("admin@kainos", hashedAndSaltedPass);
         //when
         when(authDao.getPasswordFromDatabase(loginRequest)).thenReturn("admin1");
         //then
@@ -55,7 +66,7 @@ class AuthServiceTest {
     @Test
     public void login_WhenSQLExceptionIsThrownInGenerateToken_ShouldThrowFailedToGenerateTokenException() throws NoSuchAlgorithmException, SQLException {
         //given
-        LoginRequest loginRequest = new LoginRequest("admin@kainos","admin");
+        LoginRequest loginRequest = new LoginRequest("admin@kainos", "admin");
         //when
         when(authDao.getPasswordFromDatabase(loginRequest)).thenReturn(hashedAndSaltedPass);
         when(authDao.generateToken("admin@kainos")).thenThrow(new SQLException());

@@ -10,6 +10,9 @@ import jakarta.ws.rs.core.Response;
 import org.kainos.ea.db.AuthDao;
 import org.kainos.ea.db.UserDao;
 import org.kainos.ea.exception.*;
+
+import org.kainos.ea.exception.FailedToGenerateTokenException;
+import org.kainos.ea.exception.FailedToLoginException;
 import org.kainos.ea.model.LoginRequest;
 import org.kainos.ea.model.UserRegistrationRequest;
 import org.kainos.ea.service.AuthService;
