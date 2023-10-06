@@ -12,9 +12,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.sql.SQLException;
-
 
 @Tag(name = "Job Roles")
 @Path("/api")
@@ -46,11 +44,10 @@ public class JobController {
             return Response.ok(jobService.findRoleById(id)).build();
         } catch (RoleDoesNotExistException e) {
             logger.error("Failed to get a role! Error: {}", e.getMessage());
-
             return Response.status(Response.Status.BAD_REQUEST).build();
         } catch (FailedToGetRoleException e) {
             logger.error("Role does not exist! Id: {} Error: {}", id, e.getMessage());
-            return Response.serverError().build();
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 }

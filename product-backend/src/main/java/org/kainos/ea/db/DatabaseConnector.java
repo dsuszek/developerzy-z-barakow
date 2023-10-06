@@ -15,7 +15,6 @@ public class DatabaseConnector {
 
 
     public static Connection getConnection() throws SQLException {
-
         String user, password, host, name;
         if (conn != null && !conn.isClosed()) {
             return conn;
@@ -26,7 +25,6 @@ public class DatabaseConnector {
             password = dotenv.get("DB_PASSWORD");
             host = dotenv.get("DB_HOST");
             name = dotenv.get("DB_NAME");
-
             if (user == null || password == null || host == null || name == null)
                 throw new IllegalArgumentException("Properties file must exist " +
                         "and must contain user, password, name and host properties.");
@@ -35,16 +33,5 @@ public class DatabaseConnector {
         } catch (SQLException exception) {
             throw exception;
         }
-    }
-
-    public boolean isDbConnected(Connection conn) {
-        try {
-            if (conn != null && !conn.isClosed()) {
-                return true;
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-        return false;
     }
 }

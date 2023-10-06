@@ -11,7 +11,6 @@ import org.kainos.ea.controller.JobRoleController;
 import org.kainos.ea.controller.AuthController;
 import org.kainos.ea.db.AuthDao;
 import org.kainos.ea.service.AuthService;
-
 public class DropwizardWebServiceApplication extends Application<DropwizardWebServiceConfiguration> {
 
     public static void main(final String[] args) throws Exception {

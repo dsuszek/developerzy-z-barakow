@@ -8,10 +8,10 @@ import axios from 'axios';
 import Role from './model/role.js';
 import RoleController from './controller/roleController.js';
 import AuthController from './controller/authController.js';
-import logger from './service/logger.js';
 import { API_URL } from './common/constants.js';
-import CapabilityController from './controller/capabiliyController.js';
+import CapabilityController from './controller/capabilityController.js';
 import JobRoleController from './controller/jobRoleController.js';
+import logger from './service/logger.js';
 
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -51,7 +51,7 @@ app.listen(3000, () => {
 const roleController = new RoleController();
 const jobRoleController = new JobRoleController();
 const authController = new AuthController();
-const capabiltyController = new CapabilityController();
+const capabilityController = new CapabilityController();
 
 // Routing
 app.get('/', (eq: Request, res: Response) => {
@@ -60,4 +60,4 @@ app.get('/', (eq: Request, res: Response) => {
 roleController.appRoutes(app);
 jobRoleController.appRoutes(app);
 authController.appRoutes(app);
-capabiltyController.appRoutes(app);
+capabilityController.appRoutes(app);

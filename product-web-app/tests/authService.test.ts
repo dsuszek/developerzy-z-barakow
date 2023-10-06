@@ -1,13 +1,11 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
 import Login from '../model/login.js';
 import AuthService from '../service/authService.js';
 import LoginValidator from '../service/loginValidator.js';
 import logger from '../service/logger.js';
+import mockAxios from './axios.instance.test.js';
 
-const mockAxios = new MockAdapter(axios);
 const loginValidatorStub = sinon.stub(new LoginValidator());
 
 const loginRequest: Login = {
