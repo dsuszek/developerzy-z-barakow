@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class UserRegistrationValidator {
     private static final Pattern EMAIL_DOMAIN_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@kainos\\.com$");
-    private static final Pattern EMAIL_PATTERN = Pattern.compile("^(?=.{1,50}$)[A-Za-z0-9+_.-]+@kainos.com$");
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^(?=.{1,50}$)[A-Za-z0-9+_.-]+@kainos\\.com$");
     private static final Pattern PASSWORD_SPECIAL_CHARS_PATTERN = Pattern.compile(".*[!@#$%^&*()_+{}\\[\\]:;<>,.?~\\\\-].*");
     private static final Pattern PASSWORD_UPPERCASE_LETTER_PATTERN = Pattern.compile("(?=.*[A-Z]).*");
     private static final Pattern PASSWORD_LOWERCASE_LETTER_PATTERN = Pattern.compile("(?=.*[a-z]).*");

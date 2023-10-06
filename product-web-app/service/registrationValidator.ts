@@ -30,5 +30,7 @@ export default class RegistrationValidator {
         if (registration.password.length >= 50) {
             return "Password must contain 50 characters at the maximum"
         } 
+
+        return null;
     }
 }
