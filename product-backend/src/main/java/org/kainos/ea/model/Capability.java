@@ -6,7 +6,6 @@ public class Capability {
     private String leadName;
     private String capabilityLeadPicture;
     private String message;
-
     public Capability(short id, String capabilityName, String leadName, String capabilityLeadPicture, String message) {
         this.id = id;
         this.capabilityName = capabilityName;
@@ -14,12 +13,14 @@ public class Capability {
         this.capabilityLeadPicture = capabilityLeadPicture;
         this.message = message;
     }
-
     public Capability(String capabilityName, String leadName, String capabilityLeadPicture, String message) {
         this.capabilityName = capabilityName;
         this.leadName = leadName;
         this.capabilityLeadPicture = capabilityLeadPicture;
         this.message = message;
+    }
+
+    public Capability() {
     }
 
     public short getId() {

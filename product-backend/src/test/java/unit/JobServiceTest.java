@@ -49,7 +49,7 @@ public class JobServiceTest {
         Assertions.assertEquals(result, expectedList);
     }
     @Test
-    void getJobRoles_whenJobRolesAreUnavaliable_shouldReturnEmptyList() throws SQLException {
+    void getJobRoles_whenJobRolesAreUnavailable_shouldReturnEmptyList() throws SQLException {
         List<JobRole> testList = new ArrayList<JobRole>();
         when(jobDaoMock.getRoles(connMock)).thenReturn(testList);
         Assertions.assertTrue(testList.isEmpty());

@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 
-@Tag(name = "API for capabilities")
+@Tag(name = "Capabilities API")
 @Path("/api")
 public class CapabilityController {
     CapabilityService capabilityService;
@@ -29,10 +29,10 @@ public class CapabilityController {
     @GET
     @Path("/capabilities")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCapabilities() throws SQLException, CapabilityDoesNotExistException, FailedToGetCapabilityException {
+    public Response getCapabilities() throws SQLException, CapabilityDoesNotExistException, FailedToGetCapabilitiesException {
         try {
             return Response.ok(capabilityService.getCapabilities()).build();
-        } catch (FailedToGetCapabilityException e) {
+        } catch (FailedToGetCapabilitiesException e) {
             logger.error("Capabilities failed to be found! Error: {}", e.getMessage());
             return Response.serverError().build();
         }

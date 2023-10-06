@@ -14,7 +14,6 @@ import java.util.Optional;
 public class CapabilityDao {
     public CapabilityDao() throws SQLException {
     }
-
     public List<Capability> getCapabilities(Connection c) throws SQLException {
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery(

@@ -16,22 +16,18 @@ public class CapabilityService {
     public CapabilityDao capabilityDao;
     public DatabaseConnector databaseConnector;
     private final static Logger logger = LoggerFactory.getLogger(CapabilityService.class);
-
-
     public CapabilityService(CapabilityDao capabilityDao, DatabaseConnector databaseConnector) {
         this.capabilityDao = capabilityDao;
         this.databaseConnector = databaseConnector;
     }
-
-    public List<Capability> getCapabilities() throws FailedToGetCapabilityException {
+    public List<Capability> getCapabilities() throws FailedToGetCapabilitiesException {
         try {
             return capabilityDao.getCapabilities(databaseConnector.getConnection());
         } catch (SQLException e) {
             logger.error("SQL exception! Error: {}", e.getMessage());
-            throw new FailedToGetCapabilityException();
+            throw new FailedToGetCapabilitiesException();
         }
     }
-
     public Capability findCapabilityById(int id) throws CapabilityDoesNotExistException, FailedToGetCapabilityException {
         try {
             Optional<Capability> capability = capabilityDao.findCapabilityById(id, databaseConnector.getConnection());

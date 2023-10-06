@@ -14,14 +14,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.sql.SQLException;
 
-@Tag(name = "Job Roles")
+@Tag(name = "Job Roles API")
 @Path("/api")
 public class JobController {
-    private static JobService jobService;
+    private JobService jobService;
     private final static Logger logger = LoggerFactory.getLogger(JobService.class);
 
-    public JobController() throws SQLException {
-        JobService jobService = new JobService(new JobDao(), new DatabaseConnector());
+    public JobController(JobService jobService) throws SQLException {
+        this.jobService = new JobService(new JobDao(), new DatabaseConnector());
     }
 
     @GET
