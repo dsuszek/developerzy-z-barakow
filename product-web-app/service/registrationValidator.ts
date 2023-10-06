@@ -5,7 +5,6 @@ const EMAIL_PATTERN = /^(?=.{1,50}$)[A-Za-z0-9+_.-]+@kainos\.com$/;
 const PASSWORD_SPECIAL_CHARS_PATTERN = /.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-].*/;
 const PASSWORD_UPPERCASE_LETTER_PATTERN = /(?=.*[A-Z]).*/;
 const PASSWORD_LOWERCASE_LETTER_PATTERN = /(?=.*[a-z]).*/;
-const PASSWORD_LENGTH_PATTERN = /(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$%^&+=!]).{9,50}/;
 
 export default class RegistrationValidator {
 
@@ -25,8 +24,11 @@ export default class RegistrationValidator {
         if (!PASSWORD_LOWERCASE_LETTER_PATTERN.test(registration.password)) {
             return "Password must contain at least one lowercase letter"
         }
-        if (!PASSWORD_LENGTH_PATTERN.test(registration.password)) {
-            return "Password must contain between 9 and 50 characters"
-        }
+        if (registration.password.length < 9) {
+            return "Password must contain at least 9 characters"
+        } 
+        if (registration.password.length >= 50) {
+            return "Password must contain 50 characters at the maximum"
+        } 
     }
 }
