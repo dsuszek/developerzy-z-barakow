@@ -8,14 +8,14 @@ export default class CapabilityController {
   private capabilityService = new CapabilityService();
 
   appRoutes(app: Application) {
-    app.get('/roles', async (req: Request, res: Response) => {
+    app.get('/capabilities', async (req: Request, res: Response) => {
       let data: Capability[] = [];
       try {
         data = await this.capabilityService.getCapabilities();
       } catch (e) {
         logger.error(`Couldn't get capabilities! Error: ${e}`);
       }
-      res.render('list-capabilities', { roles: data });
+      res.render('list-capabilities', { capabilities: data });
     });
   }
 }
