@@ -34,10 +34,12 @@
           </thead>
           <tbody>
             {% for capability in capabilities %}
-            <td>{{ capability.capabilityName }}</td>
-            <td>{{ capability.leadName }}</td>
-            <td><img src ="data:image/jpeg; base64, {{ capability.capabilityLeadPicture }}"/></td>
-            <td>{{ capability.message }}</td>
+            <tr>
+              <td>{{ capability.capabilityName }}</td>
+              <td>{{ capability.leadName }}</td>
+              <td><img src="data:image/jpeg; base64, {{ capability.capabilityLeadPicture }}" /></td>
+              <td>{{ capability.message }}</td>
+            </tr>
             {% endfor %}
           </tbody>
         </table>
