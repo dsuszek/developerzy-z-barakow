@@ -10,8 +10,8 @@ import java.util.regex.Pattern;
 
 public class UserRegistrationValidator {
     private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
-    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@kainos\\.com$");
-    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$%^&+=!]).{9,}$");
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-](@kainos\\.com)$");
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$%^&+=!]).{9,50}$");
 
     private UserDao userDao = new UserDao();
 

@@ -24,7 +24,7 @@ export default class BandService {
 
             return response.data;
         } catch (e) {
-            logger.error('Could not');
+            logger.error('Could not create band');
             throw new Error('Could not create band');
         }
     }

@@ -23,7 +23,7 @@ export default class BandController {
                 res.redirect('/admin/band');
             } catch (e: any) {
                 res.locals.errormessage = e.message;
-                res.render('register', req.body);
+                res.render('add-band', req.body);
             }
         });
     }
