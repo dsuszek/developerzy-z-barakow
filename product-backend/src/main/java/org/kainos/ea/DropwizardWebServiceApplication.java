@@ -5,8 +5,9 @@ import io.dropwizard.core.setup.Bootstrap;
 import io.dropwizard.core.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
-import org.kainos.ea.controller.AuthController;
+import org.kainos.ea.controller.JobController;
 import org.kainos.ea.controller.JobRoleController;
+import org.kainos.ea.controller.AuthController;
 
 public class DropwizardWebServiceApplication extends Application<DropwizardWebServiceConfiguration> {
 
@@ -31,6 +32,7 @@ public class DropwizardWebServiceApplication extends Application<DropwizardWebSe
 
     @Override
     public void run(DropwizardWebServiceConfiguration dropwizardWebServiceConfiguration, Environment environment) throws Exception {
+        environment.jersey().register(new JobController());
         environment.jersey().register(new JobRoleController());
         environment.jersey().register(new AuthController());
     }
