@@ -8,7 +8,7 @@ export default class RoleController {
   private roleService = new RoleService();
 
   appRoutes(app: Application) {
-    app.get('/roles', async (req: Request, res: Response) => {
+    app.get('/job-roles', async (req: Request, res: Response) => {
       let data: Role[] = [];
       try {
         data = await this.roleService.getRoles();
@@ -18,7 +18,7 @@ export default class RoleController {
 
       res.render('list-roles', { roles: data });
     });
-    app.get('/role/:id', async (req: Request, res: Response) => {
+    app.get('/job-roles/:id', async (req: Request, res: Response) => {
       let data = null;
 
       try {
