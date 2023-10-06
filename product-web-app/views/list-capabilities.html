@@ -36,7 +36,7 @@
             {% for capability in capabilities %}
             <td>{{ capability.capabilityName }}</td>
             <td>{{ capability.leadName }}</td>
-            <td>{{ capability.capabilityLeadPicture }}</td>
+            <td><img src ="data:image/jpeg; base64, {{ capability.capabilityLeadPicture }}"/></td>
             <td>{{ capability.message }}</td>
             {% endfor %}
           </tbody>
