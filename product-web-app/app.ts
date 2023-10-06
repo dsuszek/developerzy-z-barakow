@@ -5,13 +5,15 @@ import session from 'express-session';
 import path from 'path';
 import nunjucks from 'nunjucks';
 import axios from 'axios';
+import Role from './model/role.js';
+import RoleController from './controller/roleController.js';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import AuthController from './controller/authController.js';
 import JobRoleController from './controller/jobRoleController.js';
-import logger from './service/logger.js';
 import { API_URL } from './common/constants.js';
 import authMiddleware from './middleware/authMiddleware.js';
+import logger from './service/logger.js';
 
 dotenv.config();
 
@@ -38,6 +40,7 @@ axios.defaults.baseURL = API_URL;
 
 declare module 'express-session' {
   interface SessionData {
+    role: Partial<Role>;
   }
 }
 
@@ -47,7 +50,7 @@ app.use('/public', express.static(path.join(dirname, 'public')));
 app.listen(3000, () => {
   logger.info('Server listening on port 3000');
 });
-
+const roleController = new RoleController();
 const jobRoleController = new JobRoleController();
 const authController = new AuthController();
 
@@ -59,6 +62,6 @@ app.use(authMiddleware);
 app.get('/', (eq: Request, res: Response) => {
   res.render('home');
 });
-
+roleController.appRoutes(app);
 jobRoleController.appRoutes(app);
 authController.appRoutes(app);

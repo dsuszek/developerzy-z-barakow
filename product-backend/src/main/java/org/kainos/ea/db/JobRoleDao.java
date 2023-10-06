@@ -7,7 +7,10 @@ import java.sql.*;
 
 public class JobRoleDao {
     public JobRole createJobRole(JobRoleRequest jobRole) throws SQLException, FailedToCreateJobRoleException {
-        Connection c = DatabaseConnector.getConnection();
+
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+
+        Connection c = databaseConnector.getConnection();
 
         String insertStatement = "INSERT INTO JobRoles (name, description, link) VALUES (?,?,?)";
 
