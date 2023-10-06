@@ -2,7 +2,7 @@ import Registration from "../model/registration.js";
 
 const EMAIL_DOMAIN_PATTERN = /@kainos\.com$/;
 const EMAIL_PATTERN = /^(?=.{1,50}$)[A-Za-z0-9+_.-]+@kainos\.com$/;
-const PASSWORD_SPECIAL_CHARS_PATTERN = /.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-].*/;
+const PASSWORD_SPECIAL_CHARS_PATTERN = /.*[!@#$%^&*()_+{}[\]:;<>,.?~\\-].*/;
 const PASSWORD_UPPERCASE_LETTER_PATTERN = /(?=.*[A-Z]).*/;
 const PASSWORD_LOWERCASE_LETTER_PATTERN = /(?=.*[a-z]).*/;
 
