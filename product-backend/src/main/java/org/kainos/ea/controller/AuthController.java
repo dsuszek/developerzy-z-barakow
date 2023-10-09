@@ -25,14 +25,8 @@ import java.security.NoSuchAlgorithmException;
 @Tag(name = "Authorization API")
 @Path("/api/auth")
 public class AuthController {
-    private AuthService authService = new AuthService(new UserDao(), new AuthDao(), new UserRegistrationValidator());
+    private final AuthService authService = new AuthService(new UserDao(), new AuthDao(), new UserRegistrationValidator());
     private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
-
-    public AuthController() {}
-
-    public AuthController(AuthService authService) {
-        this.authService = authService;
-    }
     @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
