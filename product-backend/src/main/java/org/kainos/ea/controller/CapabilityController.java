@@ -1,18 +1,13 @@
 package org.kainos.ea.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.kainos.ea.dao.CapabilityDao;
-import org.kainos.ea.dao.JobDao;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.exception.*;
 import org.kainos.ea.service.CapabilityService;
-import org.kainos.ea.service.JobService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
