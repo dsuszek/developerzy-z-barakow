@@ -8,6 +8,7 @@ import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.kainos.ea.controller.JobController;
 import org.kainos.ea.controller.JobRoleController;
 import org.kainos.ea.controller.AuthController;
+import org.kainos.ea.filter.AuthFilter;
 
 public class DropwizardWebServiceApplication extends Application<DropwizardWebServiceConfiguration> {
 
@@ -35,5 +36,6 @@ public class DropwizardWebServiceApplication extends Application<DropwizardWebSe
         environment.jersey().register(new JobController());
         environment.jersey().register(new JobRoleController());
         environment.jersey().register(new AuthController());
+        environment.jersey().register(new AuthFilter());
     }
 }

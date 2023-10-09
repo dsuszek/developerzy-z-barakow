@@ -34,7 +34,7 @@ public class UserRegistrationValidator {
         if (userRegistration.getPassword().length() < 9) {
             return "Password must contain at least 9 characters";
         }
-        if (userRegistration.getPassword().length() >= 9) {
+        if (userRegistration.getPassword().length() >= 50) {
             return "Password must contain 50 characters at the maximum";
         }
 
