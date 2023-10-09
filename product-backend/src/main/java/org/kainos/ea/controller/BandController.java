@@ -24,7 +24,7 @@ public class BandController {
     private final static Logger logger = LoggerFactory.getLogger(BandService.class);
 
     @GET
-    @Path("/band")
+    @Path("/admin/band")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBands() {
