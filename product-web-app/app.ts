@@ -7,10 +7,15 @@ import nunjucks from 'nunjucks';
 import axios from 'axios';
 import Role from './model/role.js';
 import RoleController from './controller/roleController.js';
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 import AuthController from './controller/authController.js';
-import { API_URL } from './common/constants.js';
 import JobRoleController from './controller/jobRoleController.js';
+import { API_URL } from './common/constants.js';
+import authMiddleware from './middleware/authMiddleware.js';
 import logger from './service/logger.js';
+
+dotenv.config();
 
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -31,8 +36,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(session({ secret: 'NOT_HARDCODED_SECRET', cookie: { maxAge: 60000 } }));
 
-// app.use(cookieParser());
-
 axios.defaults.baseURL = API_URL;
 
 declare module 'express-session' {
@@ -50,6 +53,10 @@ app.listen(3000, () => {
 const roleController = new RoleController();
 const jobRoleController = new JobRoleController();
 const authController = new AuthController();
+
+app.use(cookieParser());
+
+app.use(authMiddleware);
 
 // Routing
 app.get('/', (eq: Request, res: Response) => {
