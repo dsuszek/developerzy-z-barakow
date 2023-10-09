@@ -1,14 +1,13 @@
-import { Application, Request, Response } from "express";
+import { Application, Request, Response } from 'express';
 
-import Registration from "../model/registration.js";
-import AuthService from "../service/authService.js";
-import RegistrationValidator from "../service/registrationValidator.js";
-import sanitize from "sanitize-html";
+import sanitize from 'sanitize-html';
+import Registration from '../model/registration.js';
+import AuthService from '../service/authService.js';
+import RegistrationValidator from '../service/registrationValidator.js';
 import Login from '../model/login.js';
 import LoginValidator from '../service/loginValidator.js';
 
 export default class AuthController {
-
   private authService = new AuthService(new RegistrationValidator(), new LoginValidator());
 
   appRoutes(app: Application) {
@@ -24,15 +23,13 @@ export default class AuthController {
       data.password = sanitize(data.password).trim();
 
       try {
-        const newUser = await this.authService.register(data);
+        await this.authService.register(data);
         res.redirect('/');
-
       } catch (e: any) {
         res.locals.errormessage = e.message;
         res.render('register', req.body);
       }
     });
-
 
     app.get('/auth/login', async (req: Request, res: Response) => {
       res.render('login');

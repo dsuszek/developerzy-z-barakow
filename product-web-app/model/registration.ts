@@ -1,5 +1,5 @@
 export default interface Registration {
-    email: string;
-    password: string;
-    roleId: number;
+  email: string;
+  password: string;
+  roleId: number;
 }

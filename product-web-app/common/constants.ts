@@ -5,5 +5,5 @@ export const API = {
   GET_PRODUCT: (id: number) => `/api/products/${id}`,
   JOB_ROLES: '/api/admin/job-roles',
   REGISTRATION: '/api/auth/register',
-  BANDS: '/api/admin/band'
+  BANDS: '/api/admin/band',
 };
