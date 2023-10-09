@@ -53,7 +53,8 @@ public class AuthController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response register(UserRegistrationRequest userRegistrationRequest) {
         try {
-            return Response.ok(authService.registerUser(userRegistrationRequest)).build();
+            authService.registerUser(userRegistrationRequest);
+            return Response.ok().build();
         } catch (FailedToRegisterUserException e) {
             logger.error("Failed to register user! Error: {}", e.getMessage());
 
