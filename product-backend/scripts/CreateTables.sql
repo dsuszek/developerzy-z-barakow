@@ -11,8 +11,6 @@ roleId TINYINT,
 FOREIGN KEY (roleId) REFERENCES UserRoles (id)
 );
 
-<<<<<<< HEAD
-=======
 CREATE TABLE IF NOT EXISTS Bands (
 id SMALLINT PRIMARY KEY AUTO_INCREMENT,
 name varchar(50) UNIQUE NOT NULL,
@@ -28,25 +26,16 @@ CREATE TABLE IF NOT EXISTS Capabilities (
     PRIMARY KEY(id)
     );
 
->>>>>>> 4606e2f09a67eff174a86e589301ee8033856522
 CREATE TABLE IF NOT EXISTS JobRoles (
 id SMALLINT PRIMARY KEY AUTO_INCREMENT,
 name varchar(50) UNIQUE,
 description varchar(3000),
 link varchar(1000),
-<<<<<<< HEAD
-FOREIGN KEY (id) REFERENCES Bands (id)
-);
-=======
 bandId SMALLINT,
 capabilityId SMALLINT,
 FOREIGN KEY (bandId) REFERENCES Bands (id),
 FOREIGN KEY (capabilityId) REFERENCES Capabilities (id)
 );
-
- 
-
->>>>>>> 4606e2f09a67eff174a86e589301ee8033856522
 
 CREATE TABLE IF NOT EXISTS Bands (
  id SMALLINT PRIMARY KEY AUTO_INCREMENT,
