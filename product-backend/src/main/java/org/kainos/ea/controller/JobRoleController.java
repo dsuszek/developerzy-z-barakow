@@ -20,11 +20,6 @@ public class JobRoleController {
     private JobRoleService jobRoleService = new JobRoleService(new JobRoleDao(), new JobRoleValidator());
     private final static Logger logger = LoggerFactory.getLogger(JobRoleService.class);
 
-    public JobRoleController() {}
-
-    public JobRoleController(JobRoleService jobRoleService) {
-        this.jobRoleService = jobRoleService;
-    }
     @POST
     @Path("/admin/job-roles")
     @Consumes(MediaType.APPLICATION_JSON)
