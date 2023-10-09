@@ -11,7 +11,8 @@ import java.util.List;
 
 public class BandDao {
 
-    public List<Band> getBands(Connection c) throws SQLException {
+    public List<Band> getBands() throws SQLException {
+        Connection c = DatabaseConnector.getConnection();
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery(
                 "SELECT * FROM Bands;");

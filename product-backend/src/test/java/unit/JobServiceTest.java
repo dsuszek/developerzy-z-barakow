@@ -4,11 +4,13 @@ package unit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.kainos.ea.dao.JobRoleDao;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.exception.FailedToGetRoleException;
 import org.kainos.ea.exception.FailedToGetRolesException;
 import org.kainos.ea.exception.RoleDoesNotExistException;
 import org.kainos.ea.model.JobRole;
+import org.kainos.ea.service.JobRoleService;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Connection;
@@ -24,8 +26,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class JobServiceTest {
 
-
-    JobDao jobDaoMock = mock(JobDao.class);
+    JobRoleDao jobDaoMock = mock(JobRoleDao.class);
     DatabaseConnector databaseConnectorMock = mock(DatabaseConnector.class);
     Connection connMock = mock ( Connection.class);
 
@@ -33,12 +34,12 @@ public class JobServiceTest {
 
     JobRole jobRole1 = new JobRole("Tester", "good", "www.onet.pl");
     JobRole jobRole2 = new JobRole("DevOps", "good", "www.o2.pl");
-    JobService jobService = new JobService(jobDaoMock, databaseConnectorMock);
+    JobRoleService jobService = new JobRoleService(jobDaoMock, databaseConnectorMock);
 
     @Test
     void getJobRoles_whenJobRolesAvailable_shouldReturnListOfJobRoles() throws SQLException, FailedToGetRolesException {
         // given
-        JobService sut = new JobService(jobDaoMock, databaseConnectorMock);
+        JobRoleService sut = new JobRoleService(jobDaoMock, databaseConnectorMock);
         when(databaseConnectorMock.getConnection()).thenReturn(conn);
         List<JobRole> expectedList = List.of(jobRole1, jobRole2);
         when(jobDaoMock.getRoles(conn)).thenReturn(expectedList);

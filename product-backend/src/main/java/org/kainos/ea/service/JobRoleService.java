@@ -15,12 +15,17 @@ public class JobRoleService {
 
     private final static Logger logger = LoggerFactory.getLogger(JobRoleService.class);
     private final JobRoleDao jobRoleDao;
-    private final JobRoleValidator jobRoleValidator;
+    private JobRoleValidator jobRoleValidator;
     private DatabaseConnector databaseConnector;
 
     public JobRoleService(JobRoleDao jobRoleDao, JobRoleValidator jobRoleValidator) {
         this.jobRoleDao = jobRoleDao;
         this.jobRoleValidator = jobRoleValidator;
+    }
+
+    public JobRoleService(JobRoleDao jobRoleDao, DatabaseConnector databaseConnector) {
+        this.jobRoleDao = jobRoleDao;
+        this.databaseConnector = databaseConnector;
     }
 
     public JobRole createJobRole(JobRoleRequest jobRole) throws FailedToCreateJobRoleException, InvalidJobRoleException {
