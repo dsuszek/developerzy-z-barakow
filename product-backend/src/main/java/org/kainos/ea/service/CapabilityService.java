@@ -16,11 +16,13 @@ import java.util.Optional;
 public class CapabilityService {
     public CapabilityDao capabilityDao;
     public DatabaseConnector databaseConnector;
+    public CapabilityValidator capabilityValidator;
     private final static Logger logger = LoggerFactory.getLogger(CapabilityService.class);
 
-    public CapabilityService(CapabilityDao capabilityDao, DatabaseConnector databaseConnector) {
+    public CapabilityService(CapabilityDao capabilityDao, DatabaseConnector databaseConnector, CapabilityValidator capabilityValidator) {
         this.capabilityDao = capabilityDao;
         this.databaseConnector = databaseConnector;
+        this.capabilityValidator = capabilityValidator;
     }
 
     public List<Capability> getCapabilities() throws FailedToGetCapabilitiesException {
@@ -29,6 +31,19 @@ public class CapabilityService {
         } catch (SQLException e) {
             logger.error("SQL exception! Error: {}", e.getMessage());
             throw new FailedToGetCapabilitiesException();
+        }
+    }
+    public int createCapability(CapabilityRequest capability)throws InvalidCapabilityException,FailedToCreateNewCapabilityException{
+        try{
+            String validation = capabilityValidator.isCapabilityValid(capability);
+
+            if(validation!=null){
+                throw new InvalidCapabilityException(validation);
+            }
+            return capabilityDao.createCapability(capability);
+        }catch(SQLException e){
+            throw new FailedToCreateNewCapabilityException();
+
         }
     }
 }
