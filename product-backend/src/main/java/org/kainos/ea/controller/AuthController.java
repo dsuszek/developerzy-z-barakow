@@ -21,12 +21,6 @@ import java.security.NoSuchAlgorithmException;
 public class AuthController {
     private AuthService authService;
     private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
-
-    public AuthController() {}
-
-    public AuthController(AuthService authService) {
-        this.authService = authService;
-    }
     @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
