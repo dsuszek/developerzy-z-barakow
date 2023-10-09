@@ -37,18 +37,4 @@ public class CapabilityController {
             return Response.serverError().build();
         }
     }
-    @GET
-    @Path("/capabilities/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response findCapabilityById(@PathParam("id") int id) {
-        try {
-            return Response.ok(capabilityService.findCapabilityById(id)).build();
-        } catch (CapabilityDoesNotExistException e) {
-            logger.error("Failed to get a capability! Error: {}", e.getMessage());
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        } catch (FailedToGetCapabilityException e) {
-            logger.error("Capability does not exist! Id: {} Error: {}", id, e.getMessage());
-            return Response.serverError().build();
-        }
-    }
 }

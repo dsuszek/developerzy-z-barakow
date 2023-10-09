@@ -7,4 +7,5 @@ export const API = {
   REGISTRATION: '/api/auth/register',
   JOBS: '/api/job-roles',
   GET_ROLE: (id: number) => `/api/job-roles/${id}`,
+  GET_CAPABILITIES: '/api/capabilities',
 };

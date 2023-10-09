@@ -33,22 +33,4 @@ public class CapabilityDao {
         }
         return capabilities;
     }
-
-    public Optional<Capability> findCapabilityById(int id, Connection c) throws SQLException {
-
-        Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery("SELECT id, capabilityName, leadName, capabilityLeadPicture, message" +
-                " FROM Capabilities where id=" + id);
-
-        while (rs.next()) {
-            return Optional.of(new Capability(
-                    rs.getShort("id"),
-                    rs.getString("capabilityName"),
-                    rs.getString("leadName"),
-                    rs.getString("capabilityLeadPicture"),
-                    rs.getString("message")
-            ));
-        }
-        return Optional.empty();
-    }
 }

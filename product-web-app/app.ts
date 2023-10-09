@@ -12,6 +12,7 @@ import { API_URL } from './common/constants.js';
 import CapabilityController from './controller/capabilityController.js';
 import JobRoleController from './controller/jobRoleController.js';
 import logger from './service/logger.js';
+import Capability from './model/capability.js';
 
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -39,6 +40,7 @@ axios.defaults.baseURL = API_URL;
 declare module 'express-session' {
   interface SessionData {
     role: Partial<Role>;
+    capability: Partial<Capability>;
   }
 }
 

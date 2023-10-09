@@ -28,12 +28,4 @@ public class CapabilityService {
             throw new FailedToGetCapabilitiesException();
         }
     }
-    public Capability findCapabilityById(int id) throws CapabilityDoesNotExistException, FailedToGetCapabilityException {
-        try {
-            Optional<Capability> capability = capabilityDao.findCapabilityById(id, databaseConnector.getConnection());
-            return capability.orElseThrow(CapabilityDoesNotExistException::new);
-        } catch (SQLException e) {
-            throw new FailedToGetCapabilityException();
-        }
-    }
 }
