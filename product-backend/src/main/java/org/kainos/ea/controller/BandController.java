@@ -7,7 +7,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.kainos.ea.db.BandDao;
+import org.kainos.ea.dao.BandDao;
 import org.kainos.ea.exception.ErrorResponse;
 import org.kainos.ea.exception.FailedToCreateBandException;
 import org.kainos.ea.exception.InvalidBandException;
@@ -20,13 +20,8 @@ import org.slf4j.LoggerFactory;
 @Tag(name = "Band API")
 @Path("/api")
 public class BandController {
-    private BandService bandService = new BandService(new BandDao(), new BandValidator());
+    private final BandService bandService = new BandService(new BandDao(), new BandValidator());
     private final static Logger logger = LoggerFactory.getLogger(BandService.class);
-
-    public BandController() {}
-    public BandController(BandService bandService) {
-        this.bandService = bandService;
-    }
 
     @POST
     @Path("/admin/band")

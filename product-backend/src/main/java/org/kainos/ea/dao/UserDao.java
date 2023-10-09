@@ -1,5 +1,6 @@
-package org.kainos.ea.db;
+package org.kainos.ea.dao;
 
+import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.exception.FailedToRegisterUserException;
 import org.kainos.ea.model.User;
 import org.kainos.ea.model.UserRegistrationRequest;
@@ -8,7 +9,8 @@ import java.sql.*;
 public class UserDao {
     // Checks if user's email address is already in use
     public boolean isEmailTaken(String email) throws SQLException, FailedToRegisterUserException {
-        Connection c = DatabaseConnector.getConnection();
+        DatabaseConnector conn = new DatabaseConnector();
+        Connection c = conn.getConnection();
         String selectStatement = "SELECT 1 FROM `Users` WHERE email = ? LIMIT 1;";
         PreparedStatement st = c.prepareStatement(selectStatement);
         st.setString(1, email);
@@ -22,7 +24,8 @@ public class UserDao {
     }
 
     public User registerUser(UserRegistrationRequest user) throws SQLException, FailedToRegisterUserException {
-        Connection c = DatabaseConnector.getConnection();
+        DatabaseConnector conn = new DatabaseConnector();
+        Connection c = conn.getConnection();
         String insertStatement = "INSERT INTO `Users` (email, password, roleId) VALUES (?, ?, ?);";
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
 

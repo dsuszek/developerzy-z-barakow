@@ -1,15 +1,35 @@
-package org.kainos.ea.db;
+package org.kainos.ea.dao;
 
+import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.exception.FailedToCreateBandException;
 import org.kainos.ea.model.Band;
 import org.kainos.ea.model.BandRequest;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BandDao {
 
+    public List<Band> getBands(Connection c) throws SQLException {
+        Statement st = c.createStatement();
+        ResultSet rs = st.executeQuery(
+                "SELECT * FROM Bands;");
+        List<Band> bands = new ArrayList<>();
+        while (rs.next()) {
+            Band band = new Band(
+                    rs.getShort("id"),
+                    rs.getString("name"),
+                    rs.getShort("level")
+            );
+            bands.add(band);
+        }
+        return bands;
+    }
+
     public Band createBand(BandRequest band) throws SQLException, FailedToCreateBandException {
-        Connection c = DatabaseConnector.getConnection();
+        DatabaseConnector conn = new DatabaseConnector();
+        Connection c = conn.getConnection();
 
         String insertStatement = "INSERT INTO `Bands` (name, level) VALUES (?, ?);";
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);

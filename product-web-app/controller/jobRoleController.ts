@@ -4,13 +4,25 @@ import JobRoleService from '../service/jobRoleService.js';
 import JobRole from '../model/jobRole.js';
 import JobRoleValidator from '../service/jobRoleValidator.js';
 import logger from '../service/logger.js';
+import BandService from '../service/bandService.js';
+import BandValidator from '../service/bandValidator.js';
+import Band from '../model/band.js';
 
 export default class JobRoleController {
   private jobRoleService = new JobRoleService(new JobRoleValidator());
 
+  private bandService = new BandService(new BandValidator());
+
   appRoutes(app: Application) {
     app.get('/admin/add-job-roles', async (req: Request, res: Response) => {
-      res.render('add-job-roles');
+      let data: Band[] = [];
+      try {
+        data = await this.bandService.getBands();
+      } catch (e) {
+        logger.error(`Could not get bands! Error: ${e}`);
+      }
+
+      res.render('add-job-roles', { bands: data });
     });
 
     app.post('/admin/add-job-roles', async (req: Request, res: Response) => {

@@ -2,7 +2,7 @@ package org.kainos.ea.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.kainos.ea.db.JobRoleDao;
+import org.kainos.ea.dao.JobRoleDao;
 import org.kainos.ea.exception.FailedToCreateJobRoleException;
 import org.kainos.ea.exception.InvalidJobRoleException;
 import org.kainos.ea.model.JobRole;
