@@ -43,7 +43,6 @@ public class CapabilityService {
             return capabilityDao.createCapability(capability);
         }catch(SQLException e){
             throw new FailedToCreateNewCapabilityException();
-
         }
     }
 }

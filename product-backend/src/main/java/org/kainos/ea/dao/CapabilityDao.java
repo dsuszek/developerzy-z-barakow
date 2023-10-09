@@ -35,7 +35,7 @@ public class CapabilityDao {
 
     public int createCapability(CapabilityRequest capability) throws SQLException, FailedToCreateNewCapabilityException {
         Connection c = new DatabaseConnector().getConnection();
-        String insertStatement = "INSERTINTOCapabilities(capabilityName,leadName,capabilityLeadPicture,message)" +
+        String insertStatement = "INSERT INTO Capabilities(capabilityName,leadName,capabilityLeadPicture,message)" +
                 "VALUES(?,?,?,?)";
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
         st.setString(1, capability.getCapabilityName());

@@ -6,13 +6,16 @@ public class CapabilityValidator {
     public String isCapabilityValid(CapabilityRequest capability) {
 
         if (capability.getCapabilityName().length() > 50) {
-            return "Capabilitynamelongerthan50chars";
+            return "Capability name longer than 50 chars";
         }
         if (capability.getLeadName().length() > 50) {
-            return "Capabilityleadnamelongerthan50chars";
+            return "Capability lead name longer than 50 chars";
         }
         if (capability.getCapabilityLeadPicture().length() > Integer.MAX_VALUE - 1) {
-            return "Leadpicturetoobig";
+            return "Lead picture too large";
+        }
+        if (capability.getMessage().length() > 3000) {
+            return "Message too long";
         }
         return null;
     }

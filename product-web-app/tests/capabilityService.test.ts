@@ -4,6 +4,7 @@ import { API, API_URL } from '../common/constants.js';
 import mockAxios from './axios.instance.test.js';
 import CapabilityService from '../service/capabilityService.js';
 import Capability from '../model/capability.js';
+import CapabilityValidator from '../service/capabilityValidator.js';
 
 const capabilityEngineering: Capability = {
   id: 1,
@@ -20,7 +21,7 @@ const capabilityDev: Capability = {
   message: '',
 };
 
-const capabilityService = new CapabilityService();
+const capabilityService = new CapabilityService(new CapabilityValidator());
 
 describe('Capability service', () => {
   before(() => {
@@ -58,7 +59,6 @@ describe('Capability service', () => {
         if (e instanceof Error) {
           return {
             message: `Failed(${e.message})`,
-
           };
         }
       }

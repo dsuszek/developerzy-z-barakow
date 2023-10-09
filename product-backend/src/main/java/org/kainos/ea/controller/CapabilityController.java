@@ -42,10 +42,10 @@ public class CapabilityController {
         try{
             return Response.ok(capabilityService.createCapability(capability)).build();
         }catch(FailedToCreateNewCapabilityException e){
-            logger.error("FailedtocreateCapability!Error:{}",e.getMessage());
+            logger.error("Failed to create Capability!Error:{}",e.getMessage());
             return Response.serverError().entity(new ErrorResponse(e.getMessage())).build();
         }catch(InvalidCapabilityException e){
-            logger.error("InvalidCapabilitydata!Error:{}",e.getMessage());
+            logger.error("Invalid Capability data! Error:{}",e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).entity(new ErrorResponse(e.getMessage())).build();
         }
     }

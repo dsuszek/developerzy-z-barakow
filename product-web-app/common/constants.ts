@@ -8,4 +8,5 @@ export const API = {
   JOBS: '/api/job-roles',
   GET_ROLE: (id: number) => `/api/job-roles/${id}`,
   GET_CAPABILITIES: '/api/capabilities',
+  POST_CAPABILITES: '/api/capabilities',
 };
