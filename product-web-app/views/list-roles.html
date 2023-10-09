@@ -21,24 +21,26 @@
       <head> </head>
     </header>
     <main class="container">
-      <section id="roles">
-        {% if roles and roles.length > 0%}
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for role in roles %}
-            <tr>
-              <td><a href="role/{{ role.id }}">{{ role.name }}</a></td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        {% else %} There are no roles. {% endif %}
-      </section>
+        <section id="roles">
+            {% if roles and roles.length > 0%}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                      </tr>
+                </thead>
+                <tbody>
+                    {% for role in roles %}
+                    <tr>
+                        <td><a href="job-roles/{{ role.id }}">{{ role.name }}</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            There are no roles.
+            {% endif %}
+        </section>
     </main>
   </body>
 </html>
