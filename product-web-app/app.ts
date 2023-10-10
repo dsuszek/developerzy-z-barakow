@@ -4,15 +4,15 @@ import 'dotenv/config';
 import path from 'path';
 import nunjucks from 'nunjucks';
 import axios from 'axios';
-import Role from './model/role.js';
-import RoleController from './controller/roleController.js';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import logger from './service/logger.js';
+import Role from './model/role.js';
+import RoleController from './controller/roleController.js';
 import AuthController from './controller/authController.js';
 import JobRoleController from './controller/jobRoleController.js';
 import { API_URL } from './common/constants.js';
 import AuthMiddleware from './middleware/authMiddleware.js';
-import logger from './service/logger.js';
 import { request } from 'http';
 
 dotenv.config();
@@ -23,7 +23,6 @@ const app: Application = express();
 const authMiddleware:AuthMiddleware = new AuthMiddleware(app);
 
 const appViews = path.join(dirname, '/views');
-app.use(express.static('/views/static'));
 
 const nunjucksConfig = {
   autoescape: true,
@@ -53,7 +52,7 @@ authMiddleware.filter();
 
 // Routing
 app.get('/', (req: Request, res: Response) => {
-  res.render('home',{ admin : req.cookies.admin});
+  res.render('home');
 });
 roleController.appRoutes(app);
 jobRoleController.appRoutes(app);
