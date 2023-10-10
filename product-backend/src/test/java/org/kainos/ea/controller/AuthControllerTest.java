@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AuthControllerTest {
 
     AuthService authService = Mockito.mock(AuthService.class);
-    AuthController authController = new AuthController(authService);
+    AuthController authController = new AuthController();
 
     @Test
     public void login_ShouldReturnResponseCode200_WhenLoginIsSuccessful() throws NoSuchAlgorithmException, FailedToLoginException, FailedToGenerateTokenException {

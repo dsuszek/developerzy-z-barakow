@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 @Tag(name = "Job Roles API")
 @Path("/api")
 public class JobRoleController {
-    private final JobRoleService jobRoleService = new JobRoleService(new JobRoleDao(), new JobRoleValidator());
+    private JobRoleService jobRoleService = new JobRoleService(new JobRoleDao(), new JobRoleValidator());
     private final static Logger logger = LoggerFactory.getLogger(JobRoleService.class);
 
     @POST

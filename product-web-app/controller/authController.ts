@@ -1,16 +1,37 @@
 import { Application, Request, Response } from 'express';
 
-import Login from '../model/login.js';
+import sanitize from 'sanitize-html';
+import Registration from '../model/registration.js';
 import AuthService from '../service/authService.js';
+import RegistrationValidator from '../service/registrationValidator.js';
+import Login from '../model/login.js';
 import LoginValidator from '../service/loginValidator.js';
 import LoginResponse from '../model/loginResponse.js';
 
-const MILISECONDS_PER_HOUR = 3600000;
-
 export default class AuthController {
-  private authService = new AuthService(new LoginValidator());
+  private authService = new AuthService(new RegistrationValidator(), new LoginValidator());
 
   appRoutes(app: Application) {
+    const MILISECONDS_PER_HOUR = 3600000;
+
+    app.get('/auth/register', async (req: Request, res: Response) => {
+      res.render('register');
+    });
+
+    app.post('/auth/register', async (req: Request, res: Response) => {
+      const data: Registration = req.body;
+      data.email = sanitize(data.email).trim();
+      data.password = sanitize(data.password).trim();
+
+      try {
+        await this.authService.register(data);
+        res.redirect('/');
+      } catch (e: any) {
+        res.locals.errormessage = e.message;
+        res.render('register', req.body);
+      }
+    });
+
     app.get('/auth/login', async (req: Request, res: Response) => {
       res.render('login');
     });

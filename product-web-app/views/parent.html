@@ -15,9 +15,8 @@
     <header class="bg-dark text-light">
         <div class="container">
             <div class="row"></div>
-            {% if page == "login" %}
-                <a href="/auth/register" style="text-decoration: none;margin-top: 20px; color:white; float: right;">Click here to register</a>
-                {% endif %}
+            {% if page == "login" %}<a href="/auth/register" style="text-decoration: none;margin-top: 20px; color:white; float: right;">Sign up</a>{% endif %}
+            {% if page == "register" %}<a href="/auth/login" style="text-decoration: none;margin-top: 20px; color:white; float: right;">Login</a>{% endif %}
             <div class="col-md-12" style="min-height:50px;">
                 <h1> {% block title %} {% endblock %} </h1>
                 <!-- <img  href="../public/static/kainos_logo.svg" style="float: left;margin-right: 10px;" height="50" width="217" > -->
