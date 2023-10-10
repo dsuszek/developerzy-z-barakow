@@ -5,8 +5,10 @@ import mockAxios from './axios.instance.test.js';
 import CapabilityService from '../service/capabilityService.js';
 import Capability from '../model/capability.js';
 import CapabilityValidator from '../service/capabilityValidator.js';
+import { response } from 'express';
 
-const capabilityEngineering: Capability = {
+
+const capabilityEng: Capability = {
   id: 1,
   capabilityName: '',
   leadName: '',
@@ -34,25 +36,15 @@ describe('Capability service', () => {
 
   describe('getCapabilities', () => {
     it('when API is online expect capabilities to be returned', async () => {
-      mockAxios.onGet(API_URL + API.GET_CAPABILITIES).reply(200, [capabilityDev, capabilityEngineering]);
+      mockAxios.onGet(API_URL + API.GET_CAPABILITIES).reply(200, [capabilityDev, capabilityEng]);
 
       const responseBody = await capabilityService.getCapabilities();
 
       expect(responseBody).to.have.lengthOf(2);
       expect(responseBody[0]).to.deep.equal(capabilityDev);
     });
-
-    it('when API is online expect capability to be returned', async () => {
-      mockAxios.onGet(API_URL + API.GET_ROLE(1)).reply(200, capabilityDev);
-
-      const responseBody = await capabilityService.getCapabilities();
-
-      expect(responseBody).to.have.lengthOf(2);
-      expect(responseBody[0]).to.deep.equal(capabilityDev);
-    });
-
     it('when API is down expect exception to be thrown', async () => {
-      mockAxios.onGet(API_URL + API.JOBS).reply(500);
+      mockAxios.onGet(API_URL + API.GET_CAPABILITIES).reply(500);
       try {
         await capabilityService.getCapabilities();
       } catch (e: any) {
@@ -63,6 +55,12 @@ describe('Capability service', () => {
         }
       }
       return null;
+    });
+    it('when Capability is created, expect an id to be returned', async () => {
+      const id = 12;
+      mockAxios.onPost(API_URL + API.POST_CAPABILITES).reply(200, id);
+      const res = await capabilityService.createCapability(capabilityEng);
+      chai.assert.equal(res, id);
     });
   });
 });

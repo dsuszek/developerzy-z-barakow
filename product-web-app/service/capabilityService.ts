@@ -20,16 +20,14 @@ export default class CapabilityService {
     }
   }
 
-  async createCapability(capability: Capability): Promise<Capability> {
+  async createCapability(capability: Capability): Promise<Number> {
     const validateError = this.capabilityValidator.validateCapability(capability);
     if (validateError) {
       logger.warn(`VALIDATION ERROR: ${validateError}`);
       throw new Error(validateError);
     }
-
     try {
       const response = await axios.post(API.POST_CAPABILITES, capability);
-
       return response.data;
     } catch (e) {
       logger.error('Could not create capability');

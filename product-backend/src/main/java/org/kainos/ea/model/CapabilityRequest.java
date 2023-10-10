@@ -19,6 +19,7 @@ public class CapabilityRequest {
         this.capabilityLeadPicture = capabilityLeadPicture;
         this.message = message;
     }
+
     public String getCapabilityName() {
         return capabilityName;
     }

@@ -36,12 +36,11 @@ public class CapabilityService {
     public int createCapability(CapabilityRequest capability)throws InvalidCapabilityException,FailedToCreateNewCapabilityException{
         try{
             String validation = capabilityValidator.isCapabilityValid(capability);
-
             if(validation!=null){
                 throw new InvalidCapabilityException(validation);
             }
             return capabilityDao.createCapability(capability);
-        }catch(SQLException e){
+        }catch(InvalidCapabilityException | SQLException e){
             throw new FailedToCreateNewCapabilityException();
         }
     }
