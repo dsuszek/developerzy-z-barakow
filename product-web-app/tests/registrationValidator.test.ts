@@ -84,7 +84,7 @@ describe('Registration validator', () => {
       };
 
       expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal(
-        'Password should contain between 9 and 50 characters',
+        'Password should contain at least 9 characters',
       );
     });
 
@@ -96,7 +96,7 @@ describe('Registration validator', () => {
       };
 
       expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal(
-        'Password should contain between 9 and 50 characters',
+        'Password should contain 50 characters at the maximum',
       );
     });
   });
