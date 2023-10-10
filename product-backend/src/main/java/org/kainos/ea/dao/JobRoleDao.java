@@ -68,7 +68,7 @@ public class JobRoleDao {
         ResultSet rs = st.getGeneratedKeys();
 
         if (!rs.next()) {
-            throw new FailedToCreateJobRoleException("No job role id has been returned");
+            throw new FailedToCreateJobRoleException();
         }
         return new JobRole
                 (rs.getShort(1),
