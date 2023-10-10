@@ -5,7 +5,7 @@ import mockAxios from './axios.instance.test.js';
 import CapabilityService from '../service/capabilityService.js';
 import Capability from '../model/capability.js';
 
-const capabilityEngineering: Capability = {
+const capabilityEng: Capability = {
   id: 1,
   capabilityName: '',
   leadName: '',
@@ -33,7 +33,7 @@ describe('Capability service', () => {
 
   describe('getCapabilities', () => {
     it('when API is online expect capabilities to be returned', async () => {
-      mockAxios.onGet(API_URL + API.GET_CAPABILITIES).reply(200, [capabilityDev, capabilityEngineering]);
+      mockAxios.onGet(API_URL + API.GET_CAPABILITIES).reply(200, [capabilityDev, capabilityEng]);
 
       const responseBody = await capabilityService.getCapabilities();
 
@@ -58,7 +58,6 @@ describe('Capability service', () => {
         if (e instanceof Error) {
           return {
             message: `Failed(${e.message})`,
-
           };
         }
       }
