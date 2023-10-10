@@ -23,7 +23,9 @@ describe('Registration validator', () => {
         roleId: 1,
       };
 
-      expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal('Email does not have @kainos.com domain');
+      expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal(
+        'Email does not have @kainos.com domain',
+      );
     });
 
     it('expect too long email address', () => {
@@ -33,7 +35,9 @@ describe('Registration validator', () => {
         roleId: 1,
       };
 
-      expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal('Email address should have 50 characters at the maximum');
+      expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal(
+        'Email address should have 50 characters at the maximum',
+      );
     });
 
     it('expect password without special character', () => {
@@ -43,7 +47,9 @@ describe('Registration validator', () => {
         roleId: 1,
       };
 
-      expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal('Password should contain at least one special character');
+      expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal(
+        'Password should contain at least one special character',
+      );
     });
 
     it('expect password without uppercase letter', () => {
@@ -53,7 +59,9 @@ describe('Registration validator', () => {
         roleId: 1,
       };
 
-      expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal('Password should contain at least one uppercase letter');
+      expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal(
+        'Password should contain at least one uppercase letter',
+      );
     });
 
     it('expect password without lowercase letter', () => {
@@ -63,7 +71,9 @@ describe('Registration validator', () => {
         roleId: 1,
       };
 
-      expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal('Password should contain at least one lowercase letter');
+      expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal(
+        'Password should contain at least one lowercase letter',
+      );
     });
 
     it('expect too short password', () => {
@@ -73,7 +83,9 @@ describe('Registration validator', () => {
         roleId: 1,
       };
 
-      expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal('Password should contain between 9 and 50 characters');
+      expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal(
+        'Password should contain between 9 and 50 characters',
+      );
     });
 
     it('expect too long password', () => {
@@ -83,7 +95,9 @@ describe('Registration validator', () => {
         roleId: 1,
       };
 
-      expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal('Password should contain between 9 and 50 characters');
+      expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal(
+        'Password should contain between 9 and 50 characters',
+      );
     });
   });
 });
