@@ -7,6 +7,8 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.kainos.ea.dao.AuthDao;
+import org.kainos.ea.dao.UserDao;
 import org.kainos.ea.exception.*;
 
 import org.kainos.ea.exception.FailedToGenerateTokenException;
@@ -14,6 +16,7 @@ import org.kainos.ea.exception.FailedToLoginException;
 import org.kainos.ea.model.LoginRequest;
 import org.kainos.ea.model.UserRegistrationRequest;
 import org.kainos.ea.service.AuthService;
+import org.kainos.ea.service.UserRegistrationValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
