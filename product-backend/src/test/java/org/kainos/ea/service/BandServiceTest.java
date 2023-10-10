@@ -26,7 +26,7 @@ public class BandServiceTest {
         // given
         BandRequest bandRequest = new BandRequest("Trainee", (short) -42);
         // when
-        when(bandDao.createBand(bandRequest)).thenThrow(new FailedToCreateBandException("Failed to create band"));
+        when(bandDao.createBand(bandRequest)).thenThrow(new FailedToCreateBandException());
         // then
         assertThatExceptionOfType(FailedToCreateBandException.class)
                 .isThrownBy(() -> bandService.createBand(bandRequest));
