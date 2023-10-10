@@ -1,10 +1,7 @@
 package org.kainos.ea.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.kainos.ea.db.BandDao;
@@ -20,13 +17,8 @@ import org.slf4j.LoggerFactory;
 @Tag(name = "Band API")
 @Path("/api")
 public class BandController {
-    private BandService bandService = new BandService(new BandDao(), new BandValidator());
+    private final BandService bandService = new BandService(new BandDao(), new BandValidator());
     private final static Logger logger = LoggerFactory.getLogger(BandService.class);
-
-    public BandController() {}
-    public BandController(BandService bandService) {
-        this.bandService = bandService;
-    }
 
     @POST
     @Path("/admin/band")

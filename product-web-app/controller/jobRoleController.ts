@@ -28,5 +28,17 @@ export default class JobRoleController {
         res.render('add-job-roles', req.body);
       }
     });
+
+    app.get('/admin/job-role/', async (req: Request, res:Response) => {
+      const { id } = req.params;
+
+      try {
+        await this.jobRoleService.deleteJobRole(id);
+        res.redirect('/job-roles');
+      } catch (e) {
+        logger.error('Could not delete job role');
+        throw new Error('Could not delete job role');
+      }
+    });
   }
 }

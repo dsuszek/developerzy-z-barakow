@@ -1,15 +1,14 @@
 package org.kainos.ea.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.kainos.ea.db.JobRoleDao;
 import org.kainos.ea.exception.*;
 import org.kainos.ea.model.JobRoleRequest;
 import org.kainos.ea.service.JobRoleService;
+import org.kainos.ea.service.JobRoleValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,14 +16,8 @@ import org.slf4j.LoggerFactory;
 @Tag(name = "Job Roles API")
 @Path("/api")
 public class JobRoleController {
-    private JobRoleService jobRoleService;
+    private final JobRoleService jobRoleService = new JobRoleService(new JobRoleDao(), new JobRoleValidator());
     private final static Logger logger = LoggerFactory.getLogger(JobRoleService.class);
-
-    public JobRoleController() {}
-
-    public JobRoleController(JobRoleService jobRoleService) {
-        this.jobRoleService = jobRoleService;
-    }
 
     @POST
     @Path("/admin/job-roles")
@@ -41,6 +34,22 @@ public class JobRoleController {
             logger.error("Invalid job role data! Error: {}", e.getMessage());
 
             return Response.status(Response.Status.BAD_REQUEST).entity(new ErrorResponse(e.getMessage())).build();
+        }
+    }
+
+    @DELETE
+    @Path("/admin/job-role/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteDeliveryEmployee(@PathParam("id") short id) {
+        try {
+            jobRoleService.deleteJobRole(id);
+
+            return Response.ok().build();
+        } catch (JobRoleDoesNotExistException e) {
+            System.err.println(e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch (FailedToDeleteJobRole e) {
+            return Response.serverError().build();
         }
     }
 }

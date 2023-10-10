@@ -1,13 +1,13 @@
 package org.kainos.ea.service;
 
 import org.kainos.ea.db.JobRoleDao;
-import org.kainos.ea.exception.FailedToCreateJobRoleException;
-import org.kainos.ea.exception.InvalidJobRoleException;
+import org.kainos.ea.exception.*;
 import org.kainos.ea.model.JobRole;
 import org.kainos.ea.model.JobRoleRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class JobRoleService {
 
@@ -33,6 +33,19 @@ public class JobRoleService {
             logger.error("SQL exception! Error: {}", e.getMessage());
 
             throw new FailedToCreateJobRoleException(e.getMessage());
+        }
+    }
+
+    public void deleteJobRole(short id) throws JobRoleDoesNotExistException, FailedToDeleteJobRole {
+        try {
+            Optional<JobRole> jobRoleToBeDeleted = jobRoleDao.getJobRoleById(id);
+            if (jobRoleToBeDeleted.isEmpty()) {
+                throw new JobRoleDoesNotExistException();
+            }
+
+            jobRoleDao.deleteJobRole(id);
+        } catch (SQLException e) {
+            throw new FailedToDeleteJobRole();
         }
     }
 }
