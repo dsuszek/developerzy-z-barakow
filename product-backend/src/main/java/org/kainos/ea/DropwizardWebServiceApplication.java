@@ -10,10 +10,8 @@ import org.kainos.ea.controller.JobController;
 import org.kainos.ea.controller.JobRoleController;
 import org.kainos.ea.controller.AuthController;
 import org.kainos.ea.dao.JobDao;
-import org.kainos.ea.db.AuthDao;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.filter.AuthFilter;
-import org.kainos.ea.service.AuthService;
 import org.kainos.ea.service.JobService;
 
 public class DropwizardWebServiceApplication extends Application<DropwizardWebServiceConfiguration> {
@@ -42,7 +40,7 @@ public class DropwizardWebServiceApplication extends Application<DropwizardWebSe
         environment.jersey().register(new JobController(new JobService(new JobDao(), new DatabaseConnector())));
         environment.jersey().register(new CapabilityController());
         environment.jersey().register(new JobRoleController());
-        environment.jersey().register(new AuthController(new AuthService(new AuthDao())));
+        environment.jersey().register(new AuthController());
         environment.jersey().register(new AuthFilter());
     }
 }
