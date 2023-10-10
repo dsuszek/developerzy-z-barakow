@@ -15,8 +15,7 @@ export default class RoleController {
       } catch (e) {
         logger.error(`Couldn't get roles! Error: ${e}`);
       }
-
-      res.render('list-roles', { roles: data });
+      res.render('list-roles', { roles: data ,  admin :req.cookies.admin});
     });
     app.get('/job-roles/:id', async (req: Request, res: Response) => {
       let data = null;
@@ -26,7 +25,7 @@ export default class RoleController {
       } catch (e) {
         logger.error(`Couldnt get role! Error: ${e}`);
       }
-      res.render('view-role', { role: data });
+      res.render('view-role', { role: data, admin :req.cookies.admin });
     });
   }
 }

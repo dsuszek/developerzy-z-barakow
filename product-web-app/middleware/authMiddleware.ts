@@ -7,6 +7,7 @@ export default function authMiddleware (req: Request, res: Response, next: NextF
   } else if (req.cookies.token && req.cookies.token.length > 0) {
     try {
       axios.defaults.headers.common.Authorization = req.cookies.token;
+    
       next();
     } catch (error) {
       res.redirect('/auth/login');

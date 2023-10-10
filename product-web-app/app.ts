@@ -35,16 +35,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 axios.defaults.baseURL = API_URL;
-
-<<<<<<< HEAD
-=======
-declare module 'express-session' {
-  interface SessionData {
-    role: Partial<Role>;
-  }
-}
-
->>>>>>> f5d3225bced421cf3494a85f89191bb01576ef30
 app.set('view engine', 'html');
 app.use('/public', express.static(path.join(dirname, 'public')));
 
@@ -60,8 +50,8 @@ app.use(cookieParser());
 app.use(authMiddleware);
 
 // Routing
-app.get('/', (eq: Request, res: Response) => {
-  res.render('home');
+app.get('/', (req: Request, res: Response) => {
+  res.render('home',{ admin : req.cookies.admin});
 });
 roleController.appRoutes(app);
 jobRoleController.appRoutes(app);

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Login from '../model/login.js';
 import LoginValidator from './loginValidator.js';
+import LoginResponse from '../model/loginResponse.js';
 
 export default class AuthService {
   private loginValidator: LoginValidator;
@@ -9,7 +10,7 @@ export default class AuthService {
     this.loginValidator = loginValidator;
   }
 
-  async login(login: Login): Promise<string> {
+  async login(login: Login): Promise<LoginResponse> {
     try {
       const validateError = this.loginValidator.validateLogin(login);
       if (validateError) {
