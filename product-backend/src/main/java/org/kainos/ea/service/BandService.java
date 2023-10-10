@@ -1,6 +1,6 @@
 package org.kainos.ea.service;
 
-import org.kainos.ea.db.BandDao;
+import org.kainos.ea.dao.BandDao;
 import org.kainos.ea.exception.FailedToCreateBandException;
 import org.kainos.ea.exception.InvalidBandException;
 import org.kainos.ea.model.Band;

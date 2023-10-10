@@ -1,13 +1,9 @@
 package org.kainos.ea.exception;
 
 public class FailedToRegisterUserException extends Throwable {
-
-    public FailedToRegisterUserException() {}
-
-    public FailedToRegisterUserException(String message) {
-        super(message);
+    public FailedToRegisterUserException(String s) {
+        super(s);
     }
-
     @Override
     public String getMessage() {
         return "Failed to register user";

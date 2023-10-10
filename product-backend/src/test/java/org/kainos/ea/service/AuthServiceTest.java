@@ -2,7 +2,7 @@ package org.kainos.ea.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.kainos.ea.db.AuthDao;
+import org.kainos.ea.dao.AuthDao;
 import org.kainos.ea.db.UserDao;
 import org.kainos.ea.exception.FailedToGenerateTokenException;
 import org.kainos.ea.exception.FailedToLoginException;

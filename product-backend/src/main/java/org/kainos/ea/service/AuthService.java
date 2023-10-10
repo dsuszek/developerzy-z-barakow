@@ -1,6 +1,6 @@
 package org.kainos.ea.service;
 
-import org.kainos.ea.db.AuthDao;
+import org.kainos.ea.dao.AuthDao;
 import org.kainos.ea.db.PasswordEncoder;
 import org.kainos.ea.db.UserDao;
 import org.kainos.ea.exception.FailedToGenerateTokenException;
@@ -17,10 +17,13 @@ import java.sql.SQLException;
 
 public class AuthService {
     private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
-    private final UserDao userDao;
     private final AuthDao authDao;
-    private final UserRegistrationValidator userRegistrationValidator;
+    private UserDao userDao;
+    private UserRegistrationValidator userRegistrationValidator;
 
+    public AuthService(AuthDao authDao) {
+        this.authDao = authDao;
+    }
 
     public AuthService(UserDao userDao, AuthDao authDao, UserRegistrationValidator userRegistrationValidator) {
         this.userDao = userDao;
@@ -43,7 +46,7 @@ public class AuthService {
         } catch (SQLException e) {
             logger.error("SQL exception! Error: {}", e.getMessage());
 
-            throw new FailedToRegisterUserException();
+            throw new FailedToRegisterUserException("Failed to register user");
         } catch (NoSuchAlgorithmException e) {
             logger.error("No such algorithm exception! Error: {}", e.getMessage());
 

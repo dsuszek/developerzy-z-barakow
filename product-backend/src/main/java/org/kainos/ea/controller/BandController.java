@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.kainos.ea.db.BandDao;
+import org.kainos.ea.dao.BandDao;
 import org.kainos.ea.exception.ErrorResponse;
 import org.kainos.ea.exception.FailedToCreateBandException;
 import org.kainos.ea.exception.InvalidBandException;

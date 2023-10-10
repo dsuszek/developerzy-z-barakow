@@ -8,7 +8,9 @@ import java.sql.*;
 public class UserDao {
     // Checks if user's email address is already in use
     public boolean isEmailTaken(String email) throws SQLException, FailedToRegisterUserException {
-        Connection c = DatabaseConnector.getConnection();
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        Connection c = databaseConnector.getConnection();
+
         String selectStatement = "SELECT 1 FROM `Users` WHERE email = ? LIMIT 1;";
         PreparedStatement st = c.prepareStatement(selectStatement);
         st.setString(1, email);
@@ -22,7 +24,9 @@ public class UserDao {
     }
 
     public User registerUser(UserRegistrationRequest user) throws SQLException, FailedToRegisterUserException {
-        Connection c = DatabaseConnector.getConnection();
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        Connection c = databaseConnector.getConnection();
+
         String insertStatement = "INSERT INTO `Users` (email, password, roleId) VALUES (?, ?, ?);";
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
 

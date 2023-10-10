@@ -1,8 +1,9 @@
-package org.kainos.ea.db;
+package org.kainos.ea.dao;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.lang3.time.DateUtils;
+import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.model.LoginRequest;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
@@ -28,6 +29,8 @@ public class AuthDao {
     }
 
     public String generateToken(String email) throws SQLException {
+
+        String secretKey = System.getenv("JWT_SECRET");
         return Jwts.builder()
                 .claim("name", email)
                 .claim("roleId", getRoleIDFromEmail(email))
@@ -35,7 +38,7 @@ public class AuthDao {
                 .setExpiration(DateUtils.addHours(new Date(), 1))
                 .signWith(
                         SignatureAlgorithm.HS256,
-                        "Yn2kjibddFAWtnPJ2AFlL8WXmohJMCvigQggaEypa5E=".getBytes(StandardCharsets.UTF_8)
+                        secretKey.getBytes(StandardCharsets.UTF_8)
                 )
                 .compact();
     }

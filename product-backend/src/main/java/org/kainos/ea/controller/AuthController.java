@@ -7,10 +7,13 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.kainos.ea.dao.AuthDao;
+import org.kainos.ea.db.UserDao;
 import org.kainos.ea.exception.*;
 import org.kainos.ea.model.LoginRequest;
 import org.kainos.ea.model.UserRegistrationRequest;
 import org.kainos.ea.service.AuthService;
+import org.kainos.ea.service.UserRegistrationValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +22,10 @@ import java.security.NoSuchAlgorithmException;
 @Tag(name = "Authorization API")
 @Path("/api/auth")
 public class AuthController {
-    private AuthService authService;
+    public AuthService authService;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
     private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
     @POST
     @Path("/login")

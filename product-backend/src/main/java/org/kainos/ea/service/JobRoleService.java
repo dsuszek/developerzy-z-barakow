@@ -1,12 +1,13 @@
 package org.kainos.ea.service;
 
-import org.kainos.ea.db.JobRoleDao;
+import org.kainos.ea.dao.JobRoleDao;
 import org.kainos.ea.exception.*;
 import org.kainos.ea.model.JobRole;
 import org.kainos.ea.model.JobRoleRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 public class JobRoleService {
@@ -18,6 +19,24 @@ public class JobRoleService {
     public JobRoleService(JobRoleDao jobRoleDao, JobRoleValidator jobRoleValidator) {
         this.jobRoleDao = jobRoleDao;
         this.jobRoleValidator = jobRoleValidator;
+    }
+
+    public List<JobRole> getJobRoles() throws FailedToGetJobRolesException {
+        try {
+            return jobRoleDao.getRoles();
+        }catch (SQLException e) {
+            logger.error("SQL exception! Error: {}", e.getMessage());
+            throw new FailedToGetJobRolesException();
+        }
+    }
+
+    public JobRole findRoleById(int id) throws JobRoleDoesNotExistException, FailedToGetJobRoleException {
+        try {
+            Optional<JobRole> jobRole = jobRoleDao.findRoleById(id);
+            return jobRole.orElseThrow(JobRoleDoesNotExistException::new);
+        } catch ( SQLException e) {
+            throw new FailedToGetJobRoleException();
+        }
     }
 
     public JobRole createJobRole(JobRoleRequest jobRole) throws FailedToCreateJobRoleException, InvalidJobRoleException {
@@ -36,7 +55,7 @@ public class JobRoleService {
         }
     }
 
-    public void deleteJobRole(short id) throws JobRoleDoesNotExistException, FailedToDeleteJobRole {
+    public void deleteJobRole(short id) throws JobRoleDoesNotExistException, FailedToDeleteJobRoleException {
         try {
             Optional<JobRole> jobRoleToBeDeleted = jobRoleDao.getJobRoleById(id);
             if (jobRoleToBeDeleted.isEmpty()) {
@@ -45,7 +64,7 @@ public class JobRoleService {
 
             jobRoleDao.deleteJobRole(id);
         } catch (SQLException e) {
-            throw new FailedToDeleteJobRole();
+            throw new FailedToDeleteJobRoleException();
         }
     }
 }
