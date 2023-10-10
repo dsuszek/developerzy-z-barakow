@@ -13,9 +13,6 @@ export default class AuthService {
 
   private loginValidator: LoginValidator;
 
-  constructor(loginValidator: LoginValidator) {
-    this.loginValidator = loginValidator;
-  }
   constructor(registrationValidator: RegistrationValidator, loginValidator: LoginValidator) {
       this.registrationValidator = registrationValidator;
       this.loginValidator = loginValidator;
