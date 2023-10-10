@@ -34,7 +34,6 @@ public class DropwizardWebServiceApplication extends Application<DropwizardWebSe
     @Override
     public void run(DropwizardWebServiceConfiguration dropwizardWebServiceConfiguration, Environment environment) {
         environment.jersey().register(new JobRoleController());
-        environment.jersey().register(new AuthController());
         environment.jersey().register(new BandController());
         environment.jersey().register(new AuthController());
         environment.jersey().register(new AuthFilter());
