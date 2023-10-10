@@ -18,7 +18,7 @@ export default class RegistrationValidator {
     }
 
     if (!PASSWORD_SPECIAL_CHARS_PATTERN.test(registration.password)) {
-      return 'Password must contain at least one special character';
+      return 'Password should contain at least one special character';
     }
 
     if (!PASSWORD_UPPERCASE_LETTER_PATTERN.test(registration.password)) {

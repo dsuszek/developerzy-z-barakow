@@ -15,11 +15,15 @@ describe('Band validator', () => {
     logger.unsilent();
   });
 
-  describe('validateBand', () => {
+  describe('when band level is too low should return error message', async () => {
     it('expect too low level', () => {
-      const band: Partial<Band> = {
+      const band: Band = {
+        id: 1,
+        name: 'Trainee',
         level: -1,
       };
+
+      expect(bandValidator.validateBand(band as Band)).to.be.equal('Level of band should be greater than 0!');
     });
   });
 });
