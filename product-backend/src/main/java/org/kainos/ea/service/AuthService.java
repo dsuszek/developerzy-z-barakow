@@ -28,18 +28,22 @@ public class AuthService {
         this.userRegistrationValidator = userRegistrationValidator;
     }
 
-    public User registerUser(UserRegistrationRequest userRegistrationRequest) throws InvalidUserRegistrationRequestException, FailedToRegisterUserException {
+    public User registerUser(UserRegistrationRequest userRegistration) throws InvalidUserRegistrationRequestException, FailedToRegisterUserException {
         try {
-            String validation = userRegistrationValidator.isValidUserRegistrationRequest(userRegistrationRequest);
+            String validation = userRegistrationValidator.isValidUserRegistrationRequest(userRegistration);
 
             if (validation != null) {
-                throw new InvalidUserRegistrationRequestException();
+                throw new InvalidUserRegistrationRequestException(validation);
+            }
+
+            if (userDao.isEmailTaken(userRegistration.getEmail())) {
+                throw new FailedToRegisterUserException();
             }
 
             // After checking the correctness of password, assign encoded version to this request
-            userRegistrationRequest.setPassword(PasswordEncoder.encodePassword(userRegistrationRequest.getPassword()));
+            userRegistration.setPassword(PasswordEncoder.encodePassword(userRegistration.getPassword()));
 
-            return userDao.registerUser(userRegistrationRequest);
+            return userDao.registerUser(userRegistration);
         } catch (SQLException e) {
             logger.error("SQL exception! Error: {}", e.getMessage());
 

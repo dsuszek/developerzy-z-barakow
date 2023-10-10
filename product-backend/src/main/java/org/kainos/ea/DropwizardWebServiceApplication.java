@@ -8,9 +8,7 @@ import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.kainos.ea.controller.JobRoleController;
 import org.kainos.ea.controller.AuthController;
 import org.kainos.ea.controller.BandController;
-import org.kainos.ea.dao.AuthDao;
 import org.kainos.ea.filter.AuthFilter;
-import org.kainos.ea.service.AuthService;
 
 public class DropwizardWebServiceApplication extends Application<DropwizardWebServiceConfiguration> {
 

@@ -39,6 +39,7 @@ describe('Login service', () => {
         expect(exception.message).to.equal('Could not login');
       }
     });
+
     it('when login is not found should return error message', async () => {
       const login: Login = loginRequest;
       mockAxios.onPost('/api/auth/login', login).reply(400);
@@ -52,6 +53,7 @@ describe('Login service', () => {
         expect(exception.message).to.equal('Could not login');
       }
     });
+
     it('when API is running expect login to be succesful', async () => {
       const login: Login = loginRequest;
       mockAxios.onPost('/api/auth/login/', login).reply(200, 'randomizedToken2123');

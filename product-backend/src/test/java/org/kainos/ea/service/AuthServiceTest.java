@@ -6,7 +6,9 @@ import org.kainos.ea.dao.AuthDao;
 import org.kainos.ea.dao.UserDao;
 import org.kainos.ea.exception.FailedToGenerateTokenException;
 import org.kainos.ea.exception.FailedToLoginException;
+import org.kainos.ea.exception.FailedToRegisterUserException;
 import org.kainos.ea.model.LoginRequest;
+import org.kainos.ea.model.UserRegistrationRequest;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -24,6 +26,7 @@ class AuthServiceTest {
     private final UserRegistrationValidator userRegistrationValidator = Mockito.mock(UserRegistrationValidator.class);
     private AuthService authService = new AuthService(userDao, authDao, userRegistrationValidator);
     private String hashedAndSaltedPass = "U55AS5gfTUoluRuSy+nxRQ==:jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=";// admin
+
     @Test
     public void login_WhenGivenCorrectShouldLogin_ShouldReturnToken() throws NoSuchAlgorithmException, FailedToLoginException, FailedToGenerateTokenException, SQLException {
         //given
@@ -33,7 +36,7 @@ class AuthServiceTest {
         when(authDao.generateToken("admin@kainos")).thenReturn("1234567890");
         String result = authService.login(loginRequest);
         //then
-        assertEquals(result,"1234567890");
+        assertEquals(result, "1234567890");
     }
 
     @Test
@@ -59,4 +62,51 @@ class AuthServiceTest {
                 .isThrownBy(() -> authService.login(loginRequest));
     }
 
+    @Test
+    public void register_WhenRegistrationDataIsIncorrect_ShouldThrowFailedToRegisterUserException() throws SQLException, FailedToRegisterUserException {
+        // given
+        UserRegistrationRequest userRegistrationRequest = new UserRegistrationRequest("joe@gmail.com", "3jou89234u9**(U(#HH@bnbnj", (short) 1);
+        // when
+        when(userDao.isEmailTaken(userRegistrationRequest.getEmail())).thenReturn(false);
+        when(userDao.registerUser(userRegistrationRequest)).thenThrow(new FailedToRegisterUserException());
+        // then
+        assertThatExceptionOfType(FailedToRegisterUserException.class)
+                .isThrownBy(() -> authService.registerUser(userRegistrationRequest));
+    }
+
+    @Test
+    public void register_WhenPasswordDoesNotMeetTheCriteria_ShouldThrowFailedToRegisterUserException() throws SQLException, FailedToRegisterUserException {
+        // given
+        UserRegistrationRequest userRegistrationRequest = new UserRegistrationRequest("davidM@kainos.com", "pass123", (short) 1);
+        // when
+        when(userDao.isEmailTaken(userRegistrationRequest.getEmail())).thenReturn(false);
+        when(userDao.registerUser(userRegistrationRequest)).thenThrow(new FailedToRegisterUserException());
+        // then
+        assertThatExceptionOfType(FailedToRegisterUserException.class)
+                .isThrownBy(() -> authService.registerUser(userRegistrationRequest));
+    }
+
+    @Test
+    public void register_WhenPasswordIsEmpty_ShouldThrowFailedToRegisterUserException() throws SQLException, FailedToRegisterUserException {
+        // given
+        UserRegistrationRequest userRegistrationRequest = new UserRegistrationRequest("davidM@kainos.com", "        ", (short) 1);
+        // when
+        when(userDao.isEmailTaken(userRegistrationRequest.getEmail())).thenReturn(false);
+        when(userDao.registerUser(userRegistrationRequest)).thenThrow(new FailedToRegisterUserException());
+        // then
+        assertThatExceptionOfType(FailedToRegisterUserException.class)
+                .isThrownBy(() -> authService.registerUser(userRegistrationRequest));
+    }
+
+    @Test
+    public void register_WhenEmailAddressIsEmpty_ShouldThrowFailedToRegisterUserException() throws SQLException, FailedToRegisterUserException {
+        // given
+        UserRegistrationRequest userRegistrationRequest = new UserRegistrationRequest("          ", "frf23r242$R#FFE", (short) 1);
+        // when
+        when(userDao.isEmailTaken(userRegistrationRequest.getEmail())).thenReturn(false);
+        when(userDao.registerUser(userRegistrationRequest)).thenThrow(new FailedToRegisterUserException());
+        // then
+        assertThatExceptionOfType(FailedToRegisterUserException.class)
+                .isThrownBy(() -> authService.registerUser(userRegistrationRequest));
+    }
 }

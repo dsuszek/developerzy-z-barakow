@@ -15,7 +15,7 @@ export default class BandController {
 
     app.post('/admin/band', async (req: Request, res: Response) => {
       const data: Band = req.body;
-      data.name = sanitize(data.name).trim();
+      data.name = sanitize(data.name);
 
       try {
         await this.bandService.createBand(data);

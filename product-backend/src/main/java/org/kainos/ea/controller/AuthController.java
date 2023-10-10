@@ -7,13 +7,13 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.kainos.ea.dao.AuthDao;
-import org.kainos.ea.dao.UserDao;
 import org.kainos.ea.exception.*;
+
+import org.kainos.ea.exception.FailedToGenerateTokenException;
+import org.kainos.ea.exception.FailedToLoginException;
 import org.kainos.ea.model.LoginRequest;
 import org.kainos.ea.model.UserRegistrationRequest;
 import org.kainos.ea.service.AuthService;
-import org.kainos.ea.service.UserRegistrationValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,9 +43,11 @@ public class AuthController {
     @POST
     @Path("/register")
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response register(UserRegistrationRequest userRegistrationRequest) {
         try {
-            return Response.ok(authService.registerUser(userRegistrationRequest)).build();
+            authService.registerUser(userRegistrationRequest);
+            return Response.ok().build();
         } catch (FailedToRegisterUserException e) {
             logger.error("Failed to register user! Error: {}", e.getMessage());
 

@@ -7,14 +7,14 @@ import nunjucks from 'nunjucks';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import axios from 'axios';
+import logger from './service/logger.js';
 import Role from './model/role.js';
-import RoleController from './controller/roleController.js';
 import AuthController from './controller/authController.js';
 import JobRoleController from './controller/jobRoleController.js';
+import RoleController from './controller/roleController.js';
 import BandController from './controller/bandController.js';
 import { API_URL } from './common/constants.js';
 import authMiddleware from './middleware/authMiddleware.js';
-import logger from './service/logger.js';
 
 dotenv.config();
 
@@ -51,6 +51,7 @@ app.use('/public', express.static(path.join(dirname, 'public')));
 app.listen(3000, () => {
   logger.info('Server listening on port 3000');
 });
+
 const roleController = new RoleController();
 const jobRoleController = new JobRoleController();
 const authController = new AuthController();
