@@ -33,14 +33,14 @@ public class JobRoleService {
             String validation = jobRoleValidator.isValidJobRole(jobRole);
 
             if (validation != null) {
-                throw new InvalidJobRoleException(validation);
+                throw new InvalidJobRoleException();
             }
 
             return jobRoleDao.createJobRole(jobRole);
         } catch (SQLException e) {
             logger.error("SQL exception! Error: {}", e.getMessage());
 
-            throw new FailedToCreateJobRoleException(e.getMessage());
+            throw new FailedToCreateJobRoleException();
         }
     }
     public List<JobRole> getJobRoles() throws FailedToGetRolesException {
@@ -54,7 +54,7 @@ public class JobRoleService {
 
     public JobRole findRoleById(int id) throws RoleDoesNotExistException, FailedToGetRoleException {
         try {
-            Optional<JobRole> jobRole = jobRoleDao.findRoleById(id,databaseConnector.getConnection());
+            Optional<JobRole> jobRole = jobRoleDao.findRoleById(id, databaseConnector.getConnection());
             return jobRole.orElseThrow(RoleDoesNotExistException::new);
         } catch ( SQLException e) {
             throw new FailedToGetRoleException();
