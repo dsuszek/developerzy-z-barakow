@@ -18,3 +18,11 @@ description varchar(3000),
 link varchar(1000)
 );
 
+CREATE TABLE Token (
+id SMALLINT PRIMARY KEY AUTO_INCREMENT,
+email varchar(50) NOT NULL,
+token varchar(64) NOT NULL,
+expiry DATETIME NOT NULL,
+FOREIGN KEY (email) REFERENCES Users(email)
+);
+
