@@ -85,6 +85,6 @@ public class JobRoleServiceTest {
 
 
         // then
-        
+
     }
 }
