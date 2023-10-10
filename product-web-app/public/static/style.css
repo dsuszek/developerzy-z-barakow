@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Century Gothic';
+    src: url('century-gothic.ttf') format('truetype');
+}
+body {
+    font-family: 'Century Gothic', Arial, Helvetica, sans-serif;
+    background-color: green;
+}
