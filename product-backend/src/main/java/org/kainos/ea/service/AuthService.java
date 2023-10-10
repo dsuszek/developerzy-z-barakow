@@ -2,18 +2,54 @@ package org.kainos.ea.service;
 
 import org.kainos.ea.db.AuthDao;
 import org.kainos.ea.db.PasswordEncoder;
-import org.kainos.ea.exception.FailedToGenerateTokenException;
-import org.kainos.ea.exception.FailedToLoginException;
+import org.kainos.ea.db.UserDao;
+import org.kainos.ea.exception.*;
 import org.kainos.ea.model.LoginRequest;
-
+import org.kainos.ea.model.User;
+import org.kainos.ea.model.UserRegistrationRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class AuthService {
-    private AuthDao authDao;
+    private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
+    private final UserDao userDao;
+    private final AuthDao authDao;
+    private final UserRegistrationValidator userRegistrationValidator;
 
-    public AuthService(AuthDao authDao) {
+
+    public AuthService(UserDao userDao, AuthDao authDao, UserRegistrationValidator userRegistrationValidator) {
+        this.userDao = userDao;
         this.authDao = authDao;
+        this.userRegistrationValidator = userRegistrationValidator;
+    }
+
+    public User registerUser(UserRegistrationRequest userRegistration) throws InvalidUserRegistrationRequestException, FailedToRegisterUserException {
+        try {
+            String validation = userRegistrationValidator.isValidUserRegistrationRequest(userRegistration);
+
+            if (validation != null) {
+                throw new InvalidUserRegistrationRequestException(validation);
+            }
+
+            if (userDao.isEmailTaken(userRegistration.getEmail())) {
+                throw new FailedToRegisterUserException("Email address already in use. Please choose another one");
+            }
+
+            // After checking the correctness of password, assign encoded version to this request
+            userRegistration.setPassword(PasswordEncoder.encodePassword(userRegistration.getPassword()));
+
+            return userDao.registerUser(userRegistration);
+        } catch (SQLException e) {
+            logger.error("SQL exception! Error: {}", e.getMessage());
+
+            throw new FailedToRegisterUserException();
+        } catch (NoSuchAlgorithmException e) {
+            logger.error("No such algorithm exception! Error: {}", e.getMessage());
+
+            throw new RuntimeException(e);
+        }
     }
 
     public String login(LoginRequest login) throws NoSuchAlgorithmException, FailedToGenerateTokenException, FailedToLoginException {
