@@ -43,7 +43,7 @@ public class BandDao {
         ResultSet rs = st.getGeneratedKeys();
 
         if (!rs.next()) {
-            throw new FailedToCreateBandException("No band id has been returned");
+            throw new FailedToCreateBandException();
         }
 
         return new Band

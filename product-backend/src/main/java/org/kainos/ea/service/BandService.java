@@ -17,7 +17,6 @@ public class BandService {
     private final static Logger logger = LoggerFactory.getLogger(BandService.class);
     private final BandDao bandDao;
     private final BandValidator bandValidator;
-    private DatabaseConnector databaseConnector;
 
     public BandService(BandDao bandDao, BandValidator bandValidator) {
         this.bandDao = bandDao;
@@ -29,14 +28,14 @@ public class BandService {
             String validation = bandValidator.isValidBand(band);
 
             if (validation != null) {
-                throw new InvalidBandException(validation);
+                throw new InvalidBandException();
             }
 
             return bandDao.createBand(band);
         } catch (SQLException e) {
             logger.error("SQL exception! Error: {}", e.getMessage());
 
-            throw new FailedToCreateBandException(e.getMessage());
+            throw new FailedToCreateBandException();
         }
     }
 
@@ -45,7 +44,7 @@ public class BandService {
             return bandDao.getBands();
         } catch (SQLException e) {
             logger.error("SQL exception! Error: {}", e.getMessage());
-            throw new FailedToGetBandsException(e.getMessage());
+            throw new FailedToGetBandsException();
         }
     }
 }

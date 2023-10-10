@@ -38,7 +38,7 @@ public class UserDao {
         ResultSet rs = st.getGeneratedKeys();
 
         if (!rs.next()) {
-            throw new FailedToRegisterUserException("No user id returned");
+            throw new FailedToRegisterUserException();
         }
 
         return new User
