@@ -10,14 +10,14 @@ export default class JobRoleController {
 
   appRoutes(app: Application) {
     app.get('/admin/add-job-roles', async (req: Request, res: Response) => {
-      res.render('add-job-roles',{ admin : req.cookies.admin});
+      res.render('add-job-roles');
     });
 
     app.post('/admin/add-job-roles', async (req: Request, res: Response) => {
       const data: JobRole = req.body;
       data.name = sanitize(data.name).trim();
       data.description = sanitize(data.description).trim();
-      data.link = sanitize(data.link).trim();
+      // data.link = sanitize(data.link).trim();
 
       try {
         const newJobRole = await this.jobRoleService.createJobRole(data);
@@ -25,10 +25,7 @@ export default class JobRoleController {
       } catch (e: any) {
         logger.warn(e.message);
         res.locals.errormessage = e.message;
-        res.render('add-job-roles', {
-          ...req.body,
-          admin: req.cookies.admin
-        });
+        res.render('add-job-roles', req.body);
       }
     });
   }

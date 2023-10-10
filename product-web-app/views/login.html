@@ -2,6 +2,7 @@
 {% block style %}{% endblock %}
 {% block title %} Login {% endblock %}
 {% set IsAuthPage = true %}
+{% set page = "login" %}
 
 {% block content %} 
 <section id="form" class="bg-light py-5">
@@ -21,8 +22,11 @@
                 <input type="password" id="password" name="password" class="form-control" value="{{ password }}" required>
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
+            
         </form>
+        
     </div>
+    
 </section>
 {% endblock %}
 

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.exception.FailedToGenerateTokenException;
 import org.kainos.ea.exception.FailedToLoginException;
 import org.kainos.ea.model.LoginRequest;
+import org.kainos.ea.model.LoginResponse;
 import org.kainos.ea.service.AuthService;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -27,7 +28,7 @@ class AuthControllerTest {
         //given
         LoginRequest loginRequest = new LoginRequest("123@kainos.com", "123456");
         //when
-        when(authService.login(loginRequest)).thenReturn("12311212321");
+        when(authService.login(loginRequest)).thenReturn(new LoginResponse("12311212321",false));
         Response response = authController.login(loginRequest);
         //then
         assertEquals(response.getStatus(), 200);

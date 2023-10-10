@@ -11,14 +11,16 @@ import cookieParser from 'cookie-parser';
 import AuthController from './controller/authController.js';
 import JobRoleController from './controller/jobRoleController.js';
 import { API_URL } from './common/constants.js';
-import authMiddleware from './middleware/authMiddleware.js';
+import AuthMiddleware from './middleware/authMiddleware.js';
 import logger from './service/logger.js';
+import { request } from 'http';
 
 dotenv.config();
 
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const app: Application = express();
+const authMiddleware:AuthMiddleware = new AuthMiddleware(app);
 
 const appViews = path.join(dirname, '/views');
 app.use(express.static('/views/static'));
@@ -47,7 +49,7 @@ const authController = new AuthController();
 
 app.use(cookieParser());
 
-app.use(authMiddleware);
+authMiddleware.filter();
 
 // Routing
 app.get('/', (req: Request, res: Response) => {
