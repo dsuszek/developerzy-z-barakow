@@ -24,7 +24,7 @@ public class AuthFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) {
         String path = requestContext.getUriInfo().getPath();
-        if (!path.contains("auth")) {
+        if (!path.contains("auth") && !path.contains("swagger")&& !path.contains("openapi.json")) {
                 String token = requestContext.getHeaderString("Authorization");
                 if (token == null) {
                     throw new WebApplicationException("User unauthorized", Response.Status.UNAUTHORIZED);

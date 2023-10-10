@@ -29,6 +29,7 @@ public class AuthController {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login(LoginRequest login){
         try{
+             // {"token", "isAdmin"
             return Response.ok(authService.login(login)).build();
         }catch (FailedToLoginException e){
             System.err.println(e.getMessage());
