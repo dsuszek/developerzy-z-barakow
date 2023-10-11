@@ -16,7 +16,6 @@ export default class CapabilityController {
     app.get('/admin/add-capabilities', async (req: Request, res: Response) => {
       res.render('add-capabilities', { page: 'add-capabilities' });
     });
-
     app.post('/admin/add-capabilities', this.upload.any(), async (req: Request, res: Response) => {
       const data: Capability = req.body;
       const file: any = (req as any).files;
@@ -30,15 +29,24 @@ export default class CapabilityController {
       data.leadName = sanitize(data.leadName);
       data.message = sanitize(data.message);
       try {
-        const newCapability = await this.capabilityService.createCapability(data);
-        res.render('add-capabilities', {
-          page: 'add-capabilities',
-        });
+        await this.capabilityService.createCapability(data);
+        res.redirect('/admin/capabilities');
       } catch (e: any) {
         logger.warn(e.message);
         res.locals.errormessage = e.message;
         res.render('add-capabilities', req.body);
       }
+    });
+    app.get('/admin/capabilities', async (req: Request, res: Response) => {
+      let data: Capability[] = [];
+      try {
+        data = await this.capabilityService.getCapabilities();
+      } catch (e) {
+        console.error(e);
+      }
+      res.render('list-capabilities', {
+        capabilities: data,
+      });
     });
   }
 }
