@@ -19,13 +19,13 @@ public class JobRolesIntegrationTest {
             new ResourceConfigurationSourceProvider()
     );
     public final String API_URL = System.getenv("API_URL");
-
+    public String adminTokenThatNeverExpires = "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiYWRtaW5Aa2Fpbm9zLmNvbSIsInJvbGVJZCI6MiwiaWF0IjoxNjk2OTQwODY0LCJleHAiOjM2MDE2OTY5NDA4NjR9.gfJ7B1kY0DVKcKTxW3u2cIcPZvQjFEjPrcZnMjwb9do";
     @Test
     void getJobRoles_shouldReturnListOfJobRoles() {
         List<JobRole> response = APP.client().target(API_URL + "/api/job-roles")
                 .request()
+                .header("Authorization", adminTokenThatNeverExpires)
                 .get(List.class);
-
         Assertions.assertTrue(response.size() > 0);
     }
 
@@ -33,6 +33,7 @@ public class JobRolesIntegrationTest {
     void getJobRole_shouldReturnJobRole() {
         Response response = APP.client().target(API_URL + "/api/job-roles/1")
                 .request()
+                .header("Authorization", adminTokenThatNeverExpires)
                 .get();
         Assertions.assertEquals(200,response.getStatus());
     }
@@ -41,6 +42,7 @@ public class JobRolesIntegrationTest {
     void getJobRole_shouldReturnBadRequest_whenJobRoleDoesNotExist() {
         Response response = APP.client().target(API_URL + "/api/job-roles/10000")
                 .request()
+                .header("Authorization", adminTokenThatNeverExpires)
                 .get();
         Assertions.assertEquals(400,response.getStatus());
     }
