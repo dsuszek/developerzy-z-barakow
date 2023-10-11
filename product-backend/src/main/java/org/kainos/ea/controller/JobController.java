@@ -14,20 +14,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.sql.SQLException;
 
-@Tag(name = "Job roles")
+@Tag(name = "Job Roles API")
 @Path("/api")
 public class JobController {
-    private static JobService jobService;
+    private JobService jobService;
+    private final static Logger logger = LoggerFactory.getLogger(JobController.class);
 
-    static {
-        try {
-            jobService = new JobService(new JobDao(), new DatabaseConnector());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public JobController(JobService jobService) throws SQLException {
+        this.jobService = new JobService(new JobDao(), new DatabaseConnector());
     }
-
-    private final static Logger logger = LoggerFactory.getLogger(JobService.class);
 
     @GET
     @Path("/job-roles")
@@ -55,5 +50,4 @@ public class JobController {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
-
 }

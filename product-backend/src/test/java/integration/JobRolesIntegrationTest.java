@@ -10,7 +10,6 @@ import org.kainos.ea.DropwizardWebServiceApplication;
 import org.kainos.ea.DropwizardWebServiceConfiguration;
 import java.util.List;
 
-
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class JobRolesIntegrationTest {
     static final DropwizardAppExtension<DropwizardWebServiceConfiguration> APP = new DropwizardAppExtension<>(
@@ -34,18 +33,18 @@ public class JobRolesIntegrationTest {
 
     @Test
     void getJobRole_shouldReturnJobRole() {
-        Response response = APP.client().target(API_URL + "/api/job-roles/40")
+        Response response = APP.client().target(API_URL + "/api/job-roles/1")
                 .request()
-                .header("Authorization", userTokenThatNeverExpires)
+                .header("Authorization", adminTokenThatNeverExpires)
                 .get();
         Assertions.assertEquals(200,response.getStatus());
     }
 
     @Test
     void getJobRole_shouldReturnBadRequest_whenJobRoleDoesNotExist() {
-        Response response = APP.client().target(API_URL + "/api/job-roles/1")
+        Response response = APP.client().target(API_URL + "/api/job-roles/10000")
                 .request()
-                .header("Authorization", userTokenThatNeverExpires)
+                .header("Authorization", adminTokenThatNeverExpires)
                 .get();
         Assertions.assertEquals(400,response.getStatus());
     }

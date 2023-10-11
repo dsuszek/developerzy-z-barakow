@@ -54,6 +54,7 @@ export default class AuthController {
     });
     app.get('/auth/logout', async (req: Request, res: Response) => {
       res.clearCookie('token');
+      res.clearCookie('admin');
       res.render('login');
     });
   }
