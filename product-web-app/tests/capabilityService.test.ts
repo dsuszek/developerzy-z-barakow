@@ -6,21 +6,6 @@ import CapabilityService from '../service/capabilityService.js';
 import Capability from '../model/capability.js';
 import CapabilityValidator from '../service/capabilityValidator.js';
 
-// const capabilityEng: Capability = {
-//   id: 1,
-//   capabilityName: '',
-//   leadName: '',
-//   capabilityLeadPicture: '',
-//   message: '',
-// };
-// const capabilityDev: Capability = {
-//   id: 2,
-//   capabilityName: '',
-//   leadName: '',
-//   capabilityLeadPicture: '',
-//   message: '',
-// };
-
 const capabilityTest: Capability = {
   capabilityName: '',
   leadName: '',
