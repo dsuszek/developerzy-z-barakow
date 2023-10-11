@@ -1,12 +1,10 @@
-import {
-  Application, NextFunction, Request, Response,
-} from 'express';
+import { Application, NextFunction, Request, Response } from 'express';
 import axios from 'axios';
 
 export default class AuthMiddleware {
-  private app:Application;
+  private app: Application;
 
-  constructor(app:Application) {
+  constructor(app: Application) {
     this.app = app;
   }
 
