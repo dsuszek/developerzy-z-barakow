@@ -3,10 +3,7 @@ package org.kainos.ea.service;
 import org.kainos.ea.dao.AuthDao;
 import org.kainos.ea.db.PasswordEncoder;
 import org.kainos.ea.db.UserDao;
-import org.kainos.ea.exception.FailedToGenerateTokenException;
-import org.kainos.ea.exception.FailedToLoginException;
-import org.kainos.ea.exception.FailedToRegisterUserException;
-import org.kainos.ea.exception.InvalidUserRegistrationRequestException;
+import org.kainos.ea.exception.*;
 import org.kainos.ea.model.LoginRequest;
 import org.kainos.ea.model.User;
 import org.kainos.ea.model.UserRegistrationRequest;
@@ -21,32 +18,32 @@ public class AuthService {
     private UserDao userDao;
     private UserRegistrationValidator userRegistrationValidator;
 
-    public AuthService(AuthDao authDao) {
-        this.authDao = authDao;
-    }
-
     public AuthService(UserDao userDao, AuthDao authDao, UserRegistrationValidator userRegistrationValidator) {
         this.userDao = userDao;
         this.authDao = authDao;
         this.userRegistrationValidator = userRegistrationValidator;
     }
 
-    public User registerUser(UserRegistrationRequest userRegistrationRequest) throws InvalidUserRegistrationRequestException, FailedToRegisterUserException {
+    public User registerUser(UserRegistrationRequest userRegistration) throws InvalidUserRegistrationRequestException, FailedToRegisterUserException {
         try {
-            String validation = userRegistrationValidator.isValidUserRegistrationRequest(userRegistrationRequest);
+            String validation = userRegistrationValidator.isValidUserRegistrationRequest(userRegistration);
 
             if (validation != null) {
-                throw new InvalidUserRegistrationRequestException();
+                throw new InvalidUserRegistrationRequestException(validation);
+            }
+
+            if (userDao.isEmailTaken(userRegistration.getEmail())) {
+                throw new FailedToRegisterUserException();
             }
 
             // After checking the correctness of password, assign encoded version to this request
-            userRegistrationRequest.setPassword(PasswordEncoder.encodePassword(userRegistrationRequest.getPassword()));
+            userRegistration.setPassword(PasswordEncoder.encodePassword(userRegistration.getPassword()));
 
-            return userDao.registerUser(userRegistrationRequest);
+            return userDao.registerUser(userRegistration);
         } catch (SQLException e) {
             logger.error("SQL exception! Error: {}", e.getMessage());
 
-            throw new FailedToRegisterUserException("Failed to register user");
+            throw new FailedToRegisterUserException();
         } catch (NoSuchAlgorithmException e) {
             logger.error("No such algorithm exception! Error: {}", e.getMessage());
 

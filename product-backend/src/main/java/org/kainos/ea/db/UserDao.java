@@ -6,11 +6,11 @@ import org.kainos.ea.model.UserRegistrationRequest;
 import java.sql.*;
 
 public class UserDao {
-    // Checks if user's email address is already in use
-    public boolean isEmailTaken(String email) throws SQLException, FailedToRegisterUserException {
-        DatabaseConnector databaseConnector = new DatabaseConnector();
-        Connection c = databaseConnector.getConnection();
+    private final DatabaseConnector databaseConnector = new DatabaseConnector();
 
+    // Checks if user's email address is already in use
+    public boolean isEmailTaken(String email) throws SQLException {
+        Connection c = databaseConnector.getConnection();
         String selectStatement = "SELECT 1 FROM `Users` WHERE email = ? LIMIT 1;";
         PreparedStatement st = c.prepareStatement(selectStatement);
         st.setString(1, email);
@@ -24,9 +24,7 @@ public class UserDao {
     }
 
     public User registerUser(UserRegistrationRequest user) throws SQLException, FailedToRegisterUserException {
-        DatabaseConnector databaseConnector = new DatabaseConnector();
         Connection c = databaseConnector.getConnection();
-
         String insertStatement = "INSERT INTO `Users` (email, password, roleId) VALUES (?, ?, ?);";
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
 
@@ -39,7 +37,7 @@ public class UserDao {
         ResultSet rs = st.getGeneratedKeys();
 
         if (!rs.next()) {
-            throw new FailedToRegisterUserException("No user id returned");
+            throw new FailedToRegisterUserException();
         }
 
         return new User

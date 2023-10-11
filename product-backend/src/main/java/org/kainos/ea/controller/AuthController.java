@@ -7,9 +7,12 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.kainos.ea.dao.AuthDao;
 import org.kainos.ea.db.UserDao;
+import org.kainos.ea.dao.AuthDao;
 import org.kainos.ea.exception.*;
+
+import org.kainos.ea.exception.FailedToGenerateTokenException;
+import org.kainos.ea.exception.FailedToLoginException;
 import org.kainos.ea.model.LoginRequest;
 import org.kainos.ea.model.UserRegistrationRequest;
 import org.kainos.ea.service.AuthService;
@@ -22,11 +25,9 @@ import java.security.NoSuchAlgorithmException;
 @Tag(name = "Authorization API")
 @Path("/api/auth")
 public class AuthController {
-    public AuthService authService;
-    public AuthController(AuthService authService) {
-        this.authService = authService;
-    }
+    private final AuthService authService = new AuthService(new UserDao(), new AuthDao(), new UserRegistrationValidator());
     private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
+
     @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
@@ -42,12 +43,15 @@ public class AuthController {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
+
     @POST
     @Path("/register")
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response register(UserRegistrationRequest userRegistrationRequest) {
         try {
-            return Response.ok(authService.registerUser(userRegistrationRequest)).build();
+            authService.registerUser(userRegistrationRequest);
+            return Response.ok().build();
         } catch (FailedToRegisterUserException e) {
             logger.error("Failed to register user! Error: {}", e.getMessage());
 

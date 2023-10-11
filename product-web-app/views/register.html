@@ -1,55 +1,54 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Sign up</title>
-        <style>
-            .dropdown {
-                padding-bottom: 10px;
-            }
-        </style>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    </head>
-    <body>
-        <header class="bg-dark text-light">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>Sign up</h1>
-                    </div>
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+    <style>
+        .dropdown {
+            padding-bottom: 10px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <header class="bg-dark text-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Sign up</h1>
                 </div>
             </div>
-        </header>
-        <main class="container mt-4">
-            <section id="form" class="bg-light py-5">
-                <div class="container">
-                    {% if errormessage %}
-                        <div class="alert alert-danger" role="alert">
-                            {{ errormessage }}
-                        </div>
-                    {% endif %}
-                    <form action="/auth/register" method="post">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" class="form-control" value="{{ email }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" id="password" name="password" class="form-control" value="{{ password }}" required>
-                        </div>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Choose a role
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                              <a class="dropdown-item" href="#">User</a>
-                              <a class="dropdown-item" href="#">Admin</a>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Sign up</button>
-                    </form>
+        </div>
+    </header>
+    <main class="container mt-4">
+        <section id="form" class="bg-light py-5">
+            <div class="container">
+                {% if errormessage %}
+                <div class="alert alert-danger" role="alert">
+                    {{ errormessage }}
                 </div>
-            </section>
-        </main>
-    </body>
+                {% endif %}
+                <form action="/auth/register" method="post">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" value="{{ email }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" value="{{ password }}"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <select id="roleId" name="roleId" required>
+                            <option value="" selected disabled hidden>Choose role for user</option>
+                            <option value="1">Employee</option>
+                            <option value="2">Admin</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign up</button>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
 </html>
