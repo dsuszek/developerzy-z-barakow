@@ -1,0 +1,14 @@
+import axios from 'axios';
+import Capability from '../model/capability.js';
+import { API } from '../common/constants.js';
+
+export default class CapabilityService {
+  async getCapabilities(): Promise<Capability[]> {
+    try {
+      const response = await axios.get(API.GET_CAPABILITIES);
+      return response.data;
+    } catch (e) {
+      throw new Error('Failed to get capabilities from the database');
+    }
+  }
+}
