@@ -23,12 +23,12 @@ public class CapabilityService {
         this.databaseConnector = databaseConnector;
     }
 
-    public List<Capability> getCapabilities() throws FailedToGetCapabilitiesException {
+    public List<Capability> getCapabilities() throws FailedToGetCapabilityException {
         try {
             return capabilityDao.getCapabilities(databaseConnector.getConnection());
         } catch (SQLException e) {
             logger.error("SQL exception! Error: {}", e.getMessage());
-            throw new FailedToGetCapabilitiesException();
+            throw new FailedToGetCapabilityException();
         }
     }
 }

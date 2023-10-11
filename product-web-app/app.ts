@@ -42,7 +42,6 @@ axios.defaults.baseURL = API_URL;
 declare module 'express-session' {
   interface SessionData {
     role: Partial<Role>;
-    capability: Partial<Capability>;
   }
 }
 

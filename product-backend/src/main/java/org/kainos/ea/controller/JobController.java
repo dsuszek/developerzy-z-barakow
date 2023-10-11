@@ -18,7 +18,7 @@ import java.sql.SQLException;
 @Path("/api")
 public class JobController {
     private JobService jobService;
-    private final static Logger logger = LoggerFactory.getLogger(JobService.class);
+    private final static Logger logger = LoggerFactory.getLogger(JobController.class);
 
     public JobController(JobService jobService) throws SQLException {
         this.jobService = new JobService(new JobDao(), new DatabaseConnector());

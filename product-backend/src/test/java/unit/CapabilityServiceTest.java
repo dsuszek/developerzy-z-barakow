@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.dao.CapabilityDao;
 import org.kainos.ea.db.DatabaseConnector;
-import org.kainos.ea.exception.FailedToGetCapabilitiesException;
 import org.kainos.ea.exception.FailedToGetCapabilityException;
 import org.kainos.ea.model.Capability;
 import org.kainos.ea.service.CapabilityService;
@@ -30,7 +29,7 @@ public class CapabilityServiceTest {
     CapabilityService capabilityService = new CapabilityService(capabilityDaoMock, databaseConnectorMock);
 
     @Test
-    void getCapabilites_whenCapabilitiesAvailable_shouldReturnListOfCapabilities() throws SQLException, FailedToGetCapabilitiesException {
+    void getCapabilites_whenCapabilitiesAvailable_shouldReturnListOfCapabilities() throws SQLException, FailedToGetCapabilityException {
         //given
         CapabilityService sut = new CapabilityService(capabilityDaoMock, databaseConnectorMock);
         when(databaseConnectorMock.getConnection()).thenReturn(conn);
@@ -41,22 +40,10 @@ public class CapabilityServiceTest {
         //then
         Assertions.assertEquals(result, expectedList);
     }
-
-    @Test
-    void getCapabilities_whenCapabilitiesAreUnavailable_shouldReturnEmptyList() throws SQLException {
-        //given
-        when(databaseConnectorMock.getConnection()).thenReturn(conn);
-        //when
-        List<Capability> testCapabilityList = new ArrayList<>();
-        when(capabilityDaoMock.getCapabilities(conn)).thenReturn(testCapabilityList);
-        //then
-        Assertions.assertTrue(testCapabilityList.isEmpty());
-    }
     @Test
     void getCapabilities_When_ThereIsDatabaseError_Expect_FailedToGetCapabilitiesToBeThrown() throws SQLException {
         when(databaseConnectorMock.getConnection()).thenThrow(new SQLException());
-        assertThatExceptionOfType(FailedToGetCapabilitiesException.class).isThrownBy(()->capabilityService.getCapabilities());
+        assertThatExceptionOfType(FailedToGetCapabilityException.class).isThrownBy(()->capabilityService.getCapabilities());
     }
-
 }
 

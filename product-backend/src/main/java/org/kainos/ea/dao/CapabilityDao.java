@@ -24,7 +24,6 @@ public class CapabilityDao {
                     rs.getString("capabilityLeadPicture"),
                     rs.getString("message")
             );
-            capability.setId(rs.getShort("id"));
             capabilities.add(capability);
         }
         return capabilities;
