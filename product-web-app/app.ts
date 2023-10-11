@@ -4,7 +4,6 @@ import 'dotenv/config';
 import session from 'express-session';
 import path from 'path';
 import nunjucks from 'nunjucks';
-import cookieParser from 'cookie-parser';
 import axios from 'axios';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
