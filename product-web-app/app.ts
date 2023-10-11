@@ -7,6 +7,11 @@ import nunjucks from 'nunjucks';
 import cookieParser from 'cookie-parser';
 import axios from 'axios';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+import logger from './service/logger.js';
+import Role from './model/role.js';
+import RoleController from './controller/roleController.js';
+import dotenv from 'dotenv';
 import Role from './model/role.js';
 import RoleController from './controller/roleController.js';
 import AuthController from './controller/authController.js';
@@ -43,7 +48,6 @@ axios.defaults.baseURL = API_URL;
 declare module 'express-session' {
   interface SessionData {
     role: Partial<Role>;
-    capability: Partial<Capability>;
   }
 }
 

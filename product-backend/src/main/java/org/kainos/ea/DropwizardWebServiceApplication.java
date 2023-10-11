@@ -42,7 +42,7 @@ public class DropwizardWebServiceApplication extends Application<DropwizardWebSe
         environment.jersey().register(new JobController(new JobService(new JobDao(), new DatabaseConnector())));
         environment.jersey().register(new CapabilityController());
         environment.jersey().register(new JobRoleController());
-        environment.jersey().register(new AuthController(new AuthService(new AuthDao())));
-//        environment.jersey().register(new AuthFilter());
+        environment.jersey().register(new AuthController());
+        environment.jersey().register(new AuthFilter());
     }
 }
