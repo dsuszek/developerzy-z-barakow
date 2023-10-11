@@ -1,5 +1,5 @@
 import {
-  Application, NextFunction, Request, Response, application,
+  Application, NextFunction, Request, Response,
 } from 'express';
 import axios from 'axios';
 
@@ -17,17 +17,7 @@ export default class AuthMiddleware {
       } else if (req.cookies.token && req.cookies.token.length > 0) {
         try {
           axios.defaults.headers.common.Authorization = req.cookies.token;
-          this.app.locals.admin = 'true';
-
-          // if(req.path.includes('admin')){
-          //   if(req.cookies.admin=='true'){
-          //     next();
-          //   }
-          //   else{
-          //     res.redirect('/');
-          //   }
-          // }
-
+          this.app.locals.admin = req.cookies.admin;
           next();
         } catch (error) {
           res.redirect('/auth/login');
