@@ -22,7 +22,7 @@ public class CapabilityController {
     public CapabilityController() throws SQLException {
         this.capabilityService = new CapabilityService(new CapabilityDao(), new DatabaseConnector(), new CapabilityValidator());
     }
-    private final static Logger logger = LoggerFactory.getLogger(CapabilityService.class);
+    private final static Logger logger = LoggerFactory.getLogger(CapabilityController.class);
     @GET
     @Path("/capabilities")
     @Produces(MediaType.APPLICATION_JSON)

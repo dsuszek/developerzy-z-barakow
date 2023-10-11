@@ -19,7 +19,7 @@ public class CapabilityService {
     public CapabilityValidator capabilityValidator;
     private final static Logger logger = LoggerFactory.getLogger(CapabilityService.class);
 
-    public CapabilityService(CapabilityDao capabilityDao, DatabaseConnector databaseConnector, CapabilityValidator capabilityValidator) {
+    public CapabilityService(CapabilityDao capabilityDao, DatabaseConnector databaseConnector) {
         this.capabilityDao = capabilityDao;
         this.databaseConnector = databaseConnector;
         this.capabilityValidator = capabilityValidator;

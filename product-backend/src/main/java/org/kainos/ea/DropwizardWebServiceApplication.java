@@ -12,10 +12,9 @@ import org.kainos.ea.controller.AuthController;
 import org.kainos.ea.dao.JobDao;
 import org.kainos.ea.db.AuthDao;
 import org.kainos.ea.db.DatabaseConnector;
-import org.kainos.ea.filter.AuthFilter;
 import org.kainos.ea.service.AuthService;
 import org.kainos.ea.service.JobService;
-
+import org.kainos.ea.filter.AuthFilter;
 public class DropwizardWebServiceApplication extends Application<DropwizardWebServiceConfiguration> {
 
     public static void main(final String[] args) throws Exception {

@@ -21,7 +21,7 @@ public class JobRolesIntegrationTest {
             new ResourceConfigurationSourceProvider()
     );
     public final String API_URL = System.getenv("API_URL");
-
+    public String adminTokenThatNeverExpires = "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiYWRtaW5Aa2Fpbm9zLmNvbSIsInJvbGVJZCI6MiwiaWF0IjoxNjk2OTQwODY0LCJleHAiOjM2MDE2OTY5NDA4NjR9.gfJ7B1kY0DVKcKTxW3u2cIcPZvQjFEjPrcZnMjwb9do";
     @Test
     void getJobRoles_shouldReturnListOfJobRoles() {
         List<JobRole> response = APP.client().target(API_URL + "/api/job-roles")

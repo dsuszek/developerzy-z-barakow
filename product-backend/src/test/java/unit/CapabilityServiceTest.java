@@ -13,12 +13,10 @@ import org.kainos.ea.model.CapabilityRequest;
 import org.kainos.ea.service.CapabilityService;
 import org.kainos.ea.service.CapabilityValidator;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.mockito.Mockito.mock;
@@ -57,7 +55,7 @@ public class CapabilityServiceTest {
         assertThatExceptionOfType(FailedToGetCapabilityException.class).isThrownBy(()->capabilityService.getCapabilities());
     }
     @Test
-    void createCapability_ExpectTheCapabilityToBeInDatabase() throws SQLException, InvalidCapabilityException, FailedToCreateNewCapabilityException {
+    void createCapability_ExpectTheCapabilityToBeInDatabase() throws SQLException, InvalidCapabilityException, FailedToCreateNewCapabilityException, FailedToCreateNewCapabilityException {
         //given
         when(databaseConnectorMock.getConnection()).thenReturn(conn);
         CapabilityService sut = new CapabilityService(capabilityDaoMock, databaseConnectorMock, capabilityValidatorMock);
