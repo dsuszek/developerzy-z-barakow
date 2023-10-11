@@ -11,6 +11,7 @@ import logger from './service/logger.js';
 import Role from './model/role.js';
 import RoleController from './controller/roleController.js';
 import AuthController from './controller/authController.js';
+import CapabilityController from './controller/capabilityController.js';
 import JobRoleController from './controller/jobRoleController.js';
 import { API_URL } from './common/constants.js';
 import authMiddleware from './middleware/authMiddleware.js';
@@ -53,6 +54,7 @@ app.listen(3000, () => {
 const roleController = new RoleController();
 const jobRoleController = new JobRoleController();
 const authController = new AuthController();
+const capabilityController = new CapabilityController();
 
 app.use(cookieParser());
 
@@ -65,3 +67,4 @@ app.get('/', (eq: Request, res: Response) => {
 roleController.appRoutes(app);
 jobRoleController.appRoutes(app);
 authController.appRoutes(app);
+capabilityController.appRoutes(app);

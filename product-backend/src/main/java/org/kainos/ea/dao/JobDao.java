@@ -50,4 +50,3 @@ public class JobDao {
         return Optional.empty();
     }
 }
-
