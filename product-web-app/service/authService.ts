@@ -7,16 +7,15 @@ import LoginResponse from '../model/loginResponse.js';
 import logger from './logger.js';
 import { API } from '../common/constants.js';
 
-
 export default class AuthService {
   private registrationValidator: RegistrationValidator;
 
   private loginValidator: LoginValidator;
 
   constructor(registrationValidator: RegistrationValidator, loginValidator: LoginValidator) {
-      this.registrationValidator = registrationValidator;
-      this.loginValidator = loginValidator;
-    }
+    this.registrationValidator = registrationValidator;
+    this.loginValidator = loginValidator;
+  }
 
   async register(registration: Registration): Promise<string> {
     const validateError = this.registrationValidator.validateRegistration(registration);

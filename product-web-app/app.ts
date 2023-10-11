@@ -18,7 +18,7 @@ dotenv.config();
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const app: Application = express();
-const authMiddleware:AuthMiddleware = new AuthMiddleware(app);
+const authMiddleware: AuthMiddleware = new AuthMiddleware(app);
 
 const appViews = path.join(dirname, '/views');
 
