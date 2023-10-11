@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
+
 <body>
     <header class="bg-dark text-light">
         <div class="container">
@@ -15,6 +17,7 @@
                 <h1>Roles Available At Kainos</h1>
             </div>
         </div>
+
         <head>
         </head>
     </header>
@@ -25,12 +28,16 @@
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
-                      </tr>
+                        <th scope="col">Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {% for role in roles %}
                     <tr>
                         <td><a href="job-roles/{{ role.id }}">{{ role.name }}</a></td>
+                        <td>
+                            <button class="btn btn-danger" onclick="deleteRole('{{ role.id }}')">Delete</button>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -41,4 +48,26 @@
         </section>
     </main>
 </body>
+
 </html>
+
+<script>
+    function deleteRole(roleId) {
+        if (confirm('Are you sure you want to delete this role?')) {
+            fetch(`/admin/job-role/${roleId}`, {
+                method: 'DELETE',
+            })
+                .then((response) => {
+                    if (response.status === 204) {
+                        // Role successfully deleted
+                        location.reload(); // Reload the page to update the roles list
+                    } else {
+                        console.error('Error deleting role');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error deleting role', error);
+                });
+        }
+    }
+</script>
