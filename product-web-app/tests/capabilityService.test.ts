@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import logger from '../service/logger.js';
-import { API, API_URL } from '../common/constants.js';
+import { API } from '../common/constants.js';
 import mockAxios from './axios.instance.test.js';
 import CapabilityService from '../service/capabilityService.js';
 import Capability from '../model/capability.js';
