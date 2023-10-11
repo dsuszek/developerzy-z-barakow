@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 public class DatabaseConnector {
-    private final static Logger logger = LoggerFactory.getLogger(JobRoleService.class);
+    private final static Logger logger = LoggerFactory.getLogger(DatabaseConnector.class);
     private static Connection conn;
 
     public static Connection getConnection() throws SQLException {
