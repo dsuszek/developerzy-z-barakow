@@ -11,7 +11,6 @@ export default class LoginPage extends Page {
         await descriptionField.addValue(pasword);
 
         const buttonField = await $("button[type='submit']");
-
         await buttonField.click();
     }
 

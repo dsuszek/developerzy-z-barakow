@@ -14,12 +14,11 @@ export default class AddJobRolePage extends Page {
         await linkField.addValue(sharepointLink);
 
         const submitButton = $('button[class="btn btn-primary"]');
-
         await submitButton.click();
     }
 
-    public open() {
-        return browser.url(process.env.WEB_APP_URL + "/admin/add-job-roles" || 'UNDEFINED');
+    async open() {
+        await browser.url(process.env.WEB_APP_URL + "/admin/add-job-roles" || 'UNDEFINED')
     }
 
 }

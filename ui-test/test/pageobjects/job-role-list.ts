@@ -3,9 +3,8 @@ import Page from "./page.js";
 export default class JobRoleListPage extends Page {
     async goToJobRole(index: number) {
 
-        const viewDetailLinks = await $$("td a");
-     
-        await viewDetailLinks[index].click();
+        const viewDetailButton = await $$("td a");
+        await viewDetailButton[index].click();
      
      }
      public open() {

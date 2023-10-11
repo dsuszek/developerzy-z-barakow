@@ -2,13 +2,13 @@ import Page from "./page.js";
 
 export default class JobRoleDetailsPage extends Page {
     async getJobRoleName() {
-        const text = (await $("section h1")).getText();
-        return text;
+        const jobRoleNameText = (await $("section h1")).getText();
+        return jobRoleNameText;
     }
 
     async getRoleDescription() {
-        const text = (await $("h7")).getText();
-        return text;
+        const roleDescriptionText = (await $("h7")).getText();
+        return roleDescriptionText;
     }
 
     async getLinkHref() {

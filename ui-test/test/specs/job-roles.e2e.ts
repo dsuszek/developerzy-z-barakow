@@ -3,9 +3,6 @@ import AddJobRolePage from "../pageobjects/add-job-roles.js";
 import JobRoleDetailsPage from "../pageobjects/job-role-details.page.js";
 import JobRoleListPage from "../pageobjects/job-role-list.js";
 import LoginPage from "../pageobjects/login.page.js";
-import LoginAsAdmin from "../pageobjects/login.page.js";
-
-
 
 const jobRoleListPage = new JobRoleListPage();
 
