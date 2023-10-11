@@ -33,3 +33,13 @@ token varchar(64) NOT NULL,
 expiry DATETIME NOT NULL,
 FOREIGN KEY (email) REFERENCES Users(email)
 );
+
+CREATE TABLE IF NOT EXISTS Capabilities (
+id smallint NOT NULL AUTO_INCREMENT,
+capabilityName varchar(50),
+leadName varchar(50),
+capabilityLeadPicture LONGTEXT,
+message varchar(3000),
+PRIMARY KEY(id)
+);
+
