@@ -7,13 +7,11 @@ import axios from 'axios';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import logger from './service/logger.js';
-import Role from './model/role.js';
 import RoleController from './controller/roleController.js';
 import AuthController from './controller/authController.js';
 import JobRoleController from './controller/jobRoleController.js';
 import { API_URL } from './common/constants.js';
 import AuthMiddleware from './middleware/authMiddleware.js';
-import { request } from 'http';
 
 dotenv.config();
 
