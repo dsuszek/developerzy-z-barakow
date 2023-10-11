@@ -10,11 +10,12 @@ import dotenv from 'dotenv';
 import logger from './service/logger.js';
 import Role from './model/role.js';
 import AuthController from './controller/authController.js';
+import CapabilityController from './controller/capabilityController.js';
 import JobRoleController from './controller/jobRoleController.js';
 import BandController from './controller/bandController.js';
-import RoleController from './controller/roleController.js';
 import { API_URL } from './common/constants.js';
 import authMiddleware from './middleware/authMiddleware.js';
+import RoleController from './controller/roleController.js';
 
 dotenv.config();
 
@@ -53,9 +54,10 @@ app.listen(3000, () => {
 });
 
 const jobRoleController = new JobRoleController();
-const authController = new AuthController();
-const bandController = new BandController();
 const roleController = new RoleController();
+const authController = new AuthController();
+const capabilityController = new CapabilityController();
+const bandController = new BandController();
 
 app.use(cookieParser());
 
@@ -70,3 +72,4 @@ jobRoleController.appRoutes(app);
 roleController.appRoutes(app);
 authController.appRoutes(app);
 bandController.appRoutes(app);
+capabilityController.appRoutes(app);

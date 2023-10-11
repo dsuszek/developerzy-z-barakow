@@ -12,7 +12,7 @@ import org.kainos.ea.service.JobRoleValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Tag(name = "Job Roles API")
+@Tag(name = "Job Roles")
 @Path("/api")
 public class JobRoleController {
     private final JobRoleService jobRoleService = new JobRoleService(new JobRoleDao(), new JobRoleValidator());

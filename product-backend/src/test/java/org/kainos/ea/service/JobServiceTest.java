@@ -25,8 +25,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class JobServiceTest {
-
-
     JobDao jobDaoMock = mock(JobDao.class);
     DatabaseConnector databaseConnectorMock = mock(DatabaseConnector.class);
     Connection connMock = mock ( Connection.class);
@@ -50,7 +48,7 @@ public class JobServiceTest {
         Assertions.assertEquals(result, expectedList);
     }
     @Test
-    void getJobRoles_whenJobRolesAreUnavaliable_shouldReturnEmptyList() throws SQLException {
+    void getJobRoles_whenJobRolesAreUnavailable_shouldReturnEmptyList() throws SQLException {
         List<JobRole> testList = new ArrayList<JobRole>();
         when(jobDaoMock.getRoles(connMock)).thenReturn(testList);
         Assertions.assertTrue(testList.isEmpty());

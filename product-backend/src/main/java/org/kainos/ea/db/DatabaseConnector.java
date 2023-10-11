@@ -1,11 +1,19 @@
 package org.kainos.ea.db;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import org.kainos.ea.service.JobService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
 public class DatabaseConnector {
-    public Connection conn;
+    private final static Logger logger = LoggerFactory.getLogger(DatabaseConnector.class);
+    public static Connection conn;
+
+
     public Connection getConnection() throws SQLException {
         String user, password, host, name;
         if (conn != null && !conn.isClosed()) {
@@ -17,7 +25,6 @@ public class DatabaseConnector {
             password = dotenv.get("DB_PASSWORD");
             host = dotenv.get("DB_HOST");
             name = dotenv.get("DB_NAME");
-
             if (user == null || password == null || host == null || name == null)
                 throw new IllegalArgumentException("Properties file must exist " +
                         "and must contain user, password, name and host properties.");

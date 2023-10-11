@@ -19,9 +19,26 @@ link varchar(1000),
 FOREIGN KEY (id) REFERENCES Bands (id)
 );
 
+CREATE TABLE Token (
+id SMALLINT PRIMARY KEY AUTO_INCREMENT,
+email varchar(50) NOT NULL,
+token varchar(64) NOT NULL,
+expiry DATETIME NOT NULL,
+FOREIGN KEY (email) REFERENCES Users(email)
+);
+
+CREATE TABLE IF NOT EXISTS Capabilities (
+id smallint NOT NULL AUTO_INCREMENT,
+capabilityName varchar(50),
+leadName varchar(50),
+capabilityLeadPicture LONGTEXT,
+message varchar(3000),
+PRIMARY KEY(id)
+);
+
 CREATE TABLE IF NOT EXISTS Bands (
  id SMALLINT PRIMARY KEY AUTO_INCREMENT,
  name varchar(50) UNIQUE NOT NULL,
  level TINYINT NOT NULL
  );
- 
+
