@@ -11,11 +11,13 @@ roleId TINYINT,
 FOREIGN KEY (roleId) REFERENCES UserRoles (id)
 );
 
-CREATE TABLE IF NOT EXISTS JobRoles(
+CREATE TABLE IF NOT EXISTS JobRoles (
 id SMALLINT PRIMARY KEY AUTO_INCREMENT,
 name varchar(50) UNIQUE,
 description varchar(3000),
-link varchar(1000)
+link varchar(1000),
+bandId TINYINT,
+FOREIGN KEY (bandId) REFERENCES Bands (id)
 );
 
 CREATE TABLE IF NOT EXISTS Bands (
@@ -23,7 +25,7 @@ CREATE TABLE IF NOT EXISTS Bands (
  name varchar(50) UNIQUE NOT NULL,
  level TINYINT NOT NULL
  );
- 
+
 CREATE TABLE Token (
 id SMALLINT PRIMARY KEY AUTO_INCREMENT,
 email varchar(50) NOT NULL,
