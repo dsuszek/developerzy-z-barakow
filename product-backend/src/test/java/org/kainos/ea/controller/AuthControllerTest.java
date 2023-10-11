@@ -54,6 +54,4 @@ class AuthControllerTest {
         //then
         assertEquals(response.getStatus(), 500);
     }
-
-
 }

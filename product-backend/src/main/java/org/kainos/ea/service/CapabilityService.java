@@ -25,12 +25,12 @@ public class CapabilityService {
         this.capabilityValidator = capabilityValidator;
     }
 
-    public List<Capability> getCapabilities() throws FailedToGetCapabilitiesException {
+    public List<Capability> getCapabilities() throws FailedToGetCapabilityException {
         try {
             return capabilityDao.getCapabilities(databaseConnector.getConnection());
         } catch (SQLException e) {
             logger.error("SQL exception! Error: {}", e.getMessage());
-            throw new FailedToGetCapabilitiesException();
+            throw new FailedToGetCapabilityException();
         }
     }
     public int createCapability(CapabilityRequest capability)throws InvalidCapabilityException,FailedToCreateNewCapabilityException{

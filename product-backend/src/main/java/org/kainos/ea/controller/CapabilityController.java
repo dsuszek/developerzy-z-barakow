@@ -26,10 +26,10 @@ public class CapabilityController {
     @GET
     @Path("/capabilities")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCapabilities() throws SQLException, CapabilityDoesNotExistException, FailedToGetCapabilitiesException {
+    public Response getCapabilities() throws SQLException, CapabilityDoesNotExistException, FailedToGetCapabilityException {
         try {
             return Response.ok(capabilityService.getCapabilities()).build();
-        } catch (FailedToGetCapabilitiesException e) {
+        } catch (FailedToGetCapabilityException e) {
             logger.error("Capabilities failed to be found! Error: {}", e.getMessage());
             return Response.serverError().build();
         }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Capability from '../model/capability.js';
 import CapabilityValidator from './capabilityValidator.js';
-import { API, API_URL } from '../common/constants.js';
+import { API } from '../common/constants.js';
 import logger from './logger.js';
 
 export default class CapabilityService {
@@ -13,14 +13,14 @@ export default class CapabilityService {
 
   async getCapabilities(): Promise<Capability[]> {
     try {
-      const response = await axios.get(API_URL + API.GET_CAPABILITIES);
+      const response = await axios.get(API.GET_CAPABILITIES);
       return response.data;
     } catch (e) {
       throw new Error('Failed to get capabilities from the database');
     }
   }
 
-  async createCapability(capability: Capability): Promise<Number> {
+  async createCapability(capability: Capability): Promise<number> {
     const validateError = this.capabilityValidator.validateCapability(capability);
     if (validateError) {
       logger.warn(`VALIDATION ERROR: ${validateError}`);

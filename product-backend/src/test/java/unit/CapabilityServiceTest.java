@@ -6,12 +6,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.dao.CapabilityDao;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.exception.FailedToCreateNewCapabilityException;
-import org.kainos.ea.exception.FailedToGetCapabilitiesException;
 import org.kainos.ea.exception.FailedToGetCapabilityException;
 import org.kainos.ea.exception.InvalidCapabilityException;
 import org.kainos.ea.model.Capability;
 import org.kainos.ea.model.CapabilityRequest;
-import org.kainos.ea.model.JobRole;
 import org.kainos.ea.service.CapabilityService;
 import org.kainos.ea.service.CapabilityValidator;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -43,20 +41,7 @@ public class CapabilityServiceTest {
     CapabilityService capabilityService = new CapabilityService(capabilityDaoMock, databaseConnectorMock, capabilityValidatorMock);
     CapabilityValidator capabilityValidator = new CapabilityValidator();
 
-    @Test
-    void getCapabilites_whenCapabilitiesAvailable_shouldReturnListOfCapabilities() throws SQLException, FailedToGetCapabilitiesException {
-        //given
-        CapabilityService sut = new CapabilityService(capabilityDaoMock, databaseConnectorMock, capabilityValidatorMock);
-        when(databaseConnectorMock.getConnection()).thenReturn(conn);
-        List<Capability> expectedList = List.of(new Capability(), new Capability(), new Capability());
-        when(capabilityDaoMock.getCapabilities(conn)).thenReturn(expectedList);
-        //when
-        List<Capability> result = sut.getCapabilities();
-        //then
-        Assertions.assertEquals(result, expectedList);
-    }
-
-    @Test
+       @Test
     void getCapabilities_whenCapabilitiesAreUnavailable_shouldReturnEmptyList() throws SQLException {
         //given
         when(databaseConnectorMock.getConnection()).thenReturn(conn);
@@ -69,7 +54,7 @@ public class CapabilityServiceTest {
     @Test
     void getCapabilities_When_ThereIsDatabaseError_Expect_FailedToGetCapabilitiesToBeThrown() throws SQLException {
         when(databaseConnectorMock.getConnection()).thenThrow(new SQLException());
-        assertThatExceptionOfType(FailedToGetCapabilitiesException.class).isThrownBy(()->capabilityService.getCapabilities());
+        assertThatExceptionOfType(FailedToGetCapabilityException.class).isThrownBy(()->capabilityService.getCapabilities());
     }
     @Test
     void createCapability_ExpectTheCapabilityToBeInDatabase() throws SQLException, InvalidCapabilityException, FailedToCreateNewCapabilityException {

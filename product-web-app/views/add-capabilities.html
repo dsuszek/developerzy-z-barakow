@@ -44,21 +44,21 @@
               name="capabilityName"
               id="capabilityName"
               class="form-control"
-              value="{{ capabilityName }}"
+              value = "{{ capabilityName }}"
               required
             />
           </div>
           <div class="form-group">
             <label for="leadName">Capability Lead Name</label>
-            <input type="text" name="leadName" id="leadName" class="form-control" value="{{ leadName }}" required />
+            <input type="text" name="leadName" id="leadName" class="form-control" value = "{{ leadName }}" required />
           </div>
           <div class="form-group">
             <label for="capabilityLeadPicture">Select a picture of Tech Lead for upload:</label>
-            <input type="file" id="capabilityLeadPicture" name="capabilityLeadPicture">
+            <input type="file" id="capabilityLeadPicture" name="capabilityLeadPicture" value = "{{ capabilityLeadPicture }}"required>
           </div>
           <div class="form-group">
             <label for="message">Capability Lead Message</label>
-            <textarea name="message" id="message" class="form-control" required></textarea>
+            <textarea name="message" id="message" class="form-control" value = "{{ message }}"required></textarea>
           </div>
           <button class="btn btn-primary" type="submit">Submit</button>
         </form>

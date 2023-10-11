@@ -20,10 +20,15 @@ export default class CapabilityController {
     app.post('/admin/add-capabilities', this.upload.any(), async (req: Request, res: Response) => {
       const data: Capability = req.body;
       const file: any = (req as any).files;
-      data.capabilityLeadPicture = Buffer.from(file[0].buffer).toString('base64');
-      data.capabilityName = sanitize(data.capabilityName).trim();
-      data.leadName = sanitize(data.leadName).trim();
-      data.message = sanitize(data.message).trim();
+      try {
+        data.capabilityLeadPicture = Buffer.from(file[0].buffer).toString('base64');
+      } catch (e: any) {
+        logger.warn(e.message);
+        res.locals.errormessage = e.message;
+      }
+      data.capabilityName = sanitize(data.capabilityName);
+      data.leadName = sanitize(data.leadName);
+      data.message = sanitize(data.message);
       try {
         const newCapability = await this.capabilityService.createCapability(data);
         res.render('add-capabilities', {

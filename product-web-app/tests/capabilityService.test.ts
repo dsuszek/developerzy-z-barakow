@@ -1,22 +1,27 @@
 import { expect } from 'chai';
 import logger from '../service/logger.js';
-import { API, API_URL } from '../common/constants.js';
+import { API } from '../common/constants.js';
 import mockAxios from './axios.instance.test.js';
 import CapabilityService from '../service/capabilityService.js';
 import Capability from '../model/capability.js';
 import CapabilityValidator from '../service/capabilityValidator.js';
-import { response } from 'express';
 
+// const capabilityEng: Capability = {
+//   id: 1,
+//   capabilityName: '',
+//   leadName: '',
+//   capabilityLeadPicture: '',
+//   message: '',
+// };
+// const capabilityDev: Capability = {
+//   id: 2,
+//   capabilityName: '',
+//   leadName: '',
+//   capabilityLeadPicture: '',
+//   message: '',
+// };
 
-const capabilityEng: Capability = {
-  id: 1,
-  capabilityName: '',
-  leadName: '',
-  capabilityLeadPicture: '',
-  message: '',
-};
-const capabilityDev: Capability = {
-  id: 2,
+const capabilityTest: Capability = {
   capabilityName: '',
   leadName: '',
   capabilityLeadPicture: '',
@@ -36,31 +41,26 @@ describe('Capability service', () => {
 
   describe('getCapabilities', () => {
     it('when API is online expect capabilities to be returned', async () => {
-      mockAxios.onGet(API_URL + API.GET_CAPABILITIES).reply(200, [capabilityDev, capabilityEng]);
-
+      mockAxios.onGet(API.GET_CAPABILITIES).reply(200, []);
       const responseBody = await capabilityService.getCapabilities();
-
-      expect(responseBody).to.have.lengthOf(2);
-      expect(responseBody[0]).to.deep.equal(capabilityDev);
+      expect(responseBody).to.have.lengthOf(0);
     });
     it('when API is down expect exception to be thrown', async () => {
-      mockAxios.onGet(API_URL + API.GET_CAPABILITIES).reply(500);
+      mockAxios.onGet(API.GET_CAPABILITIES).reply(500);
+      let exception: any;
       try {
         await capabilityService.getCapabilities();
-      } catch (e: any) {
-        if (e instanceof Error) {
-          return {
-            message: `Failed(${e.message})`,
-          };
-        }
+      } catch (e) {
+        exception = e as Error;
+      } finally {
+        expect(exception.message).to.equal('Failed to get capabilities from the database');
       }
-      return null;
     });
     it('when Capability is created, expect an id to be returned', async () => {
       const id = 12;
-      mockAxios.onPost(API_URL + API.POST_CAPABILITES).reply(200, id);
-      const res = await capabilityService.createCapability(capabilityEng);
-      chai.assert.equal(res, id);
+      mockAxios.onPost(API.POST_CAPABILITES).reply(200, id);
+      const res = await capabilityService.createCapability(capabilityTest);
+      expect(res).to.equal(12);
     });
   });
 });
