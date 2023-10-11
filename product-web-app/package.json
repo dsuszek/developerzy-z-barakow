@@ -8,7 +8,7 @@
   },
   "type": "module",
   "scripts": {
-    "copy-static-content": "cp -R views dist",
+    "copy-static-content": "cp -R views dist && cp -R public dist",
     "build": "npm run copy-static-content && tsc",
     "lint": "npx eslint . --fix  --ext .ts && prettier --write \"**/*.+(ts)\"",
     "start": "npm run build && node dist/app.js",
