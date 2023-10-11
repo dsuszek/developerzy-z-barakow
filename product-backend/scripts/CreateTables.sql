@@ -26,7 +26,7 @@ expiry DATETIME NOT NULL,
 FOREIGN KEY (email) REFERENCES Users(email)
 );
 
-CREATE TABLE F NOT EXISTS Capabilities (
+CREATE TABLE IF NOT EXISTS Capabilities (
 id smallint NOT NULL AUTO_INCREMENT,
 capabilityName varchar(50),
 leadName varchar(50),
