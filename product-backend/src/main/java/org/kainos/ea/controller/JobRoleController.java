@@ -65,7 +65,7 @@ public class JobRoleController {
     @DELETE
     @Path("/admin/job-role/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteDeliveryEmployee(@PathParam("id") short id) {
+    public Response deleteJobRole(@PathParam("id") short id) {
         try {
             jobRoleService.deleteJobRole(id);
 

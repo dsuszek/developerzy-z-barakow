@@ -30,7 +30,7 @@ export default class JobRoleService {
 
   async deleteJobRole(id: string): Promise<void> {
     try {
-      const response = await axios.delete(`${API.JOB_ROLES}/${id}`);
+      const response = await axios.delete(`${API.JOB_ROLE}/${id}`);
 
       if (response.status !== 200) {
         throw new Error('Could not delete job role');

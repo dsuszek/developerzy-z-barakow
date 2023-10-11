@@ -6,16 +6,19 @@ import org.kainos.ea.dao.JobRoleDao;
 import org.kainos.ea.exception.FailedToCreateJobRoleException;
 import org.kainos.ea.exception.FailedToDeleteJobRoleException;
 import org.kainos.ea.exception.InvalidJobRoleException;
+import org.kainos.ea.exception.JobRoleDoesNotExistException;
 import org.kainos.ea.model.JobRole;
 import org.kainos.ea.model.JobRoleRequest;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class JobRoleServiceTest {
@@ -23,7 +26,7 @@ public class JobRoleServiceTest {
     private final JobRoleValidator jobRoleValidatorMock = mock(JobRoleValidator.class);
     private JobRoleService jobRoleService = new JobRoleService(jobRoleDaoMock, jobRoleValidatorMock);
     private final JobRole MOCKED_JOB_ROLE = new JobRole(
-            (short) 100,
+            (short) 1,
             "Technology LeaderTechnology LeaderTechnology LeaderTechnology LeaderTechnology LeaderTechnology LeaderTechnology LeaderTechnology LeaderTechnology LeaderTechnology LeaderTechnology LeaderTechnology LeaderTechnology LeaderTechnology LeaderTechnology LeaderTechnology LeaderTechnology LeaderTechnology Leader",
             "A technology leader is key strategic role within the business making executive technology decisions on behalf of the business, based upon the sector and practices’ strategic direction and goals. The core responsibilities of a technology leader in Kainos include setting a Technology direction, a technical advisor to the business and C-level clients, maintaining a commercial edge over other technology services providers, developing and nurturing technical talent across the organisation and representing Kainos as a technology evangelist.",
             "https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20Profile%20%2D%20Technology%20Leader%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FEngineering&p=true&ga=1",
@@ -37,8 +40,8 @@ public class JobRoleServiceTest {
         JobRoleRequest mockJobRoleRequest = new JobRoleRequest(
                 "Front-end EngineerFront-end EngineerFront-end EngineerFront-end EngineerFront-end EngineerFront-end EngineerFront-end EngineerFront-end EngineerFront-end EngineerFront-end EngineerFront-end EngineerFront-end EngineerFront-end EngineerFront-end EngineerFront-end Engineer",
                 "As a Front-end Engineer in Kainos, you will have the opportunity to use your expertise in developing high quality user interface solutions which delight our customers and impact the lives of users worldwide.\n" +
-                "The projects you will join are varied, and often highly visible. You will be working in fast- paced, agile environments, so it is important for you to make sound, reasoned decisions, and recommendations on front-end and user interfaces with your colleagues.\n" +
-                "You are determined, flexible and always constructive; proactive in improving things and are always inclusive and respectful in your interactions with your team. You will be working alongside talented, diverse, enthusiastic colleagues, who will help you learn and develop as you, in turn, mentor those around you.",
+                        "The projects you will join are varied, and often highly visible. You will be working in fast- paced, agile environments, so it is important for you to make sound, reasoned decisions, and recommendations on front-end and user interfaces with your colleagues.\n" +
+                        "You are determined, flexible and always constructive; proactive in improving things and are always inclusive and respectful in your interactions with your team. You will be working alongside talented, diverse, enthusiastic colleagues, who will help you learn and develop as you, in turn, mentor those around you.",
                 "https://kainossoftwareltd.sharepoint.com/sites/PeopleTeam-SharedDrive/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FPeopleTeam%2DSharedDrive%2FShared%20Documents%2FPeople%20Team%20Shared%20Drive%2FOrganisational%20Development%20%26%20Learning%2FCareer%20Lattice%2FApproved%20Job%20Profiles%2FEngineering%2FEngineering%2FJob%20Profile%20%2D%20Front%2DEnd%20Engineer%20%28A%29%2Epdf&parent=%2Fsites%2FPeopleTeam%2DSharedDrive%2FShared%20Documents%2FPeople%20Team%20Shared%20Drive%2FOrganisational%20Development%20%26%20Learning%2FCareer%20Lattice%2FApproved%20Job%20Profiles%2FEngineering%2FEngineering&p=true&ga=1",
                 (short) 1);
 
@@ -77,14 +80,15 @@ public class JobRoleServiceTest {
     }
 
     @Test
-    void deleteJobRole_When_JobRoleIdToBeDeletedIsValid_Expect_JobRoleToBeDeleted() throws SQLException, FailedToDeleteJobRoleException, InvalidJobRoleException {
+    void deleteJobRole_When_JobRoleIdDoesNotExist_Expect_FailedToDeleteJobRoleException() throws JobRoleDoesNotExistException, FailedToDeleteJobRoleException, SQLException {
+        // TODO poprawić ten test
         // given
-
-
+        JobRoleService jobRoleServiceMock = mock(JobRoleService.class);
+        short jobRoleIdToBeDeleted = -1;
         // when
 
-
+        jobRoleServiceMock.deleteJobRole(jobRoleIdToBeDeleted);
         // then
-
+        verify(jobRoleServiceMock, times(1)).deleteJobRole(jobRoleIdToBeDeleted);
     }
 }
