@@ -11,13 +11,6 @@ roleId TINYINT,
 FOREIGN KEY (roleId) REFERENCES UserRoles (id)
 );
 
-CREATE TABLE IF NOT EXISTS JobRoles(
-id SMALLINT PRIMARY KEY AUTO_INCREMENT,
-name varchar(50) UNIQUE,
-description varchar(3000),
-link varchar(1000)
-);
-
 CREATE TABLE IF NOT EXISTS Bands (
 id SMALLINT PRIMARY KEY AUTO_INCREMENT,
 name varchar(50) UNIQUE NOT NULL,
