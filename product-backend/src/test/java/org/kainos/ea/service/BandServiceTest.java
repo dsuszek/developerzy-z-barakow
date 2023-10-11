@@ -1,16 +1,17 @@
 package org.kainos.ea.service;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.dao.BandDao;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.exception.FailedToCreateBandException;
+import org.kainos.ea.exception.InvalidBandException;
 import org.kainos.ea.model.Band;
 import org.kainos.ea.model.BandRequest;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.mockito.Mockito.when;
 
@@ -37,8 +38,14 @@ public class BandServiceTest {
     }
 
     @Test
-    public void createBand_WhenBandDataIsCorrect_ShouldReturnNewBand() throws SQLException, FailedToCreateBandException {
-
-
+    public void createBand_WhenBandDataIsCorrect_ShouldReturnNewBand() throws SQLException, FailedToCreateBandException, InvalidBandException {
+        // given
+        BandService bandServiceMock = new BandService(bandDaoMock, bandValidatorMock);
+        BandRequest bandRequest = new BandRequest("Trainee", (short) 5);
+        Band result = new Band((short) 1, bandRequest.getName(), bandRequest.getLevel());
+        // when
+        when(bandDaoMock.createBand(bandRequest)).thenReturn(result);
+        // then
+        Assertions.assertEquals(bandServiceMock.createBand(bandRequest),result);
     }
 }
