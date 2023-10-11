@@ -45,7 +45,7 @@ export default class AuthController {
           maxAge: MILISECONDS_PER_HOUR,
         };
         res.cookie('token', loginResponse.token, cookieOptions);
-        res.cookie('admin',loginResponse.admin, cookieOptions);
+        res.cookie('admin', loginResponse.admin, cookieOptions);
         res.redirect('/');
       } catch (e: any) {
         res.locals.errormessage = e.message;
