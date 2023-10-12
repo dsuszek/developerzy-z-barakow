@@ -26,7 +26,8 @@ public class JobDao {
                     rs.getString("name"),
                     rs.getString("description"),
                     rs.getString("link"),
-                    rs.getShort("bandId")
+                    rs.getShort("bandId"),
+                    rs.getShort("capabilityId")
             );
             jobRoles.add(jobRole);
         }
@@ -45,7 +46,8 @@ public class JobDao {
                     rs.getString("name"),
                     rs.getString("description"),
                     rs.getString("link"),
-                    rs.getShort("bandId")
+                    rs.getShort("bandId"),
+                    rs.getShort("capabilityId")
             ));
         }
         return Optional.empty();
