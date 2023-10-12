@@ -1,14 +1,12 @@
 import express, { Application, Request, Response } from 'express';
 import * as url from 'url';
 import 'dotenv/config';
-import session from 'express-session';
 import path from 'path';
 import nunjucks from 'nunjucks';
 import axios from 'axios';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import logger from './service/logger.js';
-import Role from './model/role.js';
 import RoleController from './controller/roleController.js';
 import AuthController from './controller/authController.js';
 import CapabilityController from './controller/capabilityController.js';

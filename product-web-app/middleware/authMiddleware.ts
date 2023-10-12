@@ -1,4 +1,6 @@
-import { Application, NextFunction, Request, Response } from 'express';
+import {
+  Application, NextFunction, Request, Response,
+} from 'express';
 import axios from 'axios';
 
 export default class AuthMiddleware {
