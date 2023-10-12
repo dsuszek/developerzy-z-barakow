@@ -34,6 +34,12 @@ expiry DATETIME NOT NULL,
 FOREIGN KEY (email) REFERENCES Users(email)
 );
 
+CREATE TABLE IF NOT EXISTS Bands (
+id SMALLINT PRIMARY KEY AUTO_INCREMENT,
+name varchar(50) UNIQUE NOT NULL,
+level TINYINT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS Capabilities (
 id smallint NOT NULL AUTO_INCREMENT,
 capabilityName varchar(50),
@@ -43,3 +49,13 @@ message varchar(3000),
 PRIMARY KEY(id)
 );
 
+CREATE TABLE IF NOT EXISTS JobRoles (
+id SMALLINT PRIMARY KEY AUTO_INCREMENT,
+name varchar(50) UNIQUE,
+description varchar(3000),
+link varchar(1000),
+bandId SMALLINT,
+capabilityId SMALLINT,
+FOREIGN KEY (bandId) REFERENCES Bands (id),
+FOREIGN KEY (capabilityId) REFERENCES Capabilities (id)
+);
