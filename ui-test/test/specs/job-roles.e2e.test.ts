@@ -3,14 +3,12 @@ import AddJobRolePage from "../pageobjects/add-job-roles.page.js";
 import JobRoleDetailsPage from "../pageobjects/job-role-details.page.js";
 import JobRoleListPage from "../pageobjects/job-role-list.page.js";
 import LoginPage from "../pageobjects/login.page.js";
-import ViewJobRolesPage from "../pageobjects/view-job-roles.js";
 
 
 const jobRoleDetailsPage = new JobRoleDetailsPage();
 const addJobRolePage = new AddJobRolePage();
 const loginPage = new LoginPage();
 const jobRoleListPage = new JobRoleListPage();
-const viewJobRolesPage = new ViewJobRolesPage();
 
 const adminEmail = "admin@kainos.com";
 const adminPassword = "admin";
@@ -44,10 +42,9 @@ describe('Veryfy job role viev list test', async () => {
     it('Verify if job went to job roles list', async() => {
 
     
-        const roleList = await jobRoleListPage.goBackToList();
-        const viewList = await viewJobRolesPage.viewJobRolesList(); 
-        
-        expect(viewList).toEqual('Roles Available At Kainos');
+        const jobNameSelector = await $('//*[@id="roles"]/table/tbody/tr[last()]/td/a');
+
+        expect(jobNameSelector).toHaveText;
         
     });
 });

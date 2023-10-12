@@ -13,7 +13,7 @@ export default class Registration extends Page {
         await roleRoller.selectByVisibleText(roleName);
 
         const submitRegistration = await $('//*[@id="form"]/div/form/button');
-        submitRegistration.click();
+        submitRegistration.click(); 
     }
 
     async open() {
