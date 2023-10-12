@@ -21,7 +21,6 @@ const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const app: Application = express();
 const authMiddleware: AuthMiddleware = new AuthMiddleware(app);
-
 const appViews = path.join(dirname, '/views');
 
 const nunjucksConfig = {
@@ -31,10 +30,8 @@ const nunjucksConfig = {
 };
 
 nunjucks.configure(appViews, nunjucksConfig);
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 axios.defaults.baseURL = API_URL;
 app.set('view engine', 'html');
 app.use('/public', express.static(path.join(dirname, 'public')));

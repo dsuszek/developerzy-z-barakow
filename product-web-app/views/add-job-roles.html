@@ -44,8 +44,9 @@
         <div class="form-group">
             <label for="capability">Select a capability</label>
             <select type="text" name="capabilityId" id="capabilityId" class="form-control" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
+                {% for capability in capabilities %}
+                    <option value="{{ capability.id }}">{{ capability.capabilityName }}</option>
+                {% endfor %}
             </select>
         </div>
         <button class="btn-green" type="submit">Submit</button>

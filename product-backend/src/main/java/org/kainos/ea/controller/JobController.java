@@ -1,6 +1,7 @@
 package org.kainos.ea.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.checkerframework.checker.units.qual.C;
 import org.kainos.ea.dao.JobDao;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.exception.FailedToGetRoleException;
@@ -12,6 +13,8 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.print.attribute.standard.Media;
 import java.sql.SQLException;
 
 @Tag(name = "Job Roles API")
@@ -27,6 +30,7 @@ public class JobController {
     @GET
     @Path("/job-roles")
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response getJobRoles() throws SQLException, RoleDoesNotExistException, FailedToGetRoleException {
         try {
             return Response.ok(jobService.getJobRoles()).build();
@@ -39,6 +43,7 @@ public class JobController {
     @GET
     @Path("/job-roles/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response findRoleById(@PathParam("id") int id) throws SQLException {
         try {
             return Response.ok(jobService.findRoleById(id)).build();

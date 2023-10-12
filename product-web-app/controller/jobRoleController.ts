@@ -7,22 +7,35 @@ import logger from '../service/logger.js';
 import BandService from '../service/bandService.js';
 import BandValidator from '../service/bandValidator.js';
 import Band from '../model/band.js';
+import Capability from '../model/capability.js';
+import CapabilityService from '../service/capabilityService.js';
+import CapabilityValidator from '../service/capabilityValidator.js';
 
 export default class JobRoleController {
   private jobRoleService = new JobRoleService(new JobRoleValidator());
+
+  private capabilityService = new CapabilityService(new CapabilityValidator());
 
   private bandService = new BandService(new BandValidator());
 
   appRoutes(app: Application) {
     app.get('/admin/add-job-roles', async (req: Request, res: Response) => {
-      let data: Band[] = [];
+      let bands: Band[] = [];
+      let capabilities: Capability[] = [];
+
       try {
-        data = await this.bandService.getBands();
+        bands = await this.bandService.getBands();
       } catch (e) {
         logger.error(`Could not get bands! Error: ${e}`);
       }
 
-      res.render('add-job-roles', { bands: data });
+      try {
+        capabilities = await this.capabilityService.getCapabilities();
+      } catch (e) {
+        logger.error(`Could not get capabilities! Error: ${e}`);
+      }
+
+      res.render('add-job-roles', { bands, capabilities });
     });
 
     app.post('/admin/add-job-roles', async (req: Request, res: Response) => {

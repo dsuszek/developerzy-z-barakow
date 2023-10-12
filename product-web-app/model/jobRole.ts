@@ -4,4 +4,5 @@ export default interface JobRole {
   description: string;
   link: string;
   bandId: number;
+  capabilityId: number;
 }

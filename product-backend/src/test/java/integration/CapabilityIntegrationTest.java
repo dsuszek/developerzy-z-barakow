@@ -13,15 +13,18 @@ import java.util.List;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class CapabilityIntegrationTest {
+    public String adminTokenThatNeverExpires = "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiYWRtaW5Aa2Fpbm9zLmNvbSIsInJvbGVJZCI6MiwiaWF0IjoxNjk2OTQwODY0LCJleHAiOjM2MDE2OTY5NDA4NjR9.gfJ7B1kY0DVKcKTxW3u2cIcPZvQjFEjPrcZnMjwb9do";
     static final DropwizardAppExtension<DropwizardWebServiceConfiguration> APP = new DropwizardAppExtension<>(
             DropwizardWebServiceApplication.class, null,
             new ResourceConfigurationSourceProvider()
     );
+
     public final String API_URL = System.getenv("API_URL");
     @Test
     void getCapabilities_shouldReturnListOfCapabilities() {
         List<Capability> response = APP.client().target(API_URL + "/api/capabilities")
                 .request()
+                .header("Authorization", adminTokenThatNeverExpires)
                 .get(List.class);
         Assertions.assertTrue(response.size() > 0);
     }
