@@ -34,7 +34,6 @@ public class DropwizardWebServiceApplication extends Application<DropwizardWebSe
 
     @Override
     public void run(DropwizardWebServiceConfiguration dropwizardWebServiceConfiguration, Environment environment) throws Exception {
-        environment.jersey().register(new JobController());
         environment.jersey().register(new CapabilityController());
         environment.jersey().register(new JobRoleController());
         environment.jersey().register(new AuthController());
