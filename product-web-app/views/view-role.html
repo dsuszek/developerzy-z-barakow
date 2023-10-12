@@ -13,14 +13,15 @@
   <div class="mb-3">
     <h4>Role Link</h4>
   </div>
-  <div class="mb-2">
+  <div class="mb-2" style="margin-bottom: 20px;">
     <a href="{{role.link}}" target="_blank" class="btn btn-primary">Link to Job Profile</a>
     <td>
       <a href="/delete-job-role/{{ role.id }}" class="btn btn-danger">Delete</a>
     </td>
   </div>
-    <a href="/job-roles" class="btn btn-primary">Back</a>
-    {% else %}
+  <br>
+    <a href="/job-roles" class="btn-green">Back</a>
+    {% else %} 
     No role details found. {% endif %}
 </section>
 {% endblock %}
