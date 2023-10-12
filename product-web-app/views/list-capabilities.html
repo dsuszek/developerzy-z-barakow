@@ -1,50 +1,31 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Capabilites</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body>
-    <header class="bg-dark text-light">
-      <div class="container">
-        <div class="w-auto">
-          <h1>Capabilites Available At Kainos</h1>
-        </div>
-      </div>
-      <head> </head>
-    </header>
-    <main class="container">
-      <section id="capabilities">
-        {% if capabilities and capabilities.length > 0%}
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Capability Name</th>
-              <th scope="col">Capability Lead Name</th>
-              <th scope="col">Capability Lead Picture</th>
-              <th scope="col">Message from Capability Lead</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for capability in capabilities %}
-            <tr>
-              <td>{{ capability.capabilityName }}</td>
-              <td>{{ capability.leadName }}</td>
-              <td><img src="data:image/jpeg; base64, {{ capability.capabilityLeadPicture }}" /></td>
-              <td>{{ capability.message }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        {% else %} There are no Capabilities. {% endif %}
-      </section>
-    </main>
-  </body>
-</html>
+{% extends "./parent.html" %}
+{% block style %}{% endblock %}
+{% block title %} Capabilites {% endblock %}
+{% set page = "list-capabilities" %}
+
+{% block content %} 
+<section id="capabilities">
+  {% if capabilities and capabilities.length > 0%}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Capability Name</th>
+        <th scope="col">Capability Lead Name</th>
+        <th scope="col">Capability Lead Picture</th>
+        <th scope="col">Message from Capability Lead</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for capability in capabilities %}
+      <tr>
+        <td>{{ capability.capabilityName }}</td>
+        <td>{{ capability.leadName }}</td>
+        <td><img src="data:image/jpeg; base64, {{ capability.capabilityLeadPicture }}" /></td>
+        <td>{{ capability.message }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %} There are no Capabilities. {% endif %}
+</section>
+{% endblock %}
