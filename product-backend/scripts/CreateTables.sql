@@ -18,13 +18,13 @@ level TINYINT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Capabilities (
-    id smallint NOT NULL AUTO_INCREMENT,
-    capabilityName varchar(50),
-    leadName varchar(50),
-    capabilityLeadPicture LONGTEXT,
-    message varchar(3000),
-    PRIMARY KEY(id)
-    );
+id smallint NOT NULL AUTO_INCREMENT,
+capabilityName varchar(50),
+leadName varchar(50),
+capabilityLeadPicture LONGTEXT,
+message varchar(3000),
+PRIMARY KEY(id)
+);
 
 CREATE TABLE IF NOT EXISTS JobRoles (
 id SMALLINT PRIMARY KEY AUTO_INCREMENT,
@@ -36,13 +36,3 @@ capabilityId SMALLINT,
 FOREIGN KEY (bandId) REFERENCES Bands (id),
 FOREIGN KEY (capabilityId) REFERENCES Capabilities (id)
 );
-
-CREATE TABLE IF NOT EXISTS Capabilities (
-id smallint NOT NULL AUTO_INCREMENT,
-capabilityName varchar(50),
-leadName varchar(50),
-capabilityLeadPicture LONGTEXT,
-message varchar(3000),
-PRIMARY KEY(id)
-);
-
