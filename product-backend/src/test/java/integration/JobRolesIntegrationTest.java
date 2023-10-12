@@ -14,14 +14,15 @@ import java.util.List;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class JobRolesIntegrationTest {
-    public String adminTokenThatNeverExpires = "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiYWRtaW5Aa2Fpbm9zLmNvbSIsInJvbGVJZCI6MiwiaWF0IjoxNjk2OTQwODY0LCJleHAiOjM2MDE2OTY5NDA4NjR9.gfJ7B1kY0DVKcKTxW3u2cIcPZvQjFEjPrcZnMjwb9do";
-
     static final DropwizardAppExtension<DropwizardWebServiceConfiguration> APP = new DropwizardAppExtension<>(
             DropwizardWebServiceApplication.class, null,
             new ResourceConfigurationSourceProvider()
     );
     public final String API_URL = System.getenv("API_URL");
-        @Test
+    public String userTokenThatNeverExpires = "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidXNlckBrYWlub3MuY29tIiwicm9sZUlkIjoxLCJpYXQiOjE2OTY5NDA3MDIsImV4cCI6MzYwMTY5Njk0MDcwMn0.3htxQT2vE7hpaajYxUCfbAGHOtuaKiExD6yredmfOl0";
+    public String adminTokenThatNeverExpires = "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiYWRtaW5Aa2Fpbm9zLmNvbSIsInJvbGVJZCI6MiwiaWF0IjoxNjk2OTQwODY0LCJleHAiOjM2MDE2OTY5NDA4NjR9.gfJ7B1kY0DVKcKTxW3u2cIcPZvQjFEjPrcZnMjwb9do";
+
+    @Test
     void getJobRoles_shouldReturnListOfJobRoles() {
         List<JobRole> response = APP.client().target(API_URL + "/api/job-roles")
                 .request()
@@ -36,7 +37,7 @@ public class JobRolesIntegrationTest {
                 .request()
                 .header("Authorization", adminTokenThatNeverExpires)
                 .get();
-        Assertions.assertEquals(200, response.getStatus());
+        Assertions.assertEquals(200,response.getStatus());
     }
 
     @Test
@@ -45,6 +46,6 @@ public class JobRolesIntegrationTest {
                 .request()
                 .header("Authorization", adminTokenThatNeverExpires)
                 .get();
-        Assertions.assertEquals(400, response.getStatus());
+        Assertions.assertEquals(400,response.getStatus());
     }
 }

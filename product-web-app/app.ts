@@ -11,31 +11,29 @@ import logger from './service/logger.js';
 import Role from './model/role.js';
 import RoleController from './controller/roleController.js';
 import AuthController from './controller/authController.js';
-import { API_URL } from './common/constants.js';
 import CapabilityController from './controller/capabilityController.js';
 import JobRoleController from './controller/jobRoleController.js';
-import authMiddleware from './middleware/authMiddleware.js';
+import { API_URL } from './common/constants.js';
+import AuthMiddleware from './middleware/authMiddleware.js';
 
 dotenv.config();
+
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
+
 const app: Application = express();
+const authMiddleware: AuthMiddleware = new AuthMiddleware(app);
 const appViews = path.join(dirname, '/views');
+
 const nunjucksConfig = {
   autoescape: true,
   noCache: true,
   express: app,
 };
+
 nunjucks.configure(appViews, nunjucksConfig);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(session({ secret: 'NOT_HARDCODED_SECRET', cookie: { maxAge: 60000 } }));
 axios.defaults.baseURL = API_URL;
-declare module 'express-session' {
-  interface SessionData {
-    role: Partial<Role>;
-  }
-}
-
 app.set('view engine', 'html');
 app.use('/public', express.static(path.join(dirname, 'public')));
 
@@ -49,10 +47,10 @@ const capabilityController = new CapabilityController();
 
 app.use(cookieParser());
 
-app.use(authMiddleware);
+authMiddleware.filter();
 
 // Routing
-app.get('/', (eq: Request, res: Response) => {
+app.get('/', (req: Request, res: Response) => {
   res.render('home');
 });
 roleController.appRoutes(app);
