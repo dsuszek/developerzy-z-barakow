@@ -1,45 +1,28 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Role Details</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous"
-    />
-    <style></style>
-  </head>
-  <body>
-    <header class="bg-dark text-light">
-      <div class="container">
-        <div class="row"></div>
-        <div class="col-md-12">
-          <h1>Role Details</h1>
-        </div>
-      </div>
-    </header>
-    <main class="container mt-4">
-      <section id="role" class="mt-1">
-        {% if role %}
-        <h4>Role Name</h4>
-        <h1>{{role.name}}</h1>
-        <h4>Role Description</h4>
-        <div class="mb-2">
-        <h7>{{role.description}}</h7>
-        </div>
-        <div class="mb-3">
-          <h4>Role Link</h4>
-        </div>
-        <div class="mb-2">
-          <a href="{{role.link}}" target="_blank" class="btn btn-primary">Link to Job Profile</a>
-        </div>
-          <a href="/job-roles" class="btn btn-primary">Back</a>
-          {% else %} 
-          No role details found. {% endif %}
-      </section>
-    </main>
-  </body>
-</html>
+{% extends "./parent.html" %}
+{% block style %}{% endblock %}
+{% block title %} Role Details {% endblock %}
+{% block content %} 
+<section id="role" class="mt-1">
+  {% if role %}
+  <h4>Role Name</h4>
+  <h1>{{role.name}}</h1>
+  <h4>Role Description</h4>
+  <div class="mb-2">
+  <h7>{{role.description}}</h7>
+  </div>
+  <div class="mb-3">
+    <h4>Role Link</h4>
+  </div>
+  <div class="mb-2">
+    <a href="{{role.link}}" target="_blank" class="btn btn-primary">Link to Job Profile</a>
+  </div>
+    <a href="/job-roles" class="btn btn-primary">Back</a>
+    {% else %} 
+    No role details found. {% endif %}
+</section>
+{% endblock %}
+
+
+
+
+

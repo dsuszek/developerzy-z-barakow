@@ -1,12 +1,11 @@
 import express, { Application, Request, Response } from 'express';
 import * as url from 'url';
 import 'dotenv/config';
-import session from 'express-session';
 import path from 'path';
 import nunjucks from 'nunjucks';
+import axios from 'axios';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-import axios from 'axios';
 import logger from './service/logger.js';
 import Role from './model/role.js';
 import AuthController from './controller/authController.js';
@@ -15,13 +14,14 @@ import JobRoleController from './controller/jobRoleController.js';
 import RoleController from './controller/roleController.js';
 import BandController from './controller/bandController.js';
 import { API_URL } from './common/constants.js';
-import authMiddleware from './middleware/authMiddleware.js';
+import AuthMiddleware from './middleware/authMiddleware.js';
 
 dotenv.config();
 
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const app: Application = express();
+const authMiddleware: AuthMiddleware = new AuthMiddleware(app);
 
 const appViews = path.join(dirname, '/views');
 
@@ -36,16 +36,7 @@ nunjucks.configure(appViews, nunjucksConfig);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(session({ secret: 'NOT_HARDCODED_SECRET', cookie: { maxAge: 60000 } }));
-
 axios.defaults.baseURL = API_URL;
-
-declare module 'express-session' {
-  interface SessionData {
-    role: Partial<Role>;
-  }
-}
-
 app.set('view engine', 'html');
 app.use('/public', express.static(path.join(dirname, 'public')));
 
@@ -61,10 +52,10 @@ const bandController = new BandController();
 
 app.use(cookieParser());
 
-app.use(authMiddleware);
+authMiddleware.filter();
 
 // Routing
-app.get('/', (eq: Request, res: Response) => {
+app.get('/', (req: Request, res: Response) => {
   res.render('home');
 });
 roleController.appRoutes(app);

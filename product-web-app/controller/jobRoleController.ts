@@ -27,9 +27,8 @@ export default class JobRoleController {
 
     app.post('/admin/add-job-roles', async (req: Request, res: Response) => {
       const data: JobRole = req.body;
-      data.name = sanitize(data.name);
-      data.description = sanitize(data.description);
-      data.link = sanitize(data.link);
+      data.name = sanitize(data.name).trim();
+      data.description = sanitize(data.description).trim();
 
       try {
         const newJobRole = await this.jobRoleService.createJobRole(data);

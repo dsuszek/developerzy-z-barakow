@@ -8,6 +8,7 @@ import org.kainos.ea.exception.FailedToGenerateTokenException;
 import org.kainos.ea.exception.FailedToLoginException;
 import org.kainos.ea.exception.FailedToRegisterUserException;
 import org.kainos.ea.model.LoginRequest;
+import org.kainos.ea.model.LoginResponse;
 import org.kainos.ea.model.UserRegistrationRequest;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -34,9 +35,9 @@ class AuthServiceTest {
         //when
         when(authDao.getPasswordFromDatabase(loginRequest)).thenReturn(hashedAndSaltedPass);
         when(authDao.generateToken("admin@kainos")).thenReturn("1234567890");
-        String result = authService.login(loginRequest);
+        LoginResponse result = authService.login(loginRequest);
         //then
-        assertEquals(result, "1234567890");
+        assertEquals(result.getToken(), "1234567890");
     }
 
     @Test
