@@ -1,20 +1,20 @@
 import { Guid } from "guid-typescript";
-import AddJobRolePage from "../pageobjects/add-job-roles.js";
+import AddJobRolePage from "../pageobjects/add-job-roles.page.js";
 import JobRoleDetailsPage from "../pageobjects/job-role-details.page.js";
-import JobRoleListPage from "../pageobjects/job-role-list.js";
+import JobRoleListPage from "../pageobjects/job-role-list.page.js";
 import LoginPage from "../pageobjects/login.page.js";
 
-const jobRoleListPage = new JobRoleListPage();
 
 const jobRoleDetailsPage = new JobRoleDetailsPage();
 const addJobRolePage = new AddJobRolePage();
 const loginPage = new LoginPage();
+const jobRoleListPage = new JobRoleListPage();
 
 const adminEmail = "admin@kainos.com";
 const adminPassword = "admin";
 
 const uuid: string = Guid.create().toString();
-const jobRoleDescription = 'bla bla alicja bla bla';
+const jobRoleDescription = 'Przykładowy opis';
 const sharepointLink = "https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20profile%20%2D%20Innovation%20Lead%20%28Consultant%29%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FEngineering&p=true&ga=1";
 
 describe('Add Job Role Test', async () => {
@@ -35,5 +35,16 @@ describe('Add Job Role Test', async () => {
 
         expect(roleName).toEqual(uuid);
         expect(roleDescription).toEqual(jobRoleDescription);
+    });
+});
+
+describe('Verify job role viev list test', async () => {
+    it('Verify if job went to job roles list', async() => {
+
+    
+        const jobNameSelector = await $('//*[@id="roles"]/table/tbody/tr[last()]/td/a');
+
+        expect(jobNameSelector).toHaveText;
+        
     });
 });
