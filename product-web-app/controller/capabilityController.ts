@@ -41,7 +41,7 @@ export default class CapabilityController {
       let data: Capability[] = [];
       try {
         data = await this.capabilityService.getCapabilities();
-      } catch (e) {
+      } catch (e: any) {
         logger.warn(e.message);
       }
       res.render('list-capabilities', {
