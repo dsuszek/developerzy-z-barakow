@@ -14,10 +14,12 @@
     <h4>Role Link</h4>
   </div>
   <div class="mb-2" style="margin-bottom: 20px;">
-    <a href="{{role.link}}" target="_blank" class="btn btn-primary">Link to Job Profile</a>
+    <a href="{{role.link}}" target="_blank" class="btn-green">Link to Job Profile</a>
+    {% if admin === 'true' %}
     <td>
-      <a href="/delete-job-role/{{ role.id }}" class="btn btn-danger">Delete</a>
+      <a href="/delete-job-role/{{ role.id }}" class="btn-orange">Delete</a>
     </td>
+    {% endif %}
   </div>
   <br>
     <a href="/job-roles" class="btn-green">Back</a>
