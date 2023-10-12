@@ -6,6 +6,7 @@ import AuthService from '../service/authService.js';
 import RegistrationValidator from '../service/registrationValidator.js';
 import Login from '../model/login.js';
 import LoginValidator from '../service/loginValidator.js';
+import LoginResponse from '../model/loginResponse.js';
 
 export default class AuthController {
   private authService = new AuthService(new RegistrationValidator(), new LoginValidator());
@@ -38,17 +39,23 @@ export default class AuthController {
     app.post('/auth/login', async (req: Request, res: Response) => {
       const data: Login = req.body;
       try {
-        const tokenFromApi: string = await this.authService.login(data);
+        const loginResponse: LoginResponse = await this.authService.login(data);
         const cookieOptions = {
           httpOnly: true,
           maxAge: MILISECONDS_PER_HOUR,
         };
-        res.cookie('token', tokenFromApi, cookieOptions);
+        res.cookie('token', loginResponse.token, cookieOptions);
+        res.cookie('admin', loginResponse.admin, cookieOptions);
         res.redirect('/');
       } catch (e: any) {
         res.locals.errormessage = e.message;
         res.render('login', req.body);
       }
+    });
+    app.get('/auth/logout', async (req: Request, res: Response) => {
+      res.clearCookie('token');
+      res.clearCookie('admin');
+      res.render('login');
     });
   }
 }

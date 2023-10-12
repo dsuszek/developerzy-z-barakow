@@ -1,26 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Sign up</title>
-    <style>
-        .dropdown {
-            padding-bottom: 10px;
-        }
-    </style>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-</head>
-<body>
-    <header class="bg-dark text-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>Sign up</h1>
-                </div>
-            </div>
-        </div>
-    </header>
-    <main class="container mt-4">
+{% extends "./parent.html" %}
+{% block style %}
+<style>
+    .dropdown {
+        padding-bottom: 10px;
+    }
+</style>
+{% endblock %}
+{% block title %} Sign up {% endblock %}
+{% set IsAuthPage = true %}
+{% set page = "register" %}
+
+{% block content %}
         <section id="form" class="bg-light py-5">
             <div class="container">
                 {% if errormessage %}
@@ -49,6 +39,4 @@
                 </form>
             </div>
         </section>
-    </main>
-</body>
-</html>
+{% endblock %}

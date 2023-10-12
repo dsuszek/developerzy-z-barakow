@@ -5,6 +5,7 @@ import org.kainos.ea.db.PasswordEncoder;
 import org.kainos.ea.db.UserDao;
 import org.kainos.ea.exception.*;
 import org.kainos.ea.model.LoginRequest;
+import org.kainos.ea.model.LoginResponse;
 import org.kainos.ea.model.User;
 import org.kainos.ea.model.UserRegistrationRequest;
 import org.slf4j.Logger;
@@ -51,14 +52,16 @@ public class AuthService {
         }
     }
 
-    public String login(LoginRequest login) throws NoSuchAlgorithmException, FailedToGenerateTokenException, FailedToLoginException {
+    public LoginResponse login(LoginRequest login) throws NoSuchAlgorithmException, FailedToGenerateTokenException, FailedToLoginException {
         try {
             String hashedPasswordFromDB = authDao.getPasswordFromDatabase(login);
             if (hashedPasswordFromDB == null) {
                 throw new FailedToLoginException();
             }
             if (PasswordEncoder.checkPassword(PasswordEncoder.encodePassword(login.getPassword()), hashedPasswordFromDB)) {
-                return authDao.generateToken(login.getEmail());
+                String token = authDao.generateToken(login.getEmail());
+                 int roleId = authDao.getRoleIDFromEmail(login.getEmail());
+                return new LoginResponse(token,roleId==2);
             } else {
                 throw new FailedToLoginException();
             }

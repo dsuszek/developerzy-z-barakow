@@ -30,7 +30,6 @@ export default class JobRoleController {
       const data: JobRole = req.body;
       data.name = sanitize(data.name).trim();
       data.description = sanitize(data.description).trim();
-      data.link = sanitize(data.link).trim();
 
       try {
         const newJobRole = await this.jobRoleService.createJobRole(data);

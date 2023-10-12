@@ -43,7 +43,7 @@ public class AuthDao {
                 .compact();
     }
 
-    private int getRoleIDFromEmail(String email) throws SQLException {
+    public int getRoleIDFromEmail(String email) throws SQLException {
         Connection c = databaseConnector.getConnection();
         String selectStatement = "SELECT roleId FROM Users where email = ? ;";
         PreparedStatement st = c.prepareStatement(selectStatement);
