@@ -6,22 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     {% block style %}{% endblock %}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="/public/static/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/public/static/style.css">
 </head>
 
 <body>
-    <header class="bg-dark text-light">
-        <div class="container">
+    <header class=" text-light">
+        <div>
+            <img  src="/public/static/kainos_logo.png" style="float: left;margin-right: 10px;" height="47" width="150" alt="">
             <div class="row"></div>
             {% if page == "login" %}<a href="/auth/register" style="text-decoration: none;margin-top: 20px; color:white; float: right;">Sign up</a>{% endif %}
             {% if page == "register" %}<a href="/auth/login" style="text-decoration: none;margin-top: 20px; color:white; float: right;">Login</a>{% endif %}
-            <div class="col-md-12" style="min-height:50px;">
-                <h1> {% block title %} {% endblock %} </h1>
-                <!-- <img  href="../public/static/kainos_logo.svg" style="float: left;margin-right: 10px;" height="50" width="217" > -->
-            </div>
+
             {% if not IsAuthPage %}
-           <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+           <nav class="navbar navbar-expand-lg navbar-dark">
                 <div class="container-fluid">
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -33,6 +33,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {% if page=="list-job-roles" %} active {% endif %}" href="/job-roles">List job roles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if page=="list-capabilities" %} active {% endif %}" href="/capabilities">List capabilities</a>
                         </li>
                         {% if admin === 'true' %} 
                         <li class="nav-item">
@@ -46,13 +49,16 @@
                     </ul>
                   </div>
                 </div>
-              </nav>     
+              </nav>
         {% endif %}
         </div>
     </header>
     <main class="container mt-4">
         {% block content %} {% endblock %}
     </main>
+    <footer>
+              <p>Made by developerzy z baraków  © 2023 Kainos Academy</p>
+      </footer>
 </body>
 
 </html>
