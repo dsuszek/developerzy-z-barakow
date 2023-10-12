@@ -26,7 +26,8 @@ public class JobRoleDao {
                     rs.getString("name"),
                     rs.getString("description"),
                     rs.getString("link"),
-                    rs.getShort("bandId")
+                    rs.getShort("bandId"),
+                    rs.getShort("capabilityId")
             );
             jobRoles.add(jobRole);
         }
@@ -37,7 +38,7 @@ public class JobRoleDao {
         DatabaseConnector databaseConnector = new DatabaseConnector();
         Connection c = databaseConnector.getConnection();
 
-        String queryStatement = "SELECT id, name, description, link" +
+        String queryStatement = "SELECT id, name, description, link, bandId, capabilityId" +
                 " FROM JobRoles where id = ?;";
         PreparedStatement st = c.prepareStatement(queryStatement);
         st.setInt(1, id);
@@ -48,7 +49,8 @@ public class JobRoleDao {
                     rs.getString("name"),
                     rs.getString("description"),
                     rs.getString("link"),
-                    rs.getShort("bandId")
+                    rs.getShort("bandId"),
+                    rs.getShort("capabilityId")
             ));
         }
         return Optional.empty();
@@ -69,7 +71,8 @@ public class JobRoleDao {
                     rs.getString("name"),
                     rs.getString("description"),
                     rs.getString("link"),
-                    rs.getShort("bandId")
+                    rs.getShort("bandId"),
+                    rs.getShort("capabilityId")
             ));
         }
         return Optional.empty();
@@ -89,13 +92,14 @@ public class JobRoleDao {
         DatabaseConnector databaseConnector = new DatabaseConnector();
         Connection c = databaseConnector.getConnection();
 
-        String insertStatement = "INSERT INTO `JobRoles` (name, description, link, bandId) VALUES (?, ?, ?, ?);";
+        String insertStatement = "INSERT INTO `JobRoles` (name, description, link, bandId, capabilityId) VALUES (?, ?, ?, ?, ?);";
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
 
         st.setString(1, jobRole.getName());
         st.setString(2, jobRole.getDescription());
         st.setString(3, jobRole.getLink());
         st.setShort(4, jobRole.getBandId());
+        st.setShort(5, jobRole.getCapabilityId());
 
         st.executeUpdate();
         ResultSet rs = st.getGeneratedKeys();
@@ -108,6 +112,7 @@ public class JobRoleDao {
                         jobRole.getName(),
                         jobRole.getDescription(),
                         jobRole.getLink(),
-                        jobRole.getBandId());
+                        jobRole.getBandId(),
+                        jobRole.getCapabilityId());
     }
 }

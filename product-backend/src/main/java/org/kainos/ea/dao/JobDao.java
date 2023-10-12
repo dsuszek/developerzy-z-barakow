@@ -21,7 +21,8 @@ public class JobDao {
                     rs.getString("name"),
                     rs.getString("description"),
                     rs.getString("link"),
-                    rs.getShort("bandId")
+                    rs.getShort("bandId"),
+                    rs.getShort("capabilityId")
             );
             jobRoles.add(jobRole);
         }
@@ -29,7 +30,7 @@ public class JobDao {
     }
 
     public Optional<JobRole> findRoleById(int id, Connection c) throws SQLException {
-        String queryStatement = "SELECT id, name, description, link" +
+        String queryStatement = "SELECT id, name, description, link, bandId, capabilityId" +
                 " FROM JobRoles where id = ?;";
         PreparedStatement st = c.prepareStatement(queryStatement);
         st.setInt(1, id);
@@ -40,7 +41,8 @@ public class JobDao {
                     rs.getString("name"),
                     rs.getString("description"),
                     rs.getString("link"),
-                    rs.getShort("bandId")
+                    rs.getShort("bandId"),
+                    rs.getShort("capabilityId")
             ));
         }
         return Optional.empty();

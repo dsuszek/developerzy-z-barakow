@@ -14,8 +14,10 @@
         <tbody>
             {% for role in roles %}
             <tr>
-                <td><a href="job-roles/{{ role.id }}">{{ role.name }}</a></td>
-                <td><a href="admin/delete-job-role/{{ role.id }}"></a></td>
+                <td><a href="/job-roles/{{ role.id }}">{{ role.name }}</a></td>
+                <td>
+                    <a href="/delete-job-role/{{ role.id }}" class="btn btn-danger">Delete</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

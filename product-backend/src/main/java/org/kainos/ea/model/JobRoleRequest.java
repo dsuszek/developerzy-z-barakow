@@ -9,6 +9,7 @@ public class JobRoleRequest {
     private String description;
     private String link;
     private short bandId;
+    private short capabilityId;
 
     public String getName() {
         return name;
@@ -42,15 +43,25 @@ public class JobRoleRequest {
         this.bandId = bandId;
     }
 
+    public short getCapabilityId() {
+        return capabilityId;
+    }
+
+    public void setCapabilityId(short capabilityId) {
+        this.capabilityId = capabilityId;
+    }
+
     @JsonCreator
     public JobRoleRequest(
             @JsonProperty("name") String name,
             @JsonProperty("description") String description,
             @JsonProperty("link") String link,
-            @JsonProperty("bandId") short bandId) {
+            @JsonProperty("bandId") short bandId,
+            @JsonProperty("capabilityId") short capabilityId) {
         this.name = name;
         this.description = description;
         this.link = link;
         this.bandId = bandId;
+        this.capabilityId = capabilityId;
     }
 }

@@ -18,7 +18,7 @@ export default class JobRoleController {
 
       try {
         await this.jobRoleService.deleteJobRole(id);
-        res.render('list-roles');
+        res.redirect('/job-roles/');
       } catch (e: any) {
         logger.warn(e.message);
         res.locals.errormessage = e.message;
