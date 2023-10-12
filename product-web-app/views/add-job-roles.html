@@ -21,6 +21,14 @@
     </div>
     {% endif %}
     <form action="/admin/add-job-roles" method="post">
+        <div class="form-group>">
+            <label for="id">Choose a capability:</label>
+            <select name="capabilityId">
+                {% for capability in capabilities %}
+                <option value = "{{ capability.id }}">{{ capability.capabilityName }}</option>
+                {% endfor %}
+            </select>
+        </div>
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" name="name" id="name" class="form-control" value="{{ name }}" required>
