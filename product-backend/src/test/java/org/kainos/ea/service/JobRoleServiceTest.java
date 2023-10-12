@@ -12,6 +12,7 @@ import org.kainos.ea.model.JobRoleRequest;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -88,15 +89,27 @@ public class JobRoleServiceTest {
     }
 
     @Test
-    void deleteJobRole_When_JobRoleIdDoesNotExist_Expect_FailedToDeleteJobRoleException() throws JobRoleDoesNotExistException, FailedToDeleteJobRoleException, SQLException {
-        // TODO poprawić ten test
+    void deleteJobRole_When_JobRoleIdDoesNotExist_Expect_JobRoleDoesNotExistException() throws SQLException {
         // given
-        JobRoleService jobRoleServiceMock = mock(JobRoleService.class);
+        JobRoleService jobRoleService = new JobRoleService(jobRoleDaoMock, jobRoleValidatorMock);
         short jobRoleIdToBeDeleted = -1;
         // when
-
-        jobRoleServiceMock.deleteJobRole(jobRoleIdToBeDeleted);
+        when(jobRoleDaoMock.getJobRoleById(jobRoleIdToBeDeleted)).thenReturn(Optional.empty());
         // then
-        verify(jobRoleServiceMock, times(1)).deleteJobRole(jobRoleIdToBeDeleted);
+        assertThatExceptionOfType(JobRoleDoesNotExistException.class).isThrownBy(() -> jobRoleService.deleteJobRole(jobRoleIdToBeDeleted));
+        verify(jobRoleDaoMock, never()).deleteJobRole(anyShort());
+    }
+
+    @Test
+    void deleteJobRole_When_JobRoleIdIsCorrect_Expect_() throws SQLException, JobRoleDoesNotExistException, FailedToDeleteJobRoleException {
+        // given
+        JobRoleService jobRoleService = new JobRoleService(jobRoleDaoMock, jobRoleValidatorMock);
+        short jobRoleIdToBeDeleted = 1;
+        // when
+        when(jobRoleDaoMock.getJobRoleById(jobRoleIdToBeDeleted)).thenReturn(Optional.of(MOCKED_JOB_ROLE));
+        // then
+        jobRoleService.deleteJobRole(jobRoleIdToBeDeleted);
+        verify(jobRoleDaoMock).getJobRoleById((short) 1);
+        verify(jobRoleDaoMock).deleteJobRole((short) 1);
     }
 }

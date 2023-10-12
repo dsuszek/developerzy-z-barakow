@@ -2,6 +2,7 @@ package org.kainos.ea.dao;
 
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.exception.FailedToCreateJobRoleException;
+import org.kainos.ea.exception.FailedToDeleteJobRoleException;
 import org.kainos.ea.model.JobRole;
 import org.kainos.ea.model.JobRoleRequest;
 
