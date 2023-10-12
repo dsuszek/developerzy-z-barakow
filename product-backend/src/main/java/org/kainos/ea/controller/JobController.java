@@ -12,15 +12,17 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.print.attribute.standard.Media;
 import java.sql.SQLException;
 
 @Tag(name = "Job Roles API")
 @Path("/api")
 public class JobController {
-    private final JobService jobService = new JobService(new JobDao(), new DatabaseConnector());
+    private JobService jobService = new JobService(new JobDao(), new DatabaseConnector());
     private final static Logger logger = LoggerFactory.getLogger(JobController.class);
+    public JobController() {}
+    public JobController(JobService jobService) {
+        this.jobService = new JobService(new JobDao(), new DatabaseConnector());
+    }
 
     @GET
     @Path("/job-roles")
