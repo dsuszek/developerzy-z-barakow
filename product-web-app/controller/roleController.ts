@@ -15,7 +15,6 @@ export default class RoleController {
       } catch (e) {
         logger.error(`Couldn't get roles! Error: ${e}`);
       }
-
       res.render('list-roles', { roles: data });
     });
     app.get('/job-roles/:id', async (req: Request, res: Response) => {

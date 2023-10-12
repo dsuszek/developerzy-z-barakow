@@ -2,19 +2,12 @@ package org.kainos.ea.db;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.impl.TextCodec;
 import org.apache.commons.lang3.time.DateUtils;
-import org.kainos.ea.exception.TokenExpiredException;
 import org.kainos.ea.model.LoginRequest;
-
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-import java.time.Instant;
 import java.util.Date;
-import java.util.UUID;
-
 
 public class AuthDao {
     private final DatabaseConnector databaseConnector = new DatabaseConnector();
@@ -49,7 +42,7 @@ public class AuthDao {
                 .compact();
     }
 
-    private int getRoleIDFromEmail(String email) throws SQLException {
+    public int getRoleIDFromEmail(String email) throws SQLException {
         Connection c = databaseConnector.getConnection();
         String selectStatement = "SELECT roleId FROM Users where email = ? ;";
         PreparedStatement st = c.prepareStatement(selectStatement);

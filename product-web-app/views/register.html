@@ -1,0 +1,42 @@
+{% extends "./parent.html" %}
+{% block style %}
+<style>
+    .dropdown {
+        padding-bottom: 10px;
+    }
+</style>
+{% endblock %}
+{% block title %} Sign up {% endblock %}
+{% set IsAuthPage = true %}
+{% set page = "register" %}
+
+{% block content %} 
+        <section id="form" class="bg-light py-5">
+            <div class="container">
+                {% if errormessage %}
+                <div class="alert alert-danger" role="alert">
+                    {{ errormessage }}
+                </div>
+                {% endif %}
+                <form action="/auth/register" method="post">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" value="{{ email }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" value="{{ password }}"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <select id="roleId" name="roleId" required>
+                            <option value="" selected disabled hidden>Choose role for user</option>
+                            <option value="1">Employee</option>
+                            <option value="2">Admin</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-green">Sign up</button>
+                </form>
+            </div>
+        </section>
+{% endblock %}

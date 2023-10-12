@@ -1,0 +1,31 @@
+{% extends "./parent.html" %}
+{% block style %}{% endblock %}
+{% block title %} Capabilites {% endblock %}
+{% set page = "list-capabilities" %}
+
+{% block content %} 
+<section id="capabilities">
+  {% if capabilities and capabilities.length > 0%}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Capability Name</th>
+        <th scope="col">Capability Lead Name</th>
+        <th scope="col">Capability Lead Picture</th>
+        <th scope="col">Message from Capability Lead</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for capability in capabilities %}
+      <tr>
+        <td>{{ capability.capabilityName }}</td>
+        <td>{{ capability.leadName }}</td>
+        <td><img src="data:image/jpeg; base64, {{ capability.capabilityLeadPicture }}" /></td>
+        <td>{{ capability.message }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %} There are no Capabilities. {% endif %}
+</section>
+{% endblock %}

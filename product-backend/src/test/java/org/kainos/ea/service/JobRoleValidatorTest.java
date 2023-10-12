@@ -3,7 +3,6 @@ package org.kainos.ea.service;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.model.JobRoleRequest;
-import org.kainos.ea.service.JobRoleValidator;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 

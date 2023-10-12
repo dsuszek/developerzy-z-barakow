@@ -1,15 +1,41 @@
 import axios from 'axios';
+import Registration from '../model/registration.js';
+import RegistrationValidator from './registrationValidator.js';
 import Login from '../model/login.js';
 import LoginValidator from './loginValidator.js';
+import LoginResponse from '../model/loginResponse.js';
+import logger from './logger.js';
+import { API } from '../common/constants.js';
 
 export default class AuthService {
+  private registrationValidator: RegistrationValidator;
+
   private loginValidator: LoginValidator;
 
-  constructor(loginValidator: LoginValidator) {
+  constructor(registrationValidator: RegistrationValidator, loginValidator: LoginValidator) {
+    this.registrationValidator = registrationValidator;
     this.loginValidator = loginValidator;
   }
 
-  async login(login: Login): Promise<string> {
+  async register(registration: Registration): Promise<string> {
+    const validateError = this.registrationValidator.validateRegistration(registration);
+
+    if (validateError) {
+      logger.warn(`VALIDATION ERROR: ${validateError}`);
+      throw new Error(validateError);
+    }
+
+    try {
+      const response = await axios.post(API.REGISTRATION, registration);
+
+      return response.data;
+    } catch (e) {
+      logger.error('Could not register new user');
+      throw new Error('Could not register new user');
+    }
+  }
+
+  async login(login: Login): Promise<LoginResponse> {
     try {
       const validateError = this.loginValidator.validateLogin(login);
       if (validateError) {
