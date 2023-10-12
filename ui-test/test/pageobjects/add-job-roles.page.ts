@@ -15,6 +15,7 @@ export default class AddJobRolePage extends Page {
 
         const submitButton = $('button[class="btn btn-primary"]');
         await submitButton.click();
+
     }
 
     async open() {
