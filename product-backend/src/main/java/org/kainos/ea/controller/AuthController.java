@@ -43,6 +43,7 @@ public class AuthController {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
+
     @POST
     @Path("/register")
     @Produces(MediaType.APPLICATION_JSON)

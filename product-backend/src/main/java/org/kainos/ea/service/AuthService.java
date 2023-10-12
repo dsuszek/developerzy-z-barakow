@@ -18,10 +18,9 @@ import java.sql.SQLException;
 
 public class AuthService {
     private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
-    private final UserDao userDao;
     private final AuthDao authDao;
-    private final UserRegistrationValidator userRegistrationValidator;
-
+    private UserDao userDao;
+    private UserRegistrationValidator userRegistrationValidator;
 
     public AuthService(UserDao userDao, AuthDao authDao, UserRegistrationValidator userRegistrationValidator) {
         this.userDao = userDao;

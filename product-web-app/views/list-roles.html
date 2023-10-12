@@ -14,7 +14,12 @@
         <tbody>
             {% for role in roles %}
             <tr>
-                <td><a href="job-roles/{{ role.id }}">{{ role.name }}</a></td>
+                <td><a href="/job-roles/{{ role.id }}">{{ role.name }}</a></td>
+                {% if admin === 'true' %}
+                <td>
+                    <a href="/delete-job-role/{{ role.id }}" class="btn-orange">Delete</a>
+                </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>

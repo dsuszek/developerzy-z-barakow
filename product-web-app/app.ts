@@ -1,17 +1,17 @@
 import express, { Application, Request, Response } from 'express';
-import cookieParser from 'cookie-parser';
 import * as url from 'url';
 import 'dotenv/config';
 import path from 'path';
 import nunjucks from 'nunjucks';
 import axios from 'axios';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 import logger from './service/logger.js';
-import AuthController from './controller/authController.js';
-import CapabilityController from './controller/capabilityController.js';
-import JobRoleController from './controller/jobRoleController.js';
 import RoleController from './controller/roleController.js';
 import BandController from './controller/bandController.js';
+import AuthController from './controller/authController.js';
+import JobRoleController from './controller/jobRoleController.js';
+import CapabilityController from './controller/capabilityController.js';
 import { API_URL } from './common/constants.js';
 import AuthMiddleware from './middleware/authMiddleware.js';
 
@@ -40,22 +40,22 @@ app.listen(3000, () => {
   logger.info('Server listening on port 3000');
 });
 
-const roleController = new RoleController();
 const jobRoleController = new JobRoleController();
+const roleController = new RoleController();
 const authController = new AuthController();
 const capabilityController = new CapabilityController();
 const bandController = new BandController();
 
 app.use(cookieParser());
-
 authMiddleware.filter();
 
 // Routing
 app.get('/', (req: Request, res: Response) => {
   res.render('home');
 });
-roleController.appRoutes(app);
+
 jobRoleController.appRoutes(app);
+roleController.appRoutes(app);
 authController.appRoutes(app);
-capabilityController.appRoutes(app);
 bandController.appRoutes(app);
+capabilityController.appRoutes(app);

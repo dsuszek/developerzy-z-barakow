@@ -11,11 +11,16 @@ import org.kainos.ea.service.JobRoleService;
 import org.kainos.ea.service.JobRoleValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 @Tag(name = "Job Roles")
 @Path("/api")
 public class JobRoleController {
-    private final JobRoleService jobRoleService = new JobRoleService(new JobRoleDao(), new JobRoleValidator());
+    private JobRoleService jobRoleService = new JobRoleService(new JobRoleDao(), new JobRoleValidator());
     private final static Logger logger = LoggerFactory.getLogger(JobRoleService.class);
+
+    public JobRoleController(JobRoleService jobRoleService) {
+        this.jobRoleService = jobRoleService;
+    }
 
     @GET
     @Path("/job-roles")
@@ -28,6 +33,7 @@ public class JobRoleController {
             return Response.serverError().build();
         }
     }
+
 
     @GET
     @Path("/job-roles/{id}")
@@ -43,6 +49,7 @@ public class JobRoleController {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
+
     @POST
     @Path("/admin/job-roles")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -58,6 +65,22 @@ public class JobRoleController {
             logger.error("Invalid job role data! Error: {}", e.getMessage());
 
             return Response.status(Response.Status.BAD_REQUEST).entity(new ErrorResponse(e.getMessage())).build();
+        }
+    }
+
+    @DELETE
+    @Path("/admin/job-role/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteJobRole(@PathParam("id") short id) {
+        try {
+            jobRoleService.deleteJobRole(id);
+
+            return Response.ok().build();
+        } catch (JobRoleDoesNotExistException e) {
+            System.err.println(e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch (FailedToDeleteJobRoleException e) {
+            return Response.serverError().build();
         }
     }
 }

@@ -4,6 +4,7 @@ import org.kainos.ea.dao.JobRoleDao;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.exception.*;
 import org.kainos.ea.model.JobRole;
+import org.kainos.ea.model.JobRoleDetails;
 import org.kainos.ea.model.JobRoleRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +16,8 @@ public class JobRoleService {
 
     private final static Logger logger = LoggerFactory.getLogger(JobRoleService.class);
     private final JobRoleDao jobRoleDao;
-    private JobRoleValidator jobRoleValidator;
     private DatabaseConnector databaseConnector;
+    private JobRoleValidator jobRoleValidator;
 
     public JobRoleService(JobRoleDao jobRoleDao, JobRoleValidator jobRoleValidator) {
         this.jobRoleDao = jobRoleDao;
@@ -52,12 +53,25 @@ public class JobRoleService {
         }
     }
 
-    public JobRole findRoleById(int id) throws RoleDoesNotExistException, FailedToGetRoleException {
+    public JobRoleDetails findRoleById(int id) throws RoleDoesNotExistException, FailedToGetRoleException {
         try {
-            Optional<JobRole> jobRole = jobRoleDao.findRoleById(id, databaseConnector.getConnection());
+            Optional<JobRoleDetails> jobRole = jobRoleDao.findRoleById(id, databaseConnector.getConnection());
             return jobRole.orElseThrow(RoleDoesNotExistException::new);
         } catch ( SQLException e) {
             throw new FailedToGetRoleException();
+        }
+    }
+
+    public void deleteJobRole(short id) throws JobRoleDoesNotExistException, FailedToDeleteJobRoleException {
+        try {
+            Optional<JobRole> jobRoleToBeDeleted = jobRoleDao.getJobRoleById(id);
+            if (jobRoleToBeDeleted.isEmpty()) {
+                throw new JobRoleDoesNotExistException();
+            }
+
+            jobRoleDao.deleteJobRole(id);
+        } catch (SQLException e) {
+            throw new FailedToDeleteJobRoleException();
         }
     }
 }

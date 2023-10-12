@@ -21,7 +21,7 @@ import javax.print.attribute.standard.Media;
 @Path("/api")
 public class BandController {
     private final BandService bandService = new BandService(new BandDao(), new BandValidator());
-    private final static Logger logger = LoggerFactory.getLogger(BandController.class);
+    private final static Logger logger = LoggerFactory.getLogger(BandService.class);
 
     @GET
     @Path("/admin/band")

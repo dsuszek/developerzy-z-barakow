@@ -38,6 +38,19 @@ export default class JobRoleController {
       res.render('add-job-roles', { bands, capabilities });
     });
 
+    app.get('/delete-job-role/:id', async (req: Request, res: Response) => {
+      const { id } = req.params;
+
+      try {
+        await this.jobRoleService.deleteJobRole(id);
+        res.redirect('/job-roles/');
+      } catch (e: any) {
+        logger.warn(e.message);
+        res.locals.errormessage = e.message;
+        res.render('list-roles', req.body);
+      }
+    });
+
     app.post('/admin/add-job-roles', async (req: Request, res: Response) => {
       const data: JobRole = req.body;
       data.name = sanitize(data.name).trim();

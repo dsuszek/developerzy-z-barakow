@@ -1,5 +1,4 @@
-package unit;
-
+package org.kainos.ea.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

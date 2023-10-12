@@ -20,6 +20,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 class AuthServiceTest {
     private final AuthDao authDao = Mockito.mock(AuthDao.class);
@@ -41,9 +42,9 @@ class AuthServiceTest {
     }
 
     @Test
-    public void login_WhenLoginDataIsIncorrect_ShouldThrowFailedToLoginException() throws NoSuchAlgorithmException{
+    public void login_WhenLoginDataIsIncorrect_ShouldThrowFailedToLoginException() throws NoSuchAlgorithmException {
         //given
-        LoginRequest loginRequest = new LoginRequest("admin@kainos",hashedAndSaltedPass);
+        LoginRequest loginRequest = new LoginRequest("admin@kainos", hashedAndSaltedPass);
         //when
         when(authDao.getPasswordFromDatabase(loginRequest)).thenReturn("admin1");
         //then
@@ -54,7 +55,7 @@ class AuthServiceTest {
     @Test
     public void login_WhenSQLExceptionIsThrownInGenerateToken_ShouldThrowFailedToGenerateTokenException() throws NoSuchAlgorithmException, SQLException {
         //given
-        LoginRequest loginRequest = new LoginRequest("admin@kainos","admin");
+        LoginRequest loginRequest = new LoginRequest("admin@kainos", "admin");
         //when
         when(authDao.getPasswordFromDatabase(loginRequest)).thenReturn(hashedAndSaltedPass);
         when(authDao.generateToken("admin@kainos")).thenThrow(new SQLException());

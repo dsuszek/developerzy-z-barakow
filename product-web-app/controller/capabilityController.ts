@@ -42,7 +42,7 @@ export default class CapabilityController {
       try {
         data = await this.capabilityService.getCapabilities();
       } catch (e) {
-        console.error(e);
+        logger.warn(e.message);
       }
       res.render('list-capabilities', {
         capabilities: data,

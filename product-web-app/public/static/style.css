@@ -42,3 +42,20 @@ footer {
 .btn-green:hover{
     opacity: 70%;
 }
+
+.btn-orange{
+    margin: 10px;
+    padding: 10px;
+    background-color:#ec6608;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-size: large;
+    min-width: 150px;
+}
+.btn-orange:hover{
+    opacity: 70%;
+}
+a{
+    text-decoration: none;
+}
