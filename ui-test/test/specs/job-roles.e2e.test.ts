@@ -38,7 +38,7 @@ describe('Add Job Role Test', async () => {
     });
 });
 
-describe('Veryfy job role viev list test', async () => {
+describe('Verify job role viev list test', async () => {
     it('Verify if job went to job roles list', async() => {
 
     
