@@ -96,6 +96,6 @@ public class JobRoleValidatorTest {
         when(jobRole.getName()).thenReturn("Principal Architect");
         when(jobRole.getDescription()).thenReturn("This is an exemplary description of Principal Architect position.");
         when(jobRole.getLink()).thenReturn("int.com/people/Job%20Specifications/Fo2FJob%20profile%2");
-        assertThat(jobRoleValidator.isValidJobRole(jobRole)).isEqualTo("Link doesn't meet all the criteria");
+        assertThat(jobRoleValidator.isValidJobRole(jobRole)).isEqualTo("Link does not meet all the criteria");
     }
 }

@@ -38,7 +38,7 @@ public class JobRoleValidator {
 
         // checks if link matches the regex
         if (!LINK_PATTERN.matcher(jobRole.getLink()).matches()) {
-            return "Link doesn't meet all the criteria";
+            return "Link does not meet all the criteria";
         }
 
         return null;

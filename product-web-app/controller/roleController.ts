@@ -13,7 +13,7 @@ export default class RoleController {
       try {
         data = await this.roleService.getRoles();
       } catch (e) {
-        logger.error(`Couldn't get roles! Error: ${e}`);
+        logger.error(`Could not get roles! Error: ${e}`);
       }
       res.render('list-roles', { roles: data });
     });
@@ -23,7 +23,7 @@ export default class RoleController {
       try {
         data = await this.roleService.findRoleById(Number.parseInt(req.params.id, 10));
       } catch (e) {
-        logger.error(`Couldnt get role! Error: ${e}`);
+        logger.error(`Could not get role! Error: ${e}`);
       }
       res.render('view-role', { role: data });
     });

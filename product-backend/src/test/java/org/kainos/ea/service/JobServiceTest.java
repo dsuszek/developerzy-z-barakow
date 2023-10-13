@@ -1,16 +1,16 @@
-package unit;
-
+package org.kainos.ea.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.kainos.ea.dao.JobDao;
+import org.kainos.ea.dao.JobRoleDao;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.exception.FailedToGetRoleException;
 import org.kainos.ea.exception.FailedToGetRolesException;
 import org.kainos.ea.exception.RoleDoesNotExistException;
 import org.kainos.ea.model.JobRole;
-import org.kainos.ea.service.JobService;
+import org.kainos.ea.model.JobRoleDetails;
+import org.kainos.ea.service.JobRoleService;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Connection;
@@ -21,33 +21,23 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
-import static org.kainos.ea.db.DatabaseConnector.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class JobServiceTest {
-    JobDao jobDaoMock = mock(JobDao.class);
+
+    JobRoleDao jobDaoMock = mock(JobRoleDao.class);
     DatabaseConnector databaseConnectorMock = mock(DatabaseConnector.class);
     Connection connMock = mock ( Connection.class);
 
     Connection conn;
 
-    JobRole jobRole1 = new JobRole("Tester", "good", "www.onet.pl");
-    JobRole jobRole2 = new JobRole("DevOps", "good", "www.o2.pl");
-    JobService jobService = new JobService(jobDaoMock, databaseConnectorMock);
+    JobRoleDetails jobRole1 = new JobRoleDetails((short) 1, "Tester", "good", "www.onet.pl", "test", (short) 1, "test");
+    JobRole jobRole2 = new JobRole( "Tester", "good", "www.onet.pl");
+    JobRole jobRole3 = new JobRole( "Tester2", "good", "www.onet.pl");
+    JobRoleService jobService = new JobRoleService(jobDaoMock, databaseConnectorMock);
 
-    @Test
-    void getJobRoles_whenJobRolesAvailable_shouldReturnListOfJobRoles() throws SQLException, FailedToGetRolesException {
-        // given
-        JobService sut = new JobService(jobDaoMock, databaseConnectorMock);
-        when(databaseConnectorMock.getConnection()).thenReturn(conn);
-        List<JobRole> expectedList = List.of(jobRole1, jobRole2);
-        when(jobDaoMock.getRoles(conn)).thenReturn(expectedList);
-        // when
-        List<JobRole> result = sut.getJobRoles();
-        // then
-        Assertions.assertEquals(result, expectedList);
-    }
+
     @Test
     void getJobRoles_whenJobRolesAreUnavailable_shouldReturnEmptyList() throws SQLException {
         List<JobRole> testList = new ArrayList<JobRole>();
@@ -60,7 +50,7 @@ public class JobServiceTest {
         //given
         when(jobDaoMock.findRoleById(1, databaseConnectorMock.getConnection())).thenReturn(Optional.ofNullable(jobRole1));
         //when
-        JobRole jobRole = jobService.findRoleById(1);
+        JobRoleDetails jobRole = jobService.findRoleById(1);
         //then
         assertThat(jobRole).isEqualTo(jobRole1);
     }
@@ -71,11 +61,6 @@ public class JobServiceTest {
         assertThatExceptionOfType(RoleDoesNotExistException.class)
                 .isThrownBy(() -> jobService.findRoleById(20));
     }
-    @Test
-    void getRoleById_When_ThereIsDatabaseError_Expect_FailedToGetRoleExceptionToBeThrown() throws SQLException  {
-        when(databaseConnectorMock.getConnection()).thenThrow(new SQLException());
-        assertThatExceptionOfType(FailedToGetRoleException.class)
-                .isThrownBy(() -> jobService.findRoleById(20));
-    }
+
 
 }

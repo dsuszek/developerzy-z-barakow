@@ -2,6 +2,7 @@ import axios from 'axios';
 import Role from '../model/role.js';
 import logger from './logger.js';
 import { API, API_URL } from '../common/constants.js';
+import JobRoleDetails from '../model/jobRoleDetails.js';
 
 export default class RoleService {
   async getRoles(): Promise<Role[]> {
@@ -13,7 +14,7 @@ export default class RoleService {
     }
   }
 
-  async findRoleById(id: number): Promise<Role> {
+  async findRoleById(id: number): Promise<JobRoleDetails> {
     try {
       const response = await axios.get(API_URL + API.GET_ROLE(id));
 

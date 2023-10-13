@@ -27,4 +27,17 @@ export default class JobRoleService {
       throw new Error('Could not create job role');
     }
   }
+
+  async deleteJobRole(id: string): Promise<void> {
+    try {
+      const response = await axios.delete(`${API.JOB_ROLE}/${id}`);
+
+      if (response.status !== 200) {
+        throw new Error('Could not delete job role');
+      }
+    } catch (e) {
+      logger.error('Could not delete job role');
+      throw new Error('Could not delete job role');
+    }
+  }
 }

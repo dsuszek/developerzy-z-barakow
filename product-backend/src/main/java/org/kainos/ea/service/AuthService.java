@@ -1,9 +1,12 @@
 package org.kainos.ea.service;
 
-import org.kainos.ea.db.AuthDao;
+import org.kainos.ea.dao.AuthDao;
 import org.kainos.ea.db.PasswordEncoder;
-import org.kainos.ea.db.UserDao;
-import org.kainos.ea.exception.*;
+import org.kainos.ea.dao.UserDao;
+import org.kainos.ea.exception.FailedToGenerateTokenException;
+import org.kainos.ea.exception.FailedToLoginException;
+import org.kainos.ea.exception.FailedToRegisterUserException;
+import org.kainos.ea.exception.InvalidUserRegistrationRequestException;
 import org.kainos.ea.model.LoginRequest;
 import org.kainos.ea.model.LoginResponse;
 import org.kainos.ea.model.User;
@@ -15,10 +18,9 @@ import java.sql.SQLException;
 
 public class AuthService {
     private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
-    private final UserDao userDao;
     private final AuthDao authDao;
-    private final UserRegistrationValidator userRegistrationValidator;
-
+    private UserDao userDao;
+    private UserRegistrationValidator userRegistrationValidator;
 
     public AuthService(UserDao userDao, AuthDao authDao, UserRegistrationValidator userRegistrationValidator) {
         this.userDao = userDao;
@@ -35,7 +37,7 @@ public class AuthService {
             }
 
             if (userDao.isEmailTaken(userRegistration.getEmail())) {
-                throw new FailedToRegisterUserException("Email address already in use. Please choose another one");
+                throw new FailedToRegisterUserException();
             }
 
             // After checking the correctness of password, assign encoded version to this request

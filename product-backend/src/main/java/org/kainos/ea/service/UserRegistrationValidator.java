@@ -1,6 +1,6 @@
 package org.kainos.ea.service;
 
-import org.kainos.ea.db.UserDao;
+import org.kainos.ea.dao.UserDao;
 import org.kainos.ea.model.UserRegistrationRequest;
 import java.util.regex.Pattern;
 

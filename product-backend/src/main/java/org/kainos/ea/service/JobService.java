@@ -6,10 +6,10 @@ import org.kainos.ea.exception.FailedToGetRoleException;
 import org.kainos.ea.exception.FailedToGetRolesException;
 import org.kainos.ea.exception.RoleDoesNotExistException;
 import org.kainos.ea.model.JobRole;
+import org.kainos.ea.model.JobRoleDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.crypto.Data;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -34,9 +34,9 @@ public class JobService {
         }
     }
 
-    public JobRole findRoleById(int id) throws RoleDoesNotExistException, FailedToGetRoleException {
+    public JobRoleDetails findRoleById(int id) throws RoleDoesNotExistException, FailedToGetRoleException {
         try {
-            Optional<JobRole> jobRole = jobDao.findRoleById(id,databaseConnector.getConnection());
+            Optional<JobRoleDetails> jobRole = jobDao.findRoleById(id, databaseConnector.getConnection());
             return jobRole.orElseThrow(RoleDoesNotExistException::new);
         } catch ( SQLException e) {
             throw new FailedToGetRoleException();

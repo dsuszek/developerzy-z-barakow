@@ -33,6 +33,22 @@
             <label for="link">Link</label>
             <input type="text" name="link" id="link" value="{{ link }}" class="form-control" required>
         </div>
+        <div class="form-group">
+            <label for="band">Select a band</label>
+            <select type="text" name="bandId" id="bandId" class="form-control" required>
+                {% for band in bands %}
+                    <option value="{{ band.id }}">{{ band.name }} ({{ band.level }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="capability">Select a capability</label>
+            <select type="text" name="capabilityId" id="capabilityId" class="form-control" required>
+                {% for capability in capabilities %}
+                    <option value="{{ capability.id }}">{{ capability.capabilityName }}</option>
+                {% endfor %}
+            </select>
+        </div>
         <button class="btn-green" type="submit">Submit</button>
     </form>
 </section>

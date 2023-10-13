@@ -1,6 +1,9 @@
 package org.kainos.ea.dao;
 
+import org.kainos.ea.db.DatabaseConnector;
+import org.kainos.ea.exception.FailedToCreateNewCapabilityException;
 import org.kainos.ea.model.Capability;
+import org.kainos.ea.model.CapabilityRequest;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -27,5 +30,27 @@ public class CapabilityDao {
             capabilities.add(capability);
         }
         return capabilities;
+    }
+
+    public int createCapability(CapabilityRequest capability) throws SQLException, FailedToCreateNewCapabilityException {
+        Connection c = new DatabaseConnector().getConnection();
+        String insertStatement = "INSERT INTO Capabilities(capabilityName,leadName,capabilityLeadPicture,message)" +
+                "VALUES(?,?,?,?)";
+        PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
+        st.setString(1, capability.getCapabilityName());
+        st.setString(2, capability.getLeadName());
+        st.setString(3, capability.getCapabilityLeadPicture());
+        st.setString(4, capability.getMessage());
+        int affectedRows = st.executeUpdate();
+        if (affectedRows == 0) {
+            throw new FailedToCreateNewCapabilityException();
+        }
+        int capNo = 0;
+        try (ResultSet rs=st.getGeneratedKeys()){
+            if (rs.next()) {
+                capNo = rs.getShort(1);
+            }
+        }
+        return capNo;
     }
 }

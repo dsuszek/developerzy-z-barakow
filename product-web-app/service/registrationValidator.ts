@@ -12,22 +12,22 @@ export default class RegistrationValidator {
       return 'Email does not have @kainos.com domain';
     }
     if (!EMAIL_PATTERN.test(registration.email)) {
-      return 'Email address must have 50 characters at the maximum';
+      return 'Email address should have 50 characters at the maximum';
     }
     if (!PASSWORD_SPECIAL_CHARS_PATTERN.test(registration.password)) {
-      return 'Password must contain at least one special character';
+      return 'Password should contain at least one special character';
     }
     if (!PASSWORD_UPPERCASE_LETTER_PATTERN.test(registration.password)) {
-      return 'Password must contain at least one uppercase letter';
+      return 'Password should contain at least one uppercase letter';
     }
     if (!PASSWORD_LOWERCASE_LETTER_PATTERN.test(registration.password)) {
-      return 'Password must contain at least one lowercase letter';
+      return 'Password should contain at least one lowercase letter';
     }
     if (registration.password.length < 9) {
-      return 'Password must contain at least 9 characters';
+      return 'Password should contain at least 9 characters';
     }
     if (registration.password.length >= 50) {
-      return 'Password must contain 50 characters at the maximum';
+      return 'Password should contain 50 characters at the maximum';
     }
 
     return null;

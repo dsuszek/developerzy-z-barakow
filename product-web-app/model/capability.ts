@@ -1,5 +1,5 @@
 export default interface Capability {
-  id: number;
+  id?: number;
   capabilityName: string;
   leadName: string;
   capabilityLeadPicture: string;

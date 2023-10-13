@@ -7,8 +7,8 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.kainos.ea.db.AuthDao;
-import org.kainos.ea.db.UserDao;
+import org.kainos.ea.dao.AuthDao;
+import org.kainos.ea.dao.UserDao;
 import org.kainos.ea.exception.*;
 
 import org.kainos.ea.exception.FailedToGenerateTokenException;
@@ -27,6 +27,7 @@ import java.security.NoSuchAlgorithmException;
 public class AuthController {
     private final AuthService authService = new AuthService(new UserDao(), new AuthDao(), new UserRegistrationValidator());
     private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
+
     @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
@@ -42,6 +43,7 @@ public class AuthController {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
+
     @POST
     @Path("/register")
     @Produces(MediaType.APPLICATION_JSON)

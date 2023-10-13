@@ -1,5 +1,6 @@
-package org.kainos.ea.db;
+package org.kainos.ea.dao;
 
+import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.exception.FailedToRegisterUserException;
 import org.kainos.ea.model.User;
 import org.kainos.ea.model.UserRegistrationRequest;
@@ -37,7 +38,7 @@ public class UserDao {
         ResultSet rs = st.getGeneratedKeys();
 
         if (!rs.next()) {
-            throw new FailedToRegisterUserException("No user id returned");
+            throw new FailedToRegisterUserException();
         }
 
         return new User

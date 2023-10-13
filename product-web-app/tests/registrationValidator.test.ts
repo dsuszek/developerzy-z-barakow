@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+
 import Registration from '../model/registration.js';
 import logger from '../service/logger.js';
 import RegistrationValidator from '../service/registrationValidator.js';
@@ -14,72 +15,88 @@ describe('Registration validator', () => {
     logger.unsilent();
   });
 
-  describe('validateRegistration', () => {
-    it('expect email address with invalid domain', () => {
-      const registration: Partial<Registration> = {
-        email: 'njidhbir@gmail.com',
+  describe('validateRegistration', async () => {
+    it('expect email address without @kainos.com domain', () => {
+      const registration: Registration = {
+        email: 'ferngj@mail.com',
+        password: 'kjnjkhHGUYr@$@#w@$@',
+        roleId: 1,
       };
+
       expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal(
         'Email does not have @kainos.com domain',
       );
     });
 
     it('expect too long email address', () => {
-      const registration: Partial<Registration> = {
-        email: 'njifwefkengkergergerrgrengjk34ghiggergergergregdhbir@kainos.com',
+      const registration: Registration = {
+        email: 'nfjhweiufghwiughiuhwfbjbhebvsivhiweufghewiufhweiufhweuifewjcjkwehiufhweiufhweiufhwfhwfwe@kainos.com',
+        password: 'kjnjkhHGUYr@$@#w@$@',
+        roleId: 1,
       };
+
       expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal(
-        'Email address must have 50 characters at the maximum',
+        'Email address should have 50 characters at the maximum',
       );
     });
 
     it('expect password without special character', () => {
-      const registration: Partial<Registration> = {
-        email: 'joeD@kainos.com',
-        password: 'fFFESJFIFEfefefefeffe',
+      const registration: Registration = {
+        email: 'test@kainos.com',
+        password: 'kjGDGEGSdvvwef',
+        roleId: 1,
       };
+
       expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal(
-        'Password must contain at least one special character',
+        'Password should contain at least one special character',
       );
     });
 
     it('expect password without uppercase letter', () => {
-      const registration: Partial<Registration> = {
-        email: 'joeD@kainos.com',
-        password: 'fgfewg&*&bdfbdfgg',
+      const registration: Registration = {
+        email: 'test@kainos.com',
+        password: 'kj%$#%%#ff',
+        roleId: 1,
       };
+
       expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal(
-        'Password must contain at least one uppercase letter',
+        'Password should contain at least one uppercase letter',
       );
     });
 
     it('expect password without lowercase letter', () => {
-      const registration: Partial<Registration> = {
-        email: 'joeD@kainos.com',
-        password: 'FNJN(*(*FE&(FDBFE',
+      const registration: Registration = {
+        email: 'test@kainos.com',
+        password: 'NJNIF&YF*Y*FWGEFUYF^&WF',
+        roleId: 1,
       };
+
       expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal(
-        'Password must contain at least one lowercase letter',
+        'Password should contain at least one lowercase letter',
       );
     });
 
     it('expect too short password', () => {
-      const registration: Partial<Registration> = {
-        email: 'joeD@kainos.com',
-        password: 'f$Fg',
+      const registration: Registration = {
+        email: 'test@kainos.com',
+        password: 'kjF#ef',
+        roleId: 1,
       };
+
       expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal(
-        'Password must contain at least 9 characters',
+        'Password should contain at least 9 characters',
       );
     });
 
     it('expect too long password', () => {
-      const registration: Partial<Registration> = {
-        email: 'joeD@kainos.com',
-        password: 'fFFNEHFiuhewiufhewiufhewfy&Y&EFHfefewfefuywegfuywegfeufgeufererg$Fg',
+      const registration: Registration = {
+        email: 'test@kainos.com',
+        password: 'kjfenfiuehwfiuwehuyewgfhewhg&*$@%$@$%@$#%@%#$$@jbjbhbefjbjBHFUHEWIFUHEIUFKHEIUFEKFEF#ef',
+        roleId: 1,
       };
+
       expect(registrationValidator.validateRegistration(registration as Registration)).to.be.equal(
-        'Password must contain 50 characters at the maximum',
+        'Password should contain 50 characters at the maximum',
       );
     });
   });

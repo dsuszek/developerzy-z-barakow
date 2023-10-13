@@ -1,8 +1,9 @@
-package org.kainos.ea.db;
+package org.kainos.ea.dao;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.lang3.time.DateUtils;
+import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.model.LoginRequest;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;

@@ -2,8 +2,8 @@ package org.kainos.ea.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.kainos.ea.db.AuthDao;
-import org.kainos.ea.db.UserDao;
+import org.kainos.ea.dao.AuthDao;
+import org.kainos.ea.dao.UserDao;
 import org.kainos.ea.exception.FailedToGenerateTokenException;
 import org.kainos.ea.exception.FailedToLoginException;
 import org.kainos.ea.exception.FailedToRegisterUserException;
@@ -27,12 +27,12 @@ class AuthServiceTest {
     private final UserDao userDao = Mockito.mock(UserDao.class);
     private final UserRegistrationValidator userRegistrationValidator = Mockito.mock(UserRegistrationValidator.class);
     private AuthService authService = new AuthService(userDao, authDao, userRegistrationValidator);
-    private String hashedAndSaltedPass = "U55AS5gfTUoluRuSy+nxRQ==:jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg="; // admin
+    private String hashedAndSaltedPass = "U55AS5gfTUoluRuSy+nxRQ==:jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=";// admin
 
     @Test
     public void login_WhenGivenCorrectShouldLogin_ShouldReturnToken() throws NoSuchAlgorithmException, FailedToLoginException, FailedToGenerateTokenException, SQLException {
         //given
-        LoginRequest loginRequest = new LoginRequest("admin@kainos", "admin");
+        LoginRequest loginRequest = new LoginRequest("admin@kainos","admin");
         //when
         when(authDao.getPasswordFromDatabase(loginRequest)).thenReturn(hashedAndSaltedPass);
         when(authDao.generateToken("admin@kainos")).thenReturn("1234567890");
